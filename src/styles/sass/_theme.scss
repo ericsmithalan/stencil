@@ -1,0 +1,11 @@
+$theme-dark: (
+	app-background: color-chrome(high),
+	icon-default: color-base(high)
+);
+@function theme($name) {
+	@if (map-get($theme-dark, $name)) {
+		@return map-get($theme-dark, $name);
+	} @else {
+		@error "must contain one of the following strings: #{$theme-dark}";
+	}
+}
