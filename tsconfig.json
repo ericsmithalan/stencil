@@ -17,7 +17,16 @@
         "importHelpers": true,
         "strictNullChecks": true,
         "suppressImplicitAnyIndexErrors": true,
-        "noUnusedLocals": false
+        "noUnusedLocals": false,
+        "paths": {
+            "@client": ["src/client/index"],
+            "@styles": ["src/styles/index"],
+            "@ui": ["src/ui/index"],
+            "@components": ["src/ui/components/index"],
+            "@shell": ["src/ui/shell/index"],
+            "@editor": ["src/ui/editor/index"],
+            "@globals": ["src/client/Globals"]
+        }
     },
     "exclude": [
         "node_modules",

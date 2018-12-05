@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Titlebar } from "./titlebar/Titlebar";
+import { Titlebar } from "@shell";
 import "./shell.css";
 
 interface IShellProps {}

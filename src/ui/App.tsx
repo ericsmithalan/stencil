@@ -4,8 +4,8 @@ import * as React from "react";
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import { EditorPage } from "./editor/index";
-import { Shell } from "./shell/Shell";
+import { EditorPage } from "@editor";
+import { Shell } from "@shell";
 
 export class App extends React.Component {
     public render() {

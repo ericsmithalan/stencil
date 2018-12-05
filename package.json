@@ -21,6 +21,7 @@
         "build": "npm run build-css && react-scripts-ts build",
         "test": "react-scripts-ts test --env=jsdom",
         "eject": "react-scripts-ts eject",
+        "electron": "electron .",
         "electron-build": "tsc -p ./src/client/tsconfig.json",
         "electron-dev": "npm run electron-build && set ELECTRON_START_URL=http://localhost:3000 && electron ./build/index.js",
         "electron-pack-win": "npm run preelectron-pack && build --windows --publish always",

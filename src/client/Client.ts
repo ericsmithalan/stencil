@@ -1,39 +1,16 @@
-import * as isDev from "electron-is-dev";
-import * as path from "path";
-
-import { BrowserWindow, remote, app } from "electron";
-
-export interface ClientPropTypes {
-    backgroundColor: string;
-    width: number;
-    height: number;
-    port: number;
-    host: string;
-    outDir: string;
-}
+import * as IsDev from "electron-is-dev";
+import * as Path from "path";
+import { BrowserWindow, app, remote } from "electron";
 
 export class Client {
-    private readonly _props: ClientPropTypes;
-    public static defaultProps: Partial<ClientPropTypes> = {
-        backgroundColor: "red",
-        height: 780,
-        width: 1024,
-        port: 3000,
-        host: "localhost",
-        outDir: "../build"
-    };
+    private static _window: BrowserWindow | null;
+    public static isRunning: boolean = false;
 
-    private _window: Electron.BrowserWindow | null;
-
-    public constructor(props?: ClientPropTypes) {
-        this._props = Object.assign(Client.defaultProps, props || {}) as ClientPropTypes;
-    }
-
-    public get window(): Electron.BrowserWindow | null {
+    public static get window(): BrowserWindow {
         return remote.getCurrentWindow();
     }
 
-    public start() {
+    public static run() {
         app.on("ready", () => {
             this._createWindow();
         });
@@ -49,21 +26,42 @@ export class Client {
                 this._createWindow();
             }
         });
+
+        this.isRunning = true;
     }
 
-    private _createWindow(): void {
+    public static close(): void {
+        if (this.window != null) {
+            this.window.close();
+            app.quit();
+        }
+    }
+
+    public static maximize(): void {
+        if (this.window != null) {
+            this.window.maximize();
+        }
+    }
+
+    public static minimize(): void {
+        if (this.window != null) {
+            this.window.minimize();
+        }
+    }
+
+    private static _createWindow(): void {
         this._window = new BrowserWindow({
-            height: this._props.height,
-            width: this._props.width,
-            backgroundColor: this._props.backgroundColor,
+            backgroundColor: "red",
+            height: 780,
+            width: 1024,
             frame: false,
             autoHideMenuBar: true
         });
 
-        const file = `${this._props.outDir}/index.html`;
-        const url = `${this._props.host}:${this._props.port}`;
+        const file = "../build/index.html";
+        const url = "localhost:3000";
 
-        this._window.loadURL(isDev ? `http://${url}` : `file://${path.join(__dirname, file)}`);
+        this._window.loadURL(IsDev ? `http://${url}` : `file://${Path.join(__dirname, file)}`);
 
         this._window.webContents.openDevTools();
 

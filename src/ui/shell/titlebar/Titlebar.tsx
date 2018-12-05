@@ -1,5 +1,7 @@
 import * as React from "react";
 import "./titlebar.css";
+import { client } from "@client";
+import { app } from "electron";
 
 type TitlebarPropTypes = {
     height: number;
@@ -14,12 +16,32 @@ export class Titlebar extends React.Component<TitlebarPropTypes, TitlebarStateTy
         height: 30
     };
 
+    private _minimizeButton: React.RefObject<HTMLAnchorElement>;
+    private _maximizeButton: React.RefObject<HTMLAnchorElement>;
+    private _closeButton: React.RefObject<HTMLAnchorElement>;
+
     public constructor(props: TitlebarPropTypes) {
         super(props);
+
+        this._minimizeButton = React.createRef();
+        this._maximizeButton = React.createRef();
+        this._closeButton = React.createRef();
 
         this.state = {
             title: null
         };
+    }
+
+    public get minimizeButton(): HTMLAnchorElement {
+        return this._minimizeButton.current as HTMLAnchorElement;
+    }
+
+    public get maximizeButton(): HTMLAnchorElement {
+        return this._maximizeButton.current as HTMLAnchorElement;
+    }
+
+    public get closeButton(): HTMLAnchorElement {
+        return this._closeButton.current as HTMLAnchorElement;
     }
 
     public setTitle(value: string | null) {
@@ -37,9 +59,29 @@ export class Titlebar extends React.Component<TitlebarPropTypes, TitlebarStateTy
                     </svg>
                 </div>
                 <div className="middle">{this._renderTitle()}</div>
-                <div className="right" />
+                <div className="right">
+                    <a href="#" onClick={this._minimize}>
+                        min
+                    </a>
+                    <a href="#" onClick={this._maximize}>
+                        max
+                    </a>
+                    <a href="#" onClick={this._close}>
+                        close
+                    </a>
+                </div>
             </div>
         );
+    }
+
+    private _close(event: React.MouseEvent) {
+        client.close();
+    }
+    private _maximize(event: React.MouseEvent) {
+        client.maximize();
+    }
+    private _minimize(event: React.MouseEvent) {
+        client.minimize();
     }
 
     private _renderTitle(): JSX.Element | null {

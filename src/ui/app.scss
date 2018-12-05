@@ -7,4 +7,6 @@ body {
     background-color: theme(app-background);
     color: theme(font-color-default);
     font-family: font-family(body);
+    -webkit-user-select: none;
+    user-select: none;
 }
