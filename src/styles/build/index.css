@@ -338,7 +338,6 @@ template {
   display: none;
 }
 
-html,
 body {
   overflow: hidden;
   margin: 0;
@@ -349,7 +348,7 @@ body {
 }
 
 .startup {
-  position: absolute;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -360,9 +359,52 @@ body {
 }
 
 .editor {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.titlebar {
+  position: absolute;
+  display: flex;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  justify-content: center;
+  align-items: center;
+  background: red;
+}
+
+.titlebar .title {
+  font-size: 13px;
+  align-self: center;
+  justify-self: center;
+  background: blue;
+}
+
+.shell {
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  -webkit-user-select: none;
+  -webkit-app-region: no-drag;
+}
+
+.shell .shellTitlebar {
+  position: relative;
+  -webkit-app-region: drag;
+  min-height: 30px;
+}
+
+.shell .shellContent {
+  position: relative;
+  display: flex;
+  flex-grow: 1;
 }

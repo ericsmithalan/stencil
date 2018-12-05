@@ -1,0 +1,19 @@
+
+interesting libs
+https://github.com/evanshortiss/vector2d
+
+
+http://paperjs.org/download/
+
+
+https://github.com/google/incremental-dom/
+
+
+Gestures
+http://hammerjs.github.io/
+
+
+https://github.com/snoopdave/mbcanvas
+
+
+https://github.com/lutzroeder/textor/tree/master/src/texteditor
