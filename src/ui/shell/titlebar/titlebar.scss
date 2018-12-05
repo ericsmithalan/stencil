@@ -1,0 +1,29 @@
+.titlebar {
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+    background: red;
+    flex-direction: row;
+
+    .left {
+        background: green;
+    }
+    .middle {
+        background: blue;
+    }
+    .right {
+        background: yellow;
+    }
+
+    .title {
+        font-size: 13px;
+        align-self: center;
+        justify-self: center;
+        background: blue;
+    }
+}
