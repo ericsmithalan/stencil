@@ -4,9 +4,10 @@ $font-body: "Alegreya", serif;
 $font-heading: "Lato", sans-serif;
 
 $font-families: (
-	family-body: $font-body,
-	family-heading: $font-heading
+	body: $font-body,
+	heading: $font-heading
 );
+
 $font-sizes: (
 	h1: 48,
 	h2: 32,

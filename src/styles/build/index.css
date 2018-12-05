@@ -340,7 +340,29 @@ template {
 
 html,
 body {
+  overflow: hidden;
   margin: 0;
   padding: 0;
   background-color: #222222;
+  color: #a1a1a1;
+  font-family: "Alegreya", serif;
+}
+
+.startup {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.editor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }

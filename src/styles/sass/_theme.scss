@@ -1,6 +1,7 @@
 $theme-dark: (
 	app-background: color-chrome(high),
-	icon-default: color-base(high)
+	font-color-default: color-base(medium),
+	icon-color-default: color-base(medium)
 );
 @function theme($name) {
 	@if (map-get($theme-dark, $name)) {
