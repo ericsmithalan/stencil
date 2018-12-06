@@ -8,24 +8,13 @@
   flex-direction: row;
 }
 
-.titlebar .left {
-  background: green;
-}
-
-.titlebar .middle {
-  background: blue;
-  -webkit-user-select: none;
+.titlebar .titlebar-middle {
   -webkit-app-region: drag;
   flex-grow: 1;
-}
-
-.titlebar .right {
-  background: yellow;
 }
 
 .titlebar .title {
   font-size: 13px;
   align-self: center;
   justify-self: center;
-  background: blue;
 }

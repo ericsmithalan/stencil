@@ -1,94 +1,80 @@
-import * as React from "react";
+declare const window: any;
+
 import "./titlebar.css";
-import { client } from "@client";
-import { app } from "electron";
+
+import * as React from "react";
 
 type TitlebarPropTypes = {
-    height: number;
+	height: number;
 };
 
 type TitlebarStateTypes = {
-    title: string | null;
+	title: string | null;
 };
 
 export class Titlebar extends React.Component<TitlebarPropTypes, TitlebarStateTypes> {
-    public static defaultProps: Partial<TitlebarPropTypes> = {
-        height: 30
-    };
+	public static defaultProps: Partial<TitlebarPropTypes> = {
+		height: 30
+	};
 
-    private _minimizeButton: React.RefObject<HTMLAnchorElement>;
-    private _maximizeButton: React.RefObject<HTMLAnchorElement>;
-    private _closeButton: React.RefObject<HTMLAnchorElement>;
+	private _remote = window.require("electron").remote;
 
-    public constructor(props: TitlebarPropTypes) {
-        super(props);
+	public constructor(props: TitlebarPropTypes) {
+		super(props);
 
-        this._minimizeButton = React.createRef();
-        this._maximizeButton = React.createRef();
-        this._closeButton = React.createRef();
+		this.state = {
+			title: null
+		};
+	}
 
-        this.state = {
-            title: null
-        };
-    }
+	public get currentWindow(): Electron.BrowserWindow {
+		return this._remote.getCurrentWindow();
+	}
 
-    public get minimizeButton(): HTMLAnchorElement {
-        return this._minimizeButton.current as HTMLAnchorElement;
-    }
+	public setTitle(value: string | null) {
+		if (this.state.title != value) {
+			this.setState({ title: value });
+		}
+	}
 
-    public get maximizeButton(): HTMLAnchorElement {
-        return this._maximizeButton.current as HTMLAnchorElement;
-    }
+	protected close = () => {
+		console.log("close clicked");
+		this.currentWindow.close();
+	};
 
-    public get closeButton(): HTMLAnchorElement {
-        return this._closeButton.current as HTMLAnchorElement;
-    }
+	protected maximize = () => {
+		console.log("max clicked");
+		this.currentWindow.maximize();
+	};
 
-    public setTitle(value: string | null) {
-        if (this.state.title != value) {
-            this.setState({ title: value });
-        }
-    }
+	protected minimize = () => {
+		console.log("min clicked");
+		this.currentWindow.minimize();
+	};
 
-    public render() {
-        return (
-            <div style={{ height: this.props.height }} className="titlebar">
-                <div className="left">
-                    <svg viewBox="0,0, 30,30">
-                        <rect width="30" height="30" fill="#000000" />
-                    </svg>
-                </div>
-                <div className="middle">{this._renderTitle()}</div>
-                <div className="right">
-                    <a href="#" onClick={this._minimize}>
-                        min
-                    </a>
-                    <a href="#" onClick={this._maximize}>
-                        max
-                    </a>
-                    <a href="#" onClick={this._close}>
-                        close
-                    </a>
-                </div>
-            </div>
-        );
-    }
+	public render() {
+		return (
+			<div style={{ height: this.props.height }} className="titlebar">
+				<div className="titlebar-left">
+					<svg viewBox="0,0, 30,30">
+						<rect width="30" height="30" fill="#000000" />
+					</svg>
+				</div>
+				<div className="titlebar-middle">{this._renderTitle()}</div>
+				<div className="titlebar-right">
+					<button onClick={this.minimize}>min</button>
+					<button onClick={this.maximize}>max</button>
+					<button onClick={this.close}>close</button>
+				</div>
+			</div>
+		);
+	}
 
-    private _close(event: React.MouseEvent) {
-        client.close();
-    }
-    private _maximize(event: React.MouseEvent) {
-        client.maximize();
-    }
-    private _minimize(event: React.MouseEvent) {
-        client.minimize();
-    }
+	private _renderTitle(): JSX.Element | null {
+		if (this.state.title) {
+			return <div className="title">{this.state.title}</div>;
+		}
 
-    private _renderTitle(): JSX.Element | null {
-        if (this.state.title) {
-            return <div className="title">{this.state.title}</div>;
-        }
-
-        return null;
-    }
+		return null;
+	}
 }

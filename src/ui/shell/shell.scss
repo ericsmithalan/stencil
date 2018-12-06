@@ -1,19 +1,21 @@
 .shell {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 
-    .shellTitlebar {
-        position: relative;
-    }
+	.shell-titlebar {
+		position: relative;
+		z-index: 2;
+	}
 
-    .shellContent {
-        position: relative;
-        display: flex;
-        flex-grow: 1;
-    }
+	.shell-content {
+		position: relative;
+		display: flex;
+		flex-grow: 1;
+		z-index: 1;
+	}
 }

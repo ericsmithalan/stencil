@@ -8,12 +8,14 @@
   bottom: 0;
 }
 
-.shell .shellTitlebar {
+.shell .shell-titlebar {
   position: relative;
+  z-index: 2;
 }
 
-.shell .shellContent {
+.shell .shell-content {
   position: relative;
   display: flex;
   flex-grow: 1;
+  z-index: 1;
 }

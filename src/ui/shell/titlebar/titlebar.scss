@@ -1,29 +1,26 @@
 .titlebar {
-    position: absolute;
-    display: flex;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    flex-direction: row;
+	position: absolute;
+	display: flex;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	flex-direction: row;
 
-    .left {
-        background: green;
-    }
-    .middle {
-        background: blue;
-        -webkit-user-select: none;
-        -webkit-app-region: drag;
-        flex-grow: 1;
-    }
-    .right {
-        background: yellow;
-    }
+	.titlebar-left {
+	}
 
-    .title {
-        font-size: 13px;
-        align-self: center;
-        justify-self: center;
-        background: blue;
-    }
+	.titlebar-middle {
+		-webkit-app-region: drag;
+		flex-grow: 1;
+	}
+
+	.titlebar-right {
+	}
+
+	.title {
+		font-size: 13px;
+		align-self: center;
+		justify-self: center;
+	}
 }

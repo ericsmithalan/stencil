@@ -1,40 +1,32 @@
 {
-    "compilerOptions": {
-        "baseUrl": ".",
-        "outDir": "build/dist",
-        "module": "esnext",
-        "target": "es6",
-        "lib": ["es6", "dom"],
-        "sourceMap": true,
-        "allowJs": true,
-        "jsx": "react",
-        "moduleResolution": "node",
-        "rootDir": "src",
-        "forceConsistentCasingInFileNames": true,
-        "noImplicitReturns": false,
-        "noImplicitThis": true,
-        "noImplicitAny": true,
-        "importHelpers": true,
-        "strictNullChecks": true,
-        "suppressImplicitAnyIndexErrors": true,
-        "noUnusedLocals": false,
-        "paths": {
-            "@client": ["src/client/index"],
-            "@styles": ["src/styles/index"],
-            "@ui": ["src/ui/index"],
-            "@components": ["src/ui/components/index"],
-            "@shell": ["src/ui/shell/index"],
-            "@editor": ["src/ui/editor/index"],
-            "@globals": ["src/client/Globals"]
-        }
-    },
-    "exclude": [
-        "node_modules",
-        "build",
-        "scripts",
-        "acceptance-tests",
-        "webpack",
-        "jest",
-        "src/setupTests.ts"
-    ]
+	"compilerOptions": {
+		"baseUrl": ".",
+		"outDir": "build/dist",
+		"module": "esnext",
+		"target": "es6",
+		"lib": ["es6", "dom"],
+		"sourceMap": true,
+		"allowJs": true,
+		"jsx": "react",
+		"moduleResolution": "node",
+		"rootDir": "src",
+		"forceConsistentCasingInFileNames": true,
+		"noImplicitReturns": false,
+		"noImplicitThis": true,
+		"noImplicitAny": true,
+		"importHelpers": true,
+		"strictNullChecks": true,
+		"suppressImplicitAnyIndexErrors": true,
+		"noUnusedLocals": false,
+		"paths": {
+			"@globals": ["src/app/Globals"],
+			"@app": ["src/app/index"],
+			"@client": ["src/app/client/index"],
+			"@ui": ["src/ui/index"],
+			"@components": ["src/ui/components/index"],
+			"@shell": ["src/ui/shell/index"],
+			"@editor": ["src/ui/editor/index"]
+		}
+	},
+	"exclude": ["node_modules", "build", "scripts", "acceptance-tests", "webpack", "jest", "src/setupTests.ts"]
 }
