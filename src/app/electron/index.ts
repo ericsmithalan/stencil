@@ -1,6 +1,5 @@
 import * as IsDev from "electron-is-dev";
 import * as Path from "path";
-
 import { BrowserWindow, app } from "electron";
 
 let window: BrowserWindow | null;
@@ -26,14 +25,14 @@ function createWindow(): void {
         height: 780,
         width: 1024,
         frame: false,
-        autoHideMenuBar: true
+        autoHideMenuBar: true,
+        backgroundColor: "#222222"
     });
 
     const file = "../build/index.html";
     const url = "localhost:3000";
 
     window.loadURL(IsDev ? `http://${url}` : `file://${Path.join(__dirname, file)}`);
-
     window.webContents.openDevTools();
 
     window.on("closed", () => {

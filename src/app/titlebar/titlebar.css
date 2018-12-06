@@ -347,18 +347,9 @@ template {
   right: 0;
 }
 
-.titlebar .titlebar-left {
-  background-color: green;
-}
-
 .titlebar .titlebar-middle {
   -webkit-app-region: drag;
   flex-grow: 1;
-  background-color: yellow;
-}
-
-.titlebar .titlebar-right {
-  background-color: red;
 }
 
 .titlebar .title {

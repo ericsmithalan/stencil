@@ -5,7 +5,8 @@ import {
     IAlertColorScale,
     IInteractiveColorScale,
     IFontFamilies,
-    IFontSizes
+    IFontSizes,
+    IAppUITheme
 } from "@models";
 
 type AvailableThemes = "dark" | "light";
@@ -15,33 +16,32 @@ export class ThemeManager {
     private _light: IAppTheme;
     private _current: IAppTheme;
 
-    public constructor() {}
+    public constructor() {
+        this._current = this.dark;
+    }
 
-    public setTheme(name: AvailableThemes) {
+    public setTheme(name: AvailableThemes): void {
         switch (name) {
             case "dark":
                 this.current = this.dark;
-                break;
             case "light":
-                this.current = this.dark;
-                break;
+                this.current = this.light;
             default:
                 this.current = this.dark;
-                break;
         }
     }
 
-    public get current(): IAppTheme {
-        if (!this._current) {
-            this.setTheme("dark");
-        }
+    public get currentId(): string {
+        return this.current.id;
+    }
 
+    public get current(): IAppTheme {
         return this._current;
     }
 
     public set current(value: IAppTheme) {
-        if (this._current.id !== value.id) {
-            this.current = value;
+        if (this._current && this.current.id != value.id) {
+            this._current = value;
         }
     }
 
@@ -55,14 +55,23 @@ export class ThemeManager {
 
     public get light(): IAppTheme {
         if (!this._light) {
-            this._light = this._createDarkTheme();
+            this._light = this._createLightTheme();
         }
 
         return this._light;
     }
 
     private _createDarkTheme(): IAppTheme {
+        console.log("------ created DARK theme");
         const chrome: IMonoColorScale = {
+            high: "#0d0d0d",
+            highMedium: "#1a1a1a",
+            medium: "#262626",
+            lowMedium: "#333333",
+            low: "#666666"
+        };
+
+        const base: IMonoColorScale = {
             high: "#f2f2f2",
             highMedium: "#e5e5e5",
             medium: "#cccccc",
@@ -70,12 +79,9 @@ export class ThemeManager {
             low: "#666666"
         };
 
-        const base: IMonoColorScale = {
-            high: "#0d0d0d",
-            highMedium: "#1a1a1a",
-            medium: "#262626",
-            lowMedium: "#333333",
-            low: "#666666"
+        const ui: IAppUITheme = {
+            windowColor: chrome.high,
+            toobarColor: chrome.highMedium
         };
 
         return {
@@ -87,12 +93,22 @@ export class ThemeManager {
                 alert: this._defaultAlertColors(),
                 icon: this._defaultIconColors(chrome)
             },
-            fonts: this._defaultFontStyles()
+            fonts: this._defaultFontStyles(),
+            ui: ui
         };
     }
 
     private _createLightTheme(): IAppTheme {
+        console.log("------ created LIGHT theme");
         const chrome: IMonoColorScale = {
+            high: "#f2f2f2",
+            highMedium: "#e5e5e5",
+            medium: "#cccccc",
+            lowMedium: "#999999",
+            low: "#666666"
+        };
+
+        const base: IMonoColorScale = {
             high: "#0d0d0d",
             highMedium: "#1a1a1a",
             medium: "#262626",
@@ -100,12 +116,9 @@ export class ThemeManager {
             low: "#666666"
         };
 
-        const base: IMonoColorScale = {
-            high: "#f2f2f2",
-            highMedium: "#e5e5e5",
-            medium: "#cccccc",
-            lowMedium: "#999999",
-            low: "#666666"
+        const ui: IAppUITheme = {
+            windowColor: chrome.high,
+            toobarColor: chrome.highMedium
         };
 
         return {
@@ -117,7 +130,8 @@ export class ThemeManager {
                 alert: this._defaultAlertColors(),
                 icon: this._defaultIconColors(chrome)
             },
-            fonts: this._defaultFontStyles()
+            fonts: this._defaultFontStyles(),
+            ui: ui
         };
     }
 

@@ -1,7 +1,8 @@
-import { IAppFonts, IAppColors } from "src/models";
+import { IAppFonts, IAppColors, IAppUITheme } from "src/models";
 
 export interface IAppTheme {
     id: string;
     fonts: IAppFonts;
     colors: IAppColors;
+    ui: IAppUITheme;
 }

@@ -6,6 +6,7 @@ import "./titlebar.css";
 import * as React from "react";
 import { Icon } from "@components";
 import { IconSource } from "@app";
+import { Settings } from "@settings";
 
 type TitlebarPropTypes = {
     height: number;
@@ -14,6 +15,13 @@ type TitlebarPropTypes = {
 type TitlebarStateTypes = {
     title: string | null;
 };
+
+export interface ITitleBarTheme {
+    focusColor: string;
+    blurColor: string;
+    buttonColor: string;
+    titleColor: string;
+}
 
 export class Titlebar extends React.Component<TitlebarPropTypes, TitlebarStateTypes> {
     public static defaultProps: Partial<TitlebarPropTypes> = {
@@ -58,7 +66,13 @@ export class Titlebar extends React.Component<TitlebarPropTypes, TitlebarStateTy
 
     public render() {
         return (
-            <div style={{ height: this.props.height }} className="titlebar">
+            <div
+                style={{
+                    height: this.props.height,
+                    backgroundColor: Settings.theme.ui.toobarColor
+                }}
+                className="titlebar"
+            >
                 <div className="titlebar-left">
                     <Icon source={IconSource.Menu} />
                 </div>

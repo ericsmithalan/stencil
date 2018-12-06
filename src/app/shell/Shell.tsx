@@ -3,6 +3,7 @@ import "./shell.css";
 import * as React from "react";
 
 import { Titlebar } from "@app";
+import { Settings } from "@settings";
 
 type ShellPropTypes = {
     titlebarHeight: number;
@@ -33,7 +34,7 @@ export class Shell extends React.Component<ShellPropTypes, ShellStateTypes> {
 
     public render() {
         return (
-            <div className="shell">
+            <div style={{ backgroundColor: Settings.theme.ui.windowColor }} className="shell">
                 <div style={{ height: this.props.titlebarHeight }} className="shell-titlebar">
                     <Titlebar height={this.props.titlebarHeight} ref={this._titlebar} />
                 </div>
