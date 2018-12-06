@@ -5,10 +5,38 @@ import * as React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import { EditorPage } from "@editor";
-import { Shell } from "@app";
+import { Shell, Launch } from "@app";
 
-export class App extends React.Component {
+type AppPropTypes = {};
+
+type AppStateTypes = {
+    isLoaded: boolean;
+};
+
+export class App extends React.Component<AppPropTypes, AppStateTypes> {
+    public constructor(props: AppPropTypes) {
+        super(props);
+
+        this.state = {
+            isLoaded: false
+        };
+    }
+
+    public componentDidMount() {}
+
     public render() {
+        if (this.state.isLoaded) {
+            return this._renderApp();
+        } else {
+            return this._renderLaunchScreen();
+        }
+    }
+
+    private _renderLaunchScreen(): JSX.Element {
+        return <Launch />;
+    }
+
+    private _renderApp(): JSX.Element {
         return (
             <BrowserRouter>
                 <Shell>

@@ -5,7 +5,6 @@
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
-@import url("https://fonts.googleapis.com/css?family=Alegreya|Lato:900");
 html {
   line-height: 1.15;
   /* 1 */
@@ -344,5 +343,5 @@ body {
   padding: 0;
   background-color: #222222;
   color: #a1a1a1;
-  font-family: "Alegreya", serif;
+  font-family: "Libre Franklin", sans-serif;
 }
