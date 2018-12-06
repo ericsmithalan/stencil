@@ -41,7 +41,19 @@ export class Themes {
 			fonts: this._defaultFontStyles(),
 			uiStyles: {
 				windowColor: chrome.high,
-				toobarColor: chrome.high
+				toobarColor: chrome.high,
+				titlebarButtonTheme: {
+					default: chrome.medium,
+					selected: chrome.high,
+					hover: chrome.highMedium,
+					press: chrome.highMedium
+				},
+				titlebarButtonIconTheme: {
+					default: base.medium,
+					selected: base.high,
+					hover: base.highMedium,
+					press: base.highMedium
+				}
 			}
 		};
 	}
@@ -77,7 +89,19 @@ export class Themes {
 			fonts: this._defaultFontStyles(),
 			uiStyles: {
 				windowColor: chrome.high,
-				toobarColor: chrome.high
+				toobarColor: chrome.high,
+				titlebarButtonTheme: {
+					default: chrome.medium,
+					selected: chrome.high,
+					hover: chrome.highMedium,
+					press: chrome.highMedium
+				},
+				titlebarButtonIconTheme: {
+					default: base.medium,
+					selected: base.high,
+					hover: base.highMedium,
+					press: base.highMedium
+				}
 			}
 		};
 	}
@@ -125,12 +149,12 @@ export class Themes {
 		};
 	}
 
-	private static _defaultIconColors(chrome: IMonoColorScale): IInteractiveColorScale {
+	private static _defaultIconColors(base: IMonoColorScale): IInteractiveColorScale {
 		return {
-			default: chrome.medium,
-			selected: chrome.high,
-			hover: chrome.highMedium,
-			press: chrome.highMedium
+			default: base.medium,
+			selected: base.high,
+			hover: base.highMedium,
+			press: base.highMedium
 		};
 	}
 }
