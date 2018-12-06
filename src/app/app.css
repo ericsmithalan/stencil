@@ -345,3 +345,11 @@ body {
   color: #a1a1a1;
   font-family: "Libre Franklin", sans-serif;
 }
+
+#root {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}

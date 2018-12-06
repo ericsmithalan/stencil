@@ -65,7 +65,6 @@ export class Icon extends React.PureComponent<IconPropTypes, IconStateTypes> {
                 width={this.props.width}
                 height={this.props.height}
                 fill={this.state.color}
-                transform="0 0"
                 preserveAspectRatio="xMaxYMax meet"
                 viewBox={`0, 0, ${this.props.width}, ${this.props.height}`}
             >

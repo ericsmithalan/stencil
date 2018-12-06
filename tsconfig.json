@@ -20,6 +20,7 @@
         "noUnusedLocals": false,
         "paths": {
             "@app": ["src/app/index"],
+            "@styles": ["src/styles/index"],
             "@core": ["src/core/index"],
             "@components": ["src/components/index"],
             "@editor": ["src/editor/index"]
