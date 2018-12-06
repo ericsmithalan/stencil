@@ -1,8 +1,6 @@
 //hack to bypass an issue
 declare const window: any;
 
-import "./titlebar.css";
-
 import * as React from "react";
 import { Icon } from "@components";
 import { IconSource } from "@app";

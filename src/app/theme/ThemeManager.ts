@@ -16,7 +16,9 @@ export class ThemeManager {
     private _light: IAppTheme;
     private _current: IAppTheme;
 
-    public constructor() {}
+    public constructor() {
+        this.setTheme("dark");
+    }
 
     public setTheme(name: AvailableThemes): void {
         switch (name) {

@@ -337,6 +337,23 @@ template {
   display: none;
 }
 
+body {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background-color: theme(app-background);
+  color: theme(font-color-default);
+  font-family: "Libre Franklin", sans-serif;
+}
+
+#root {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
 .titlebar {
   display: flex;
   flex-direction: row;
@@ -356,4 +373,61 @@ template {
   font-size: 13px;
   align-self: center;
   justify-self: center;
+}
+
+.shell {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.shell .shell-titlebar {
+  position: relative;
+  z-index: 2;
+}
+
+.shell .shell-content {
+  position: relative;
+  display: flex;
+  flex-grow: 1;
+  z-index: 1;
+}
+
+.launch {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.launch .launch-content {
+  z-index: 1;
+  margin: auto;
+  font-weight: 900;
+}
+
+.loading {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.editor {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }

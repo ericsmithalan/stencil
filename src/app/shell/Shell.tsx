@@ -1,5 +1,3 @@
-import "./shell.css";
-
 import * as React from "react";
 
 import { Titlebar } from "@app";
