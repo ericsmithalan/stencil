@@ -6,19 +6,24 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import { EditorPage } from "@editor";
 import { Shell, Launch } from "@app";
+import { Settings } from "@settings";
 
 type AppPropTypes = {};
 
 type AppStateTypes = {
     isLoaded: boolean;
+    themeId: string;
 };
 
 export class App extends React.Component<AppPropTypes, AppStateTypes> {
     public constructor(props: AppPropTypes) {
         super(props);
 
+        Settings.themeManager.setTheme("light");
+
         this.state = {
-            isLoaded: false
+            isLoaded: false,
+            themeId: "light"
         };
     }
 
@@ -26,6 +31,11 @@ export class App extends React.Component<AppPropTypes, AppStateTypes> {
         setTimeout(() => {
             this.setState({ isLoaded: true });
         }, 1000);
+
+        setTimeout(() => {
+            Settings.themeManager.setTheme("dark");
+            this.setState({ themeId: "dark" });
+        }, 3000);
     }
 
     public render() {

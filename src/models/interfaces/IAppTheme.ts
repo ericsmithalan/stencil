@@ -4,5 +4,5 @@ export interface IAppTheme {
     id: string;
     fonts: IAppFonts;
     colors: IAppColors;
-    ui: IAppUITheme;
+    uiStyles: IAppUITheme;
 }

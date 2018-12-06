@@ -65,11 +65,13 @@ export class Titlebar extends React.Component<TitlebarPropTypes, TitlebarStateTy
     };
 
     public render() {
+        const { uiStyles } = Settings.themeManager.current;
+
         return (
             <div
                 style={{
                     height: this.props.height,
-                    backgroundColor: Settings.theme.ui.toobarColor
+                    backgroundColor: uiStyles.toobarColor
                 }}
                 className="titlebar"
             >

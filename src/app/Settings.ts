@@ -11,8 +11,4 @@ export class Settings {
 
         return this._themeManager;
     }
-
-    public static get theme(): IAppTheme {
-        return this.themeManager.current;
-    }
 }

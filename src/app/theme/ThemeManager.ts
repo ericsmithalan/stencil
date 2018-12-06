@@ -16,49 +16,28 @@ export class ThemeManager {
     private _light: IAppTheme;
     private _current: IAppTheme;
 
-    public constructor() {
-        this._current = this.dark;
-    }
+    public constructor() {}
 
     public setTheme(name: AvailableThemes): void {
         switch (name) {
             case "dark":
-                this.current = this.dark;
+                this._current = this._createDarkTheme();
+                break;
             case "light":
-                this.current = this.light;
+                this._current = this._createLightTheme();
+                break;
             default:
-                this.current = this.dark;
+                this._current = this._createDarkTheme();
+                break;
         }
     }
 
     public get currentId(): string {
-        return this.current.id;
+        return this._current.id;
     }
 
     public get current(): IAppTheme {
         return this._current;
-    }
-
-    public set current(value: IAppTheme) {
-        if (this._current && this.current.id != value.id) {
-            this._current = value;
-        }
-    }
-
-    public get dark(): IAppTheme {
-        if (!this._dark) {
-            this._dark = this._createDarkTheme();
-        }
-
-        return this._dark;
-    }
-
-    public get light(): IAppTheme {
-        if (!this._light) {
-            this._light = this._createLightTheme();
-        }
-
-        return this._light;
     }
 
     private _createDarkTheme(): IAppTheme {
@@ -94,7 +73,7 @@ export class ThemeManager {
                 icon: this._defaultIconColors(chrome)
             },
             fonts: this._defaultFontStyles(),
-            ui: ui
+            uiStyles: ui
         };
     }
 
@@ -122,7 +101,7 @@ export class ThemeManager {
         };
 
         return {
-            id: "dark",
+            id: "light",
             colors: {
                 chrome: chrome,
                 base: base,
@@ -131,7 +110,7 @@ export class ThemeManager {
                 icon: this._defaultIconColors(chrome)
             },
             fonts: this._defaultFontStyles(),
-            ui: ui
+            uiStyles: ui
         };
     }
 
