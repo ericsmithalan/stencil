@@ -1,29 +1,23 @@
 {
     "compilerOptions": {
         "baseUrl": ".",
-        "outDir": "build/dist",
-        "module": "esnext",
-        "target": "es6",
+        "outDir": "../../../build",
+        "module": "commonjs",
+        "target": "es5",
         "lib": ["es6", "dom"],
         "sourceMap": true,
         "allowJs": true,
         "jsx": "react",
         "moduleResolution": "node",
-        "rootDir": "src",
+        "rootDir": ".",
         "forceConsistentCasingInFileNames": true,
         "noImplicitReturns": false,
         "noImplicitThis": true,
         "noImplicitAny": true,
         "importHelpers": true,
-        "strictNullChecks": true,
+        "strictNullChecks": false,
         "suppressImplicitAnyIndexErrors": true,
-        "noUnusedLocals": false,
-        "paths": {
-            "@app": ["src/app/index"],
-            "@core": ["src/core/index"],
-            "@components": ["src/components/index"],
-            "@editor": ["src/editor/index"]
-        }
+        "noUnusedLocals": false
     },
     "exclude": [
         "node_modules",
