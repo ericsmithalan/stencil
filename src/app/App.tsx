@@ -22,7 +22,11 @@ export class App extends React.Component<AppPropTypes, AppStateTypes> {
         };
     }
 
-    public componentDidMount() {}
+    public componentDidMount() {
+        setTimeout(() => {
+            this.setState({ isLoaded: true });
+        }, 1000);
+    }
 
     public render() {
         if (this.state.isLoaded) {
