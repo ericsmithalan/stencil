@@ -4,6 +4,8 @@ declare const window: any;
 import "./titlebar.css";
 
 import * as React from "react";
+import { Icon } from "@components";
+import { IconSource } from "@app";
 
 type TitlebarPropTypes = {
     height: number;
@@ -58,9 +60,7 @@ export class Titlebar extends React.Component<TitlebarPropTypes, TitlebarStateTy
         return (
             <div style={{ height: this.props.height }} className="titlebar">
                 <div className="titlebar-left">
-                    <svg viewBox="0,0, 30,30">
-                        <rect width="30" height="30" fill="#000000" />
-                    </svg>
+                    <Icon source={IconSource.Menu} />
                 </div>
                 <div className="titlebar-middle">{this._renderTitle()}</div>
                 <div className="titlebar-right">
