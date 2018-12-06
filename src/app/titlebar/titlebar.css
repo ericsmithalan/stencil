@@ -348,12 +348,17 @@ template {
 }
 
 .titlebar .titlebar-left {
-  flex-basis: 10%;
+  background-color: green;
 }
 
 .titlebar .titlebar-middle {
   -webkit-app-region: drag;
   flex-grow: 1;
+  background-color: yellow;
+}
+
+.titlebar .titlebar-right {
+  background-color: red;
 }
 
 .titlebar .title {

@@ -6,15 +6,17 @@
     @include size-fill-absolute();
 
     .titlebar-left {
-        flex-basis: 10%;
+        background-color: green;
     }
 
     .titlebar-middle {
         -webkit-app-region: drag;
         flex-grow: 1;
+        background-color: yellow;
     }
 
     .titlebar-right {
+        background-color: red;
     }
 
     .title {

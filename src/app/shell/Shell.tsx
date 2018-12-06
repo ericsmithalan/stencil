@@ -4,14 +4,20 @@ import * as React from "react";
 
 import { Titlebar } from "@app";
 
-interface IShellProps {}
+type ShellPropTypes = {
+    titlebarHeight: number;
+};
 
-interface IShellState {}
+type ShellStateTypes = {};
 
-export class Shell extends React.Component<IShellProps, IShellState> {
+export class Shell extends React.Component<ShellPropTypes, ShellStateTypes> {
+    public static defaultProps: Partial<ShellPropTypes> = {
+        titlebarHeight: 30
+    };
+
     private _titlebar: React.RefObject<Titlebar>;
 
-    public constructor(props: IShellProps) {
+    public constructor(props: ShellPropTypes) {
         super(props);
 
         this._titlebar = React.createRef();
@@ -28,8 +34,8 @@ export class Shell extends React.Component<IShellProps, IShellState> {
     public render() {
         return (
             <div className="shell">
-                <div className="shell-titlebar">
-                    <Titlebar height={50} ref={this._titlebar} />
+                <div style={{ height: this.props.titlebarHeight }} className="shell-titlebar">
+                    <Titlebar height={this.props.titlebarHeight} ref={this._titlebar} />
                 </div>
                 <div className="shell-content">{this.props.children}</div>
             </div>

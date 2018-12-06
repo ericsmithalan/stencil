@@ -20,8 +20,9 @@
         "noUnusedLocals": false,
         "paths": {
             "@app": ["src/app/index"],
+            "@settings": ["src/app/Settings"],
+            "@models": ["src/models/index"],
             "@styles": ["src/styles/index"],
-            "@core": ["src/core/index"],
             "@components": ["src/components/index"],
             "@editor": ["src/editor/index"]
         }
