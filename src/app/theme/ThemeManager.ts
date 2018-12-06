@@ -62,7 +62,7 @@ export class ThemeManager {
 
         const ui: IAppUITheme = {
             windowColor: chrome.high,
-            toobarColor: chrome.highMedium
+            toobarColor: chrome.high
         };
 
         return {
@@ -72,7 +72,8 @@ export class ThemeManager {
                 base: base,
                 accent: this._defaultAccentColors(),
                 alert: this._defaultAlertColors(),
-                icon: this._defaultIconColors(chrome)
+                icon: this._defaultIconColors(chrome),
+                font: base
             },
             fonts: this._defaultFontStyles(),
             uiStyles: ui
@@ -99,7 +100,7 @@ export class ThemeManager {
 
         const ui: IAppUITheme = {
             windowColor: chrome.high,
-            toobarColor: chrome.highMedium
+            toobarColor: chrome.high
         };
 
         return {
@@ -109,7 +110,8 @@ export class ThemeManager {
                 base: base,
                 accent: this._defaultAccentColors(),
                 alert: this._defaultAlertColors(),
-                icon: this._defaultIconColors(chrome)
+                icon: this._defaultIconColors(chrome),
+                font: base
             },
             fonts: this._defaultFontStyles(),
             uiStyles: ui

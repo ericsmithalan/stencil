@@ -44,6 +44,7 @@ export class Titlebar extends React.Component<TitlebarPropTypes, TitlebarStateTy
     public setTitle(value: string | null) {
         if (this.state.title != value) {
             this.setState({ title: value });
+            console.log("thitle");
         }
     }
 
@@ -63,20 +64,23 @@ export class Titlebar extends React.Component<TitlebarPropTypes, TitlebarStateTy
     };
 
     public render() {
-        const { uiStyles } = Settings.themeManager.current;
+        const { uiStyles, colors } = Settings.themeManager.current;
 
         return (
             <div
                 style={{
                     height: this.props.height,
-                    backgroundColor: uiStyles.toobarColor
+                    backgroundColor: uiStyles.toobarColor,
+                    color: colors.font.medium
                 }}
                 className="titlebar"
             >
                 <div className="titlebar-left">
                     <Icon source={IconSource.Menu} />
                 </div>
+
                 <div className="titlebar-middle">{this._renderTitle()}</div>
+
                 <div className="titlebar-right">
                     <button onClick={this.minimize}>min</button>
                     <button onClick={this.maximize}>max</button>

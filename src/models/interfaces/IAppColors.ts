@@ -6,4 +6,5 @@ export interface IAppColors {
     accent: IMonoColorScale;
     icon: IInteractiveColorScale;
     alert: IAlertColorScale;
+    font: IMonoColorScale;
 }
