@@ -7,3 +7,4 @@ export * from "./IFontSizes";
 export * from "./IAppFonts";
 export * from "./IAppTheme";
 export * from "./IAppUITheme";
+export * from "./ISize";

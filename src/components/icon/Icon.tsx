@@ -1,75 +1,95 @@
 import * as React from "react";
 
+import { ISize } from "@interfaces";
+import { Settings } from "@settings";
+
+type IconSizeTypes = "small" | "normal" | "large";
+
 type IconPropTypes = {
-    width: number;
-    height: number;
-    color: string;
-    source: JSX.Element;
+	size: IconSizeTypes;
+	source: JSX.Element;
 };
 
 type IconStateTypes = {
-    color: string;
+	color: string;
 };
 
 export class Icon extends React.PureComponent<IconPropTypes, IconStateTypes> {
-    private _source: JSX.Element;
-    public static defaultProps: Partial<IconPropTypes> = {
-        width: 32,
-        height: 32,
-        color: "red"
-    };
+	private _source: JSX.Element;
+	private readonly _size: ISize;
 
-    private _color: string;
+	public static defaultProps: Partial<IconPropTypes> = {
+		size: "normal"
+	};
 
-    public constructor(props: IconPropTypes) {
-        super(props);
+	public constructor(props: IconPropTypes) {
+		super(props);
 
-        this.state = {
-            color: this.props.color
-        };
-    }
+		this._size = this._getSize(props.size);
 
-    public get source(): JSX.Element {
-        return this._source;
-    }
+		this.state = {
+			color: Settings.themeManager.current.colors.icon.default
+		};
+	}
 
-    public get color(): string {
-        return this._color;
-    }
+	public get source(): JSX.Element {
+		return this._source;
+	}
 
-    public set color(value: string) {
-        if (this._color !== value) {
-            this._color = value;
-            this.setState({ color: value });
-        }
-    }
+	public get color(): string {
+		return this.state.color;
+	}
 
-    public set source(value: JSX.Element) {
-        this._source = value;
-    }
+	public set color(value: string) {
+		if (this.state.color !== value) {
+			this.setState({ color: value });
+		}
+	}
 
-    public componentWillMount() {
-        if (this.props.color) {
-            this.color = this.props.color;
-        }
+	public set source(value: JSX.Element) {
+		this._source = value;
+	}
 
-        if (this.props.source) {
-            this.source = this.props.source;
-        }
-    }
+	public componentWillMount() {
+		if (this.props.source) {
+			this.source = this.props.source;
+		}
+	}
 
-    public render() {
-        return (
-            <svg
-                className="iconContainer"
-                width={this.props.width}
-                height={this.props.height}
-                fill={this.state.color}
-                preserveAspectRatio="xMaxYMax meet"
-                viewBox={`0, 0, ${this.props.width}, ${this.props.height}`}
-            >
-                {this._source}
-            </svg>
-        );
-    }
+	public render() {
+		return (
+			<svg
+				className="iconContainer"
+				width={this._size.width}
+				height={this._size.height}
+				fill={this.state.color}
+				preserveAspectRatio="xMaxYMax meet"
+				viewBox={`0, 0, ${this._size.width}, ${this._size.height}`}
+			>
+				{this._source}
+			</svg>
+		);
+	}
+
+	private _getSize(size: IconSizeTypes): ISize {
+		switch (size) {
+			case "small":
+				return {
+					width: 18,
+					height: 18
+				};
+			case "normal":
+				return {
+					width: 24,
+					height: 24
+				};
+			case "large":
+				return {
+					width: 32,
+					height: 32
+				};
+			default:
+				throw new Error(`size type is out of range ${size}`);
+		}
+	}
 }

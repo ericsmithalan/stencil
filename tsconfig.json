@@ -1,39 +1,31 @@
 {
-    "compilerOptions": {
-        "baseUrl": ".",
-        "outDir": "build/dist",
-        "module": "esnext",
-        "target": "es6",
-        "lib": ["es6", "dom"],
-        "sourceMap": true,
-        "allowJs": true,
-        "jsx": "react",
-        "moduleResolution": "node",
-        "rootDir": "src",
-        "forceConsistentCasingInFileNames": true,
-        "noImplicitReturns": false,
-        "noImplicitThis": true,
-        "noImplicitAny": true,
-        "importHelpers": true,
-        "strictNullChecks": true,
-        "suppressImplicitAnyIndexErrors": true,
-        "noUnusedLocals": false,
-        "paths": {
-            "@app": ["src/app/index"],
-            "@settings": ["src/app/Settings.ts"],
-            "@models": ["src/models/index"],
-            "@styles": ["src/styles/index"],
-            "@components": ["src/components/index"],
-            "@editor": ["src/editor/index"]
-        }
-    },
-    "exclude": [
-        "node_modules",
-        "build",
-        "scripts",
-        "acceptance-tests",
-        "webpack",
-        "jest",
-        "src/setupTests.ts"
-    ]
+	"compilerOptions": {
+		"baseUrl": ".",
+		"outDir": "build/dist",
+		"module": "esnext",
+		"target": "es6",
+		"lib": ["es6", "dom"],
+		"sourceMap": true,
+		"allowJs": true,
+		"jsx": "react",
+		"moduleResolution": "node",
+		"rootDir": "src",
+		"forceConsistentCasingInFileNames": true,
+		"noImplicitReturns": false,
+		"noImplicitThis": true,
+		"noImplicitAny": true,
+		"importHelpers": true,
+		"strictNullChecks": true,
+		"suppressImplicitAnyIndexErrors": true,
+		"noUnusedLocals": false,
+		"paths": {
+			"@app": ["src/app/index"],
+			"@interfaces": ["src/interfaces/index"],
+			"@settings": ["src/app/Settings.ts"],
+			"@styles": ["src/styles/index"],
+			"@components": ["src/components/index"],
+			"@editor": ["src/editor/index"]
+		}
+	},
+	"exclude": ["node_modules", "build", "scripts", "acceptance-tests", "webpack", "jest", "src/setupTests.ts"]
 }

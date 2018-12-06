@@ -2,99 +2,108 @@
 declare const window: any;
 
 import * as React from "react";
+
 import { Icon } from "@components";
 import { IconSource } from "@app";
 import { Settings } from "@settings";
 
 type TitlebarPropTypes = {
-    height: number;
+	height: number;
 };
 
 type TitlebarStateTypes = {
-    title: string | null;
+	title: string | null;
 };
 
 export interface ITitleBarTheme {
-    focusColor: string;
-    blurColor: string;
-    buttonColor: string;
-    titleColor: string;
+	focusColor: string;
+	blurColor: string;
+	buttonColor: string;
+	titleColor: string;
 }
 
 export class Titlebar extends React.Component<TitlebarPropTypes, TitlebarStateTypes> {
-    public static defaultProps: Partial<TitlebarPropTypes> = {
-        height: 30
-    };
+	public static defaultProps: Partial<TitlebarPropTypes> = {
+		height: 30
+	};
 
-    //hack to bypass an issue
-    private _remote = window.require("electron").remote;
+	//hack to bypass an issue
+	private _remote = window.require("electron").remote;
 
-    public constructor(props: TitlebarPropTypes) {
-        super(props);
+	private readonly _iconRef: React.RefObject<Icon>;
 
-        this.state = {
-            title: null
-        };
-    }
+	public constructor(props: TitlebarPropTypes) {
+		super(props);
 
-    public get currentWindow(): Electron.BrowserWindow {
-        return this._remote.getCurrentWindow();
-    }
+		this._iconRef = React.createRef();
 
-    public setTitle(value: string | null) {
-        if (this.state.title != value) {
-            this.setState({ title: value });
-            console.log("thitle");
-        }
-    }
+		this.state = {
+			title: null
+		};
+	}
 
-    protected close = () => {
-        console.log("close clicked");
-        this.currentWindow.close();
-    };
+	public get currentWindow(): Electron.BrowserWindow {
+		return this._remote.getCurrentWindow();
+	}
 
-    protected maximize = () => {
-        console.log("max clicked");
-        this.currentWindow.maximize();
-    };
+	private get _icon(): Icon {
+		return this._iconRef.current as Icon;
+	}
 
-    protected minimize = () => {
-        console.log("min clicked");
-        this.currentWindow.minimize();
-    };
+	public setTitle(value: string | null) {
+		if (this.state.title != value) {
+			this.setState({ title: value });
+			console.log("thitle");
+		}
+	}
 
-    public render() {
-        const { uiStyles, colors } = Settings.themeManager.current;
+	protected close = () => {
+		console.log("close clicked");
+		this.currentWindow.close();
+	};
 
-        return (
-            <div
-                style={{
-                    height: this.props.height,
-                    backgroundColor: uiStyles.toobarColor,
-                    color: colors.font.medium
-                }}
-                className="titlebar"
-            >
-                <div className="titlebar-left">
-                    <Icon source={IconSource.Menu} />
-                </div>
+	protected maximize = () => {
+		console.log("max clicked");
+		this.currentWindow.maximize();
+	};
 
-                <div className="titlebar-middle">{this._renderTitle()}</div>
+	protected minimize = () => {
+		console.log("min clicked");
+		this.currentWindow.minimize();
+	};
 
-                <div className="titlebar-right">
-                    <button onClick={this.minimize}>min</button>
-                    <button onClick={this.maximize}>max</button>
-                    <button onClick={this.close}>close</button>
-                </div>
-            </div>
-        );
-    }
+	public render() {
+		const { uiStyles, colors } = Settings.themeManager.current;
 
-    private _renderTitle(): JSX.Element | null {
-        if (this.state.title) {
-            return <div className="title">{this.state.title}</div>;
-        }
+		return (
+			<div
+				style={{
+					height: this.props.height,
+					backgroundColor: uiStyles.toobarColor,
+					color: colors.font.medium
+				}}
+				className="titlebar"
+			>
+				<div className="titlebar-left">
+					<Icon ref={this._iconRef} source={IconSource.Menu} />
+				</div>
 
-        return null;
-    }
+				<div className="titlebar-middle">{this._renderTitle()}</div>
+
+				<div className="titlebar-right">
+					<button onClick={this.minimize}>min</button>
+					<button onClick={this.maximize}>max</button>
+					<button onClick={this.close}>close</button>
+				</div>
+			</div>
+		);
+	}
+
+	private _renderTitle(): JSX.Element | null {
+		if (this.state.title) {
+			return <div className="title">{this.state.title}</div>;
+		}
+
+		return null;
+	}
 }
