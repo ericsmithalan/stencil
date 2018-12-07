@@ -11,66 +11,66 @@ import { Settings } from "@settings";
 type AppPropTypes = {};
 
 type AppStateTypes = {
-	isLoaded: boolean;
-	themeId: string;
+    isLoaded: boolean;
+    themeId: string;
 };
 
 export class App extends React.Component<AppPropTypes, AppStateTypes> {
-	private _shellRef: React.RefObject<Shell>;
+    private _shellRef: React.RefObject<Shell>;
 
-	public constructor(props: AppPropTypes) {
-		super(props);
+    public constructor(props: AppPropTypes) {
+        super(props);
 
-		Settings.themeManager.setTheme("dark");
+        Settings.themeManager.setTheme("dark");
 
-		this._shellRef = React.createRef();
+        this._shellRef = React.createRef();
 
-		this.state = {
-			isLoaded: false,
-			themeId: "dark"
-		};
-	}
+        this.state = {
+            isLoaded: false,
+            themeId: "dark"
+        };
+    }
 
-	public componentDidMount() {
-		const shell = this._shellRef.current as Shell;
+    public componentDidMount() {
+        const shell = this._shellRef.current as Shell;
 
-		//simulate loading...
-		setTimeout(() => {
-			shell.isTitlebarVisible = true;
-			shell.titlebar.setTitle("hi");
-			this.setState({ isLoaded: true });
-		}, 1000);
+        //simulate loading...
+        setTimeout(() => {
+            shell.isTitlebarVisible = true;
+            shell.titlebar.setTitle("hi");
+            this.setState({ isLoaded: true });
+        }, 3000);
 
-		// setTimeout(() => {
-		//     Settings.themeManager.setTheme("dark");
-		//     this.setState({ themeId: "dark" });
-		// }, 3000);
-	}
+        // setTimeout(() => {
+        //     Settings.themeManager.setTheme("dark");
+        //     this.setState({ themeId: "dark" });
+        // }, 3000);
+    }
 
-	public render() {
-		return <Shell ref={this._shellRef}>{this._renderContent()}</Shell>;
-	}
+    public render() {
+        return <Shell ref={this._shellRef}>{this._renderContent()}</Shell>;
+    }
 
-	private _renderContent(): JSX.Element {
-		if (this.state.isLoaded) {
-			return this._renderApp();
-		} else {
-			return this._renderLaunchScreen();
-		}
-	}
+    private _renderContent(): JSX.Element {
+        if (this.state.isLoaded) {
+            return this._renderApp();
+        } else {
+            return this._renderLaunchScreen();
+        }
+    }
 
-	private _renderLaunchScreen(): JSX.Element {
-		return <Launch />;
-	}
+    private _renderLaunchScreen(): JSX.Element {
+        return <Launch />;
+    }
 
-	private _renderApp(): JSX.Element {
-		return (
-			<BrowserRouter>
-				<Switch>
-					<Route exact={true} path="/" component={EditorPage} />
-					<Route path="/home" component={EditorPage} />
-				</Switch>
-			</BrowserRouter>
-		);
-	}
+    private _renderApp(): JSX.Element {
+        return (
+            <BrowserRouter>
+                <Switch>
+                    <Route exact={true} path="/" component={EditorPage} />
+                    <Route path="/home" component={EditorPage} />
+                </Switch>
+            </BrowserRouter>
+        );
+    }
 }

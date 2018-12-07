@@ -3,4 +3,7 @@ export * from "./shell/Shell";
 export * from "./launch/Launch";
 export * from "./titlebar/Titlebar";
 export * from "./icons/IconSource";
+export * from "./theme/DarkTheme";
+export * from "./theme/LightTheme";
 export * from "./theme/ThemeManager";
+export * from "./theme/ThemeHelpers";
