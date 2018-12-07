@@ -1,5 +1,5 @@
-import { ThemeHelpers } from "@app";
-import { IAppTheme, IMonoColorScale } from "@interfaces";
+import { ThemeHelpers } from "@core.theme";
+import { IAppTheme, IMonoColorScale } from "@core.interfaces";
 
 export class LightTheme {
     public static getTheme(): IAppTheme {

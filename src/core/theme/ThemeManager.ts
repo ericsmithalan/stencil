@@ -1,5 +1,5 @@
-import { IAppTheme } from "@interfaces";
-import { DarkTheme, LightTheme } from "@app";
+import { IAppTheme } from "@core.interfaces";
+import { DarkTheme, LightTheme } from "@app.theme";
 
 type AvailableThemes = "dark" | "light";
 

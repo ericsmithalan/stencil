@@ -19,14 +19,21 @@
         "suppressImplicitAnyIndexErrors": true,
         "noUnusedLocals": false,
         "paths": {
-            "@app": ["src/app/index"],
             "@core": ["src/core/index"],
-            "@enums": ["src/enums/index"],
-            "@interfaces": ["src/interfaces/index"],
-            "@settings": ["src/app/Settings.ts"],
-            "@styles": ["src/styles/index"],
-            "@components": ["src/components/index"],
-            "@editor": ["src/editor/index"]
+            "@core.components": ["src/core/components/index"],
+            "@core.electron": ["src/core/electron/index"],
+            "@core.enums": ["src/core/enums/index"],
+            "@core.icons": ["src/core/icons/index"],
+            "@core.interfaces": ["src/core/interfaces/index"],
+            "@core.shell": ["src/core/shell/index"],
+            "@core.utils": ["src/core/utils/index"],
+            "@core.theme": ["src/core/theme/index"],
+            "@core.settings": ["src/core/Settings.ts"],
+
+            "@app": ["src/app/index"],
+            "@app.components": ["src/app/components/index"],
+            "@app.pages": ["src/app/pages/index"],
+            "@app.theme": ["src/app/theme/index"]
         }
     },
     "exclude": ["node_modules", "build", "scripts", "acceptance-tests", "webpack", "jest", "src/setupTests.ts"]

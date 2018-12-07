@@ -1,6 +1,6 @@
 import * as React from "react";
-import { IAppTheme } from "@interfaces";
-import { Settings } from "@settings";
+import { IAppTheme } from "@core.interfaces";
+import { Settings } from "@core.settings";
 
 export interface IControlProps {}
 export interface IControlState {}

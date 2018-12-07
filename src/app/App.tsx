@@ -3,10 +3,10 @@ import "../index.css";
 import * as React from "react";
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { Launch, Shell } from "@app";
+import { LaunchPage, EditorPage } from "@app.pages";
+import { Shell } from "@core.shell";
 
-import { EditorPage } from "@editor";
-import { Settings } from "@settings";
+import { Settings } from "@core.settings";
 
 type AppPropTypes = {};
 
@@ -60,7 +60,7 @@ export class App extends React.Component<AppPropTypes, AppStateTypes> {
     }
 
     private _renderLaunchScreen(): JSX.Element {
-        return <Launch />;
+        return <LaunchPage />;
     }
 
     private _renderApp(): JSX.Element {

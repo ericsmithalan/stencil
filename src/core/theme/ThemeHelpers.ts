@@ -1,5 +1,5 @@
-import { SizeType } from "@enums";
-import { ISize, IAlertColorScale, IAppFonts, IAppTheme, IAppUITheme, IFontFamilies, IFontSizes, IInteractiveColorScale, IMonoColorScale } from "@interfaces";
+import { SizeType } from "@core.enums";
+import { ISize, IAlertColorScale, IAppFonts, IAppTheme, IAppUITheme, IFontFamilies, IFontSizes, IInteractiveColorScale, IMonoColorScale } from "@core.interfaces";
 
 export class ThemeHelpers {
     public static getIconButtonSize(size: SizeType): ISize {

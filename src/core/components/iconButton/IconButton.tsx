@@ -1,12 +1,12 @@
 import * as React from "react";
 
-import { IInteractiveColorScale, ISize } from "@interfaces";
+import { IInteractiveColorScale, ISize } from "@core.interfaces";
 
-import { Icon } from "@components";
-import { Settings } from "@settings";
-import { Control, IControlProps, IControlState } from "@core";
-import { SizeType } from "@enums";
-import { ThemeHelpers } from "@app";
+import { Icon } from "@core.icons";
+import { Settings } from "@core.settings";
+import { Control, IControlProps, IControlState } from "@core.components";
+import { SizeType } from "@core.enums";
+import { ThemeHelpers } from "@app.theme";
 
 export interface IIconButtonProps {
     size: SizeType;

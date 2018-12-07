@@ -13,15 +13,15 @@
         "react-scripts-ts": "^4.0.8"
     },
     "scripts": {
-        "build-css": "node-sass-chokidar src/ -o src/  -r -i --output-style expanded",
-        "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/  -w -r --output-style expanded",
+        "build-css": "node-sass-chokidar src/app/ -o src/app/  -r -i --output-style expanded",
+        "watch-css": "npm run build-css && node-sass-chokidar src/app/ -o src/app/  -w -r --output-style expanded",
         "start": "npm-run-all -p watch-css start-js",
         "start-js": "react-scripts-ts start",
         "build-dev": "npm run build-css && react-scripts-ts build",
         "build": "npm run build-css && react-scripts-ts build",
         "test": "react-scripts-ts test --env=jsdom",
         "eject": "react-scripts-ts eject",
-        "electron-build": "tsc -p ./src/app/electron/tsconfig.json",
+        "electron-build": "tsc -p src/core/electron/tsconfig.json",
         "electron-dev": "npm run electron-build && set ELECTRON_START_URL=http://localhost:3000 && electron ./build/index.js",
         "electron-pack-win": "npm run preelectron-pack && build --windows --publish always",
         "electron-pack-mac": "npm run preelectron-pack && build --macos --publish always",

@@ -1,11 +1,11 @@
 import * as React from "react";
-import { Settings } from "@settings";
+import { Settings } from "@core.settings";
 
 interface ILaunchProps {}
 
 interface ILaunchState {}
 
-export class Launch extends React.Component<ILaunchProps, ILaunchState> {
+export class LaunchPage extends React.Component<ILaunchProps, ILaunchState> {
     public constructor(props: ILaunchProps) {
         super(props);
     }
