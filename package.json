@@ -13,8 +13,8 @@
         "react-scripts-ts": "^4.0.8"
     },
     "scripts": {
-        "build-css": "node-sass-chokidar src/app/ -o src/app/  -r -i --output-style expanded",
-        "watch-css": "npm run build-css && node-sass-chokidar src/app/ -o src/app/  -w -r --output-style expanded",
+        "build-css": "node-sass-chokidar src/ -o src/  -r -i --output-style expanded",
+        "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/  -w -r --output-style expanded",
         "start": "npm-run-all -p watch-css start-js",
         "start-js": "react-scripts-ts start",
         "build-dev": "npm run build-css && react-scripts-ts build",
