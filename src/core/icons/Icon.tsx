@@ -2,38 +2,34 @@ import * as React from "react";
 
 import { ISize } from "@core.interfaces";
 import { Settings } from "@core.settings";
+import { Control, IControlProps, IControlState } from "@core.components";
 
 type IconSizeTypes = "small" | "normal" | "large";
 
-type IconPropTypes = {
+interface IIconPropTypes extends IControlProps {
     size: IconSizeTypes;
     source: JSX.Element;
-};
+}
 
-type IconStateTypes = {
+interface IIconStateTypes extends IControlState {
     color: string;
-};
+}
 
-export class Icon extends React.PureComponent<IconPropTypes, IconStateTypes> {
-    private _source: JSX.Element;
+export class Icon extends Control<IIconPropTypes, IIconStateTypes> {
     private readonly _size: ISize;
 
-    public static defaultProps: Partial<IconPropTypes> = {
+    public static defaultProps: Partial<IIconPropTypes> = {
         size: "normal"
     };
 
-    public constructor(props: IconPropTypes) {
+    public constructor(props: IIconPropTypes) {
         super(props);
 
         this._size = this._getSize(props.size);
 
         this.state = {
-            color: Settings.themeManager.current.colors.icon.default
+            color: this.theme.colors.icon.press
         };
-    }
-
-    public get source(): JSX.Element {
-        return this._source;
     }
 
     public get color(): string {
@@ -43,16 +39,6 @@ export class Icon extends React.PureComponent<IconPropTypes, IconStateTypes> {
     public set color(value: string) {
         if (this.state.color !== value) {
             this.setState({ color: value });
-        }
-    }
-
-    public set source(value: JSX.Element) {
-        this._source = value;
-    }
-
-    public componentWillMount() {
-        if (this.props.source) {
-            this.source = this.props.source;
         }
     }
 
@@ -66,7 +52,7 @@ export class Icon extends React.PureComponent<IconPropTypes, IconStateTypes> {
                 preserveAspectRatio="xMaxYMax meet"
                 viewBox={`0, 0, ${this._size.width}, ${this._size.height}`}
             >
-                {this._source}
+                {this.props.source}
             </svg>
         );
     }

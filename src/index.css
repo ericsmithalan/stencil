@@ -337,6 +337,14 @@ template {
   display: none;
 }
 
+.svg-container {
+  position: relative;
+}
+
+.svg-container .svg-image {
+  position: relative;
+}
+
 .shell {
   display: flex;
   flex-direction: column;
@@ -381,11 +389,11 @@ template {
 }
 
 .editor {
-  position: relative;
+  position: absolute;
   top: 0;
   left: 0;
-  right: 0;
   bottom: 0;
+  right: 0;
 }
 
 .launch {
