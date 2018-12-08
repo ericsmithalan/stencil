@@ -8,7 +8,7 @@ import { Control, IControlProps, IControlState } from "@core.components";
 import { SizeType } from "@core.enums";
 import { ThemeHelpers } from "@app.theme";
 
-export interface IIconButtonProps {
+export interface IIconButtonProps extends IControlProps {
     size: SizeType;
     source: JSX.Element;
     isSelectable: boolean;
@@ -17,7 +17,7 @@ export interface IIconButtonProps {
     iconTheme: IInteractiveColorScale;
 }
 
-export interface IIconButtonState {
+export interface IIconButtonState extends IControlState {
     color: string;
     isSelected: boolean;
 }

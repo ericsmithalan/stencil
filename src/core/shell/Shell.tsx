@@ -44,8 +44,6 @@ export class Shell extends React.Component<ShellPropTypes, ShellStateTypes> {
     public render() {
         const { uiStyles } = Settings.themeManager.current;
 
-        console.log(uiStyles);
-
         return (
             <div style={{ backgroundColor: uiStyles.windowColor }} className="shell">
                 <div

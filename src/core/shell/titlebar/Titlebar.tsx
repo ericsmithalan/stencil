@@ -52,22 +52,18 @@ export class Titlebar extends React.Component<TitlebarPropTypes, TitlebarStateTy
     public setTitle(value: string | null) {
         if (this.state.title != value) {
             this.setState({ title: value });
-            console.log("thitle");
         }
     }
 
     protected close = () => {
-        console.log("close clicked");
         this.currentWindow.close();
     };
 
     protected maximize = () => {
-        console.log("max clicked");
         this.currentWindow.maximize();
     };
 
     protected minimize = () => {
-        console.log("min clicked");
         this.currentWindow.minimize();
     };
 

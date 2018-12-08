@@ -1,4 +1,5 @@
-export * from "./Control";
+export * from "./controls/Control";
+export * from "./controls/UIControl";
 export * from "./iconButton/IconButton";
-export * from "./svg/SVGBase";
 export * from "./svg/SVG";
+export * from "./draw/DrawBase";
