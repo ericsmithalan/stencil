@@ -21,8 +21,6 @@ export abstract class DrawBase extends Control<IDrawProps, IDrawState> {
     public abstract draw(context: CanvasRenderingContext2D): void;
 
     public componentDidMount() {
-        super.componentDidMount();
-
         const context = this.canvas.getContext("2d") as CanvasRenderingContext2D;
 
         this.draw(context);

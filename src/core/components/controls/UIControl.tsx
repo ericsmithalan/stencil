@@ -80,49 +80,47 @@ export abstract class UIControl<TProps extends IUIControlProps, TState extends I
     public unLoaded(): void {}
 
     public componentWillMount(): void {
-        super.componentWillMount();
         this.willLoad();
     }
 
     public componentDidMount(): void {
-        super.componentDidMount();
-
         if (this.containerEl) {
             this.measure();
             this._addEventListeners(this.containerEl);
+
+            this.loaded();
         } else {
             this.logger.error("container element not found", this.containerEl);
         }
-
-        this.loaded();
     }
 
     /** @virtual */
     public componentWillUnmount(): void {
-        super.componentWillUnmount();
-
         this._removeEventListeners(this.containerEl);
-
         this.unLoaded();
     }
 
     /** @virtual */
-    protected mouseDown = (evt: MouseEvent): void => {};
+    protected mouseDown(evt: MouseEvent): void {}
 
     /** @virtual */
-    protected mouseEnter = (evt: MouseEvent): void => {};
+    protected mouseEnter(evt: MouseEvent): void {}
 
     /** @virtual */
-    protected mouseLeave = (evt: MouseEvent): void => {};
+    protected mouseLeave(evt: MouseEvent): void {}
 
     /** @virtual */
-    protected mouseUp = (evt: MouseEvent): void => {};
+    protected mouseUp(evt: MouseEvent): void {}
 
     /** @virtual */
-    protected click = (evt: MouseEvent): void => {};
+    protected click(evt: MouseEvent): void {}
 
     protected measure() {
         const size: ISize = this.calculateSize(this.containerEl);
+
+        if (size.width <= 0 || size.height <= 0) {
+            this.logger.warn(`size is 0; height: ${size.height} width: ${size.width}`);
+        }
 
         this.width = size.width;
         this.height = size.height;
@@ -149,6 +147,7 @@ export abstract class UIControl<TProps extends IUIControlProps, TState extends I
         }
 
         if (this.props.preserveAspect) {
+            // try min value first
             let value = Math.min(width, height);
 
             if (value <= 0) {
@@ -159,26 +158,22 @@ export abstract class UIControl<TProps extends IUIControlProps, TState extends I
             height = value;
         }
 
-        if (width <= 0 || height <= 0) {
-            this.logger.warn(`size is 0; height: ${height} width: ${width}`);
-        }
-
         return { width: width, height: height };
     }
 
     private _addEventListeners(element: HTMLDivElement): void {
-        element.addEventListener("click", this.click);
-        element.addEventListener("mouseenter", this.mouseEnter);
-        element.addEventListener("mouseleave", this.mouseLeave);
-        element.addEventListener("mousedown", this.mouseDown);
-        element.addEventListener("mouseup", this.mouseUp);
+        element.addEventListener("click", (e) => this.click(e));
+        element.addEventListener("mouseenter", (e) => this.mouseEnter(e));
+        element.addEventListener("mouseleave", (e) => this.mouseLeave(e));
+        element.addEventListener("mousedown", (e) => this.mouseDown(e));
+        element.addEventListener("mouseup", (e) => this.mouseUp(e));
     }
 
     private _removeEventListeners(element: HTMLDivElement): void {
-        element.removeEventListener("click", this.click);
-        element.removeEventListener("mouseenter", this.mouseEnter);
-        element.removeEventListener("mouseleave", this.mouseLeave);
-        element.removeEventListener("mousedown", this.mouseDown);
-        element.removeEventListener("mouseup", this.mouseUp);
+        element.removeEventListener("click", (e) => this.click(e));
+        element.removeEventListener("mouseenter", (e) => this.mouseEnter(e));
+        element.removeEventListener("mouseleave", (e) => this.mouseLeave(e));
+        element.removeEventListener("mousedown", (e) => this.mouseDown(e));
+        element.removeEventListener("mouseup", (e) => this.mouseUp(e));
     }
 }

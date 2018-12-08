@@ -20,15 +20,6 @@ export abstract class Control<TProps extends IControlProps, TState extends ICont
     }
 
     /** @virtual */
-    public componentWillMount(): void {}
-
-    /** @virtual */
-    public componentDidMount(): void {}
-
-    /** @virtual */
-    public componentWillUnmount(): void {}
-
-    /** @virtual */
     protected getInitialState(): TState {
         return {} as TState;
     }

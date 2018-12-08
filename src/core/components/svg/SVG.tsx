@@ -110,25 +110,20 @@ export class SVG extends UIControl<ISVGProps, ISVGState> {
         }
     }
 
-    public get viewBox(): IBounds {
-        return { x: this.translate.x, y: this.translate.y, width: this.width, height: this.height };
-    }
-
     public render(): JSX.Element {
         return (
             <div ref={this._containerRef} className="svg-container" style={{ width: this.width, height: this.height }}>
                 <svg
-                    style={{ fillRule: "evenodd" }}
+                    style={{ width: this.width, height: this.height }}
                     ref={this._svgRef}
                     className="svg-image"
                     fill={this.fill}
                     viewBox={`${this.translate.x} ${this.translate.y} ${this.width} ${this.height}`}
-                    preserveAspectRatio={this.preserveAspect()}
                 >
                     {this.clipPath()}
                     <g clipPath="url(#clipper)" transform={this.transformString()}>
-                        {this.strokeRect()}
                         {this.props.children}
+                        {this.strokeRect()}
                     </g>
                 </svg>
             </div>
@@ -139,7 +134,7 @@ export class SVG extends UIControl<ISVGProps, ISVGState> {
         if (this.props.clip) {
             return (
                 <clipPath id="clipper">
-                    <rect width={this.width} height={this.height} x={this.translate.x} y={this.translate.y} />
+                    <rect fill="transparent" width={this.width} height={this.height} x={this.translate.x} y={this.translate.y} />
                 </clipPath>
             );
         }
@@ -149,11 +144,7 @@ export class SVG extends UIControl<ISVGProps, ISVGState> {
 
     protected strokeRect(): JSX.Element | null {
         if (this.props.strokeWidth > 0) {
-            const strokeOffset = this.props.strokeWidth * 2;
-            const width = this.width - strokeOffset;
-            const height = this.height - strokeOffset;
-
-            return <rect stroke={this.props.stroke} strokeWidth={this.props.strokeWidth} width={width} height={height} x={this.translate.x} y={this.translate.y} />;
+            return <rect fill="transparent" stroke={this.props.stroke} strokeWidth={this.props.strokeWidth} width={this.width} height={this.height} x={this.translate.x} y={this.translate.y} />;
         }
 
         return null;
@@ -163,7 +154,6 @@ export class SVG extends UIControl<ISVGProps, ISVGState> {
         let str = "";
 
         if (this.props.preserveAspect) {
-            //str += "xMidYMid meet";
             str += "none";
         }
 
