@@ -3,7 +3,7 @@ declare const window: any;
 
 import * as React from "react";
 
-import { Icon, IconSource } from "@core.icons";
+import { MenuIcon } from "@core.icons";
 import { Settings } from "@core.settings";
 
 type TitlebarPropTypes = {
@@ -29,7 +29,7 @@ export class Titlebar extends React.Component<TitlebarPropTypes, TitlebarStateTy
     //hack to bypass an issue
     private _remote = window.require("electron").remote;
 
-    private readonly _iconRef: React.RefObject<Icon>;
+    private readonly _iconRef: React.RefObject<MenuIcon>;
 
     public constructor(props: TitlebarPropTypes) {
         super(props);
@@ -45,8 +45,8 @@ export class Titlebar extends React.Component<TitlebarPropTypes, TitlebarStateTy
         return this._remote.getCurrentWindow();
     }
 
-    private get _icon(): Icon {
-        return this._iconRef.current as Icon;
+    private get _icon(): MenuIcon {
+        return this._iconRef.current as MenuIcon;
     }
 
     public setTitle(value: string | null) {
@@ -80,7 +80,7 @@ export class Titlebar extends React.Component<TitlebarPropTypes, TitlebarStateTy
                 className="titlebar"
             >
                 <div className="titlebar-left">
-                    <Icon ref={this._iconRef} source={IconSource.Menu} />
+                    <MenuIcon ref={this._iconRef} />
                 </div>
 
                 <div className="titlebar-middle">{this._renderTitle()}</div>

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { IVector2, IBounds, IDegree, ISize } from "@core.interfaces";
+import { IVector2, IBounds, IDegree, ISize, ISpacing4, ISpacing2 } from "@core.interfaces";
 import { UIControl, IUIControlProps, IUIControlState } from "@core.components";
 import { VectorHelpers } from "@core.utils";
 
@@ -24,17 +24,19 @@ export interface ISVGState extends IUIControlState {
     clip: boolean;
 }
 
-export class SVG extends UIControl<ISVGProps, ISVGState> {
+export class SVG extends UIControl<ISVGProps, ISVGState, HTMLDivElement> {
     public static defaultProps: ISVGProps = {
-        fill: "red",
+        fill: "transparent",
         width: 0,
         height: 0,
         translate: { x: 0, y: 0 },
         scale: { x: 1, y: 1 },
         rotate: { deg: 0 },
         preserveAspect: true,
-        stroke: "green",
-        strokeWidth: 3,
+        stroke: "transparent",
+        strokeWidth: 1,
+        padding: { x: 0, y: 0 },
+        margin: { x: 0, y: 0 },
         clip: true
     };
 
@@ -47,7 +49,7 @@ export class SVG extends UIControl<ISVGProps, ISVGState> {
         this._svgRef = React.createRef();
     }
 
-    protected getInitialState(): ISVGState {
+    protected defaultState(): ISVGState {
         return {
             fill: this.props.fill,
             width: this.props.width,
@@ -58,13 +60,11 @@ export class SVG extends UIControl<ISVGProps, ISVGState> {
         } as ISVGState;
     }
 
-    public willLoad(): void {}
+    protected willLoad(): void {}
 
-    public loaded(): void {
-        this.logger.log("loaded", { state: this.state });
-    }
+    protected loaded(): void {}
 
-    public willUnload(): void {}
+    protected willUnload(): void {}
 
     public get svgElement(): SVGSVGElement {
         return this._svgRef.current as SVGSVGElement;
@@ -114,7 +114,10 @@ export class SVG extends UIControl<ISVGProps, ISVGState> {
         return (
             <div ref={this._containerRef} className="svg-container" style={{ width: this.width, height: this.height }}>
                 <svg
-                    style={{ width: this.width, height: this.height }}
+                    width={this.width}
+                    height={this.height}
+                    x={this.translate.x}
+                    y={this.translate.y}
                     ref={this._svgRef}
                     className="svg-image"
                     fill={this.fill}
@@ -122,12 +125,28 @@ export class SVG extends UIControl<ISVGProps, ISVGState> {
                 >
                     {this.clipPath()}
                     <g clipPath="url(#clipper)" transform={this.transformString()}>
-                        {this.props.children}
+                        {this._renderChildren()}
                         {this.strokeRect()}
                     </g>
                 </svg>
             </div>
         );
+    }
+
+    private _renderChildren(): React.ReactNode {
+        if (this.props.children) {
+            return this.props.children;
+        } else {
+            return (
+                <g width={this.width} height={this.height} x={this.translate.x} y={this.translate.y}>
+                    <rect fill={this.state.fill} width={this.width} height={this.height} x={this.translate.x} y={this.translate.y} />
+
+                    <text fill="#ffffff" style={{ fontSize: 10, opacity: 0.3 }} x={10} y={this.height / 2 + 5} width={this.width} height={this.height}>
+                        PH
+                    </text>
+                </g>
+            );
+        }
     }
 
     protected clipPath(): JSX.Element | null {

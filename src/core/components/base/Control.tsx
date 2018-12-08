@@ -16,11 +16,11 @@ export abstract class Control<TProps extends IControlProps, TState extends ICont
         this._theme = Settings.themeManager.current;
         this._logger = Settings.Logger;
 
-        this.state = this.getInitialState();
+        this.state = this.defaultState();
     }
 
     /** @virtual */
-    protected getInitialState(): TState {
+    protected defaultState(): TState {
         return {} as TState;
     }
 

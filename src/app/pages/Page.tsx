@@ -1,6 +1,4 @@
 import * as React from "react";
-import { Icon, IconSource } from "@core.icons";
-import { SVG } from "@core.components";
 import { IAppTheme } from "@core.interfaces";
 import { Settings } from "@core.settings";
 

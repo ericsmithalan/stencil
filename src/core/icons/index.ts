@@ -1,2 +1,2 @@
-export { Icon } from "./Icon";
-export { IconSource } from "./IconSource";
+export * from "./IconBase";
+export * from "./MenuIcon";

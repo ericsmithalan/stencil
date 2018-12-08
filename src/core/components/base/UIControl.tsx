@@ -1,29 +1,35 @@
 import * as React from "react";
 
-import { ISize } from "@core.interfaces";
+import { ISize, ISpacing4, ISpacing2 } from "@core.interfaces";
 import { Control, IControlProps, IControlState } from "@core.components";
 
 export interface IUIControlProps extends IControlProps {
     width: number;
     height: number;
+    padding: ISpacing4 | ISpacing2;
+    margin: ISpacing4 | ISpacing2;
     preserveAspect: boolean;
 }
 
 export interface IUIControlState extends IControlState {
     width: number;
     height: number;
+    padding: ISpacing4 | ISpacing2;
+    margin: ISpacing4 | ISpacing2;
 }
 
-export abstract class UIControl<TProps extends IUIControlProps, TState extends IUIControlState> extends Control<TProps, TState> {
+export abstract class UIControl<TProps extends IUIControlProps, TState extends IUIControlState, TElement extends HTMLElement> extends Control<TProps, TState> {
     public static defaultProps: Partial<IUIControlProps> = {
         width: 0,
         height: 0,
-        preserveAspect: false
+        preserveAspect: false,
+        padding: { x: 0, y: 0 },
+        margin: { x: 5, y: 5 }
     };
 
     private readonly _isAutoSizeY: boolean = false;
     private readonly _isAutoSizeX: boolean = false;
-    protected _containerRef: React.RefObject<HTMLDivElement>;
+    protected _containerRef: React.RefObject<TElement>;
 
     protected constructor(props: TProps) {
         super(props);
@@ -59,25 +65,25 @@ export abstract class UIControl<TProps extends IUIControlProps, TState extends I
         }
     }
 
-    protected get containerEl(): HTMLDivElement {
-        return this._containerRef.current as HTMLDivElement;
+    protected get containerEl(): TElement {
+        return this._containerRef.current as TElement;
     }
 
     /** @virtual */
-    protected getInitialState(): TState {
+    protected defaultState(): TState {
         return {
             width: this.props.width,
             height: this.props.height
         } as TState;
     }
 
-    public abstract loaded(): void;
+    protected abstract loaded(): void;
 
     /** @virtual */
-    public willLoad(): void {}
+    protected willLoad(): void {}
 
     /** @virtual */
-    public unLoaded(): void {}
+    protected unLoaded(): void {}
 
     public componentWillMount(): void {
         this.willLoad();
@@ -126,7 +132,7 @@ export abstract class UIControl<TProps extends IUIControlProps, TState extends I
         this.height = size.height;
     }
 
-    protected calculateSize(element: HTMLDivElement): ISize {
+    protected calculateSize(element: TElement): ISize {
         let width: number = this.props.width;
         let height: number = this.props.height;
 
@@ -161,7 +167,71 @@ export abstract class UIControl<TProps extends IUIControlProps, TState extends I
         return { width: width, height: height };
     }
 
-    private _addEventListeners(element: HTMLDivElement): void {
+    private _factorYMargin(value: number): number {
+        let number = value;
+
+        if (this.props.margin.hasOwnProperty("x")) {
+            const prop = this.props.margin as ISpacing2;
+            value - prop.y * 2;
+        }
+
+        if (this.props.margin.hasOwnProperty("left")) {
+            const prop = this.props.margin as ISpacing4;
+            value - prop.top + prop.bottom;
+        }
+
+        return number;
+    }
+
+    private _factorXMargin(value: number): number {
+        let number = value;
+
+        if (this.props.margin.hasOwnProperty("x")) {
+            const prop = this.props.margin as ISpacing2;
+            value - prop.x * 2;
+        }
+
+        if (this.props.margin.hasOwnProperty("left")) {
+            const prop = this.props.margin as ISpacing4;
+            value - prop.left + prop.right;
+        }
+
+        return number;
+    }
+
+    private _factorYPadding(value: number): number {
+        let number = value;
+
+        if (this.props.padding.hasOwnProperty("x")) {
+            const prop = this.props.padding as ISpacing2;
+            value - prop.y * 2;
+        }
+
+        if (this.props.padding.hasOwnProperty("left")) {
+            const prop = this.props.padding as ISpacing4;
+            value - prop.top + prop.bottom;
+        }
+
+        return number;
+    }
+
+    private _factorXPadding(value: number): number {
+        let number = value;
+
+        if (this.props.padding.hasOwnProperty("x")) {
+            const prop = this.props.padding as ISpacing2;
+            value - prop.x * 2;
+        }
+
+        if (this.props.padding.hasOwnProperty("left")) {
+            const prop = this.props.padding as ISpacing4;
+            value - prop.left + prop.right;
+        }
+
+        return number;
+    }
+
+    private _addEventListeners(element: TElement): void {
         element.addEventListener("click", (e) => this.click(e));
         element.addEventListener("mouseenter", (e) => this.mouseEnter(e));
         element.addEventListener("mouseleave", (e) => this.mouseLeave(e));
@@ -169,7 +239,7 @@ export abstract class UIControl<TProps extends IUIControlProps, TState extends I
         element.addEventListener("mouseup", (e) => this.mouseUp(e));
     }
 
-    private _removeEventListeners(element: HTMLDivElement): void {
+    private _removeEventListeners(element: TElement): void {
         element.removeEventListener("click", (e) => this.click(e));
         element.removeEventListener("mouseenter", (e) => this.mouseEnter(e));
         element.removeEventListener("mouseleave", (e) => this.mouseLeave(e));

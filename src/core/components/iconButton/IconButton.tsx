@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { IInteractiveColorScale, ISize } from "@core.interfaces";
 
-import { Icon } from "@core.icons";
+import { IconBase } from "@core.icons";
 import { Settings } from "@core.settings";
 import { Control, IControlProps, IControlState } from "@core.components";
 import { SizeType } from "@core.enums";
@@ -24,7 +24,7 @@ export interface IIconButtonState extends IControlState {
 
 export class IconButton extends Control<IIconButtonProps, IIconButtonState> {
     private readonly _size: ISize;
-    private readonly _iconRef: React.RefObject<Icon>;
+    private readonly _iconRef: React.RefObject<IconBase>;
 
     public static defaultProps: Partial<IIconButtonProps> = {
         size: SizeType.Normal,
@@ -46,14 +46,14 @@ export class IconButton extends Control<IIconButtonProps, IIconButtonState> {
         };
     }
 
-    private get _icon(): Icon {
-        return this._iconRef.current as Icon;
+    private get _icon(): IconBase {
+        return this._iconRef.current as IconBase;
     }
 
     public render() {
         return (
             <a href="#" onClick={this.click} onMouseEnter={this.enter} onMouseLeave={this.leave}>
-                <Icon ref={this._iconRef} source={this.props.source} />>
+                <IconBase ref={this._iconRef} source={this.props.source} />>
             </a>
         );
     }

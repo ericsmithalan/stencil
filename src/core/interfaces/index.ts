@@ -16,3 +16,5 @@ export * from "./ISVGTranslate";
 export * from "./IVector2";
 export * from "./IBounds";
 export * from "./IDegree";
+export * from "./ISpacing4";
+export * from "./ISpacing2";
