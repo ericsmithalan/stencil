@@ -3,103 +3,109 @@ import "../index.css";
 import * as React from "react";
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { LaunchPage, EditorPage } from "@app.pages";
-import { Shell } from "@core.main";
-import { Settings } from "@app";
+import { ControlBase, IControlProps, IControlState, ThemeManager } from "@core";
+import { EditorPage, LaunchPage } from "@app.pages";
 import { IAppTheme, ILogger } from "@core.interfaces";
 
-type AppPropTypes = {};
+import { Settings } from "@app";
+import { Shell } from "@core.main";
 
-type AppStateTypes = {
-    isLoaded: boolean;
-    themeId: string;
-};
+export interface IAppProps extends IControlProps {}
 
-export class App extends React.Component<AppPropTypes, AppStateTypes> {
-    private _shellRef: React.RefObject<Shell>;
+export interface IAppState extends IControlState {
+	isLoaded: boolean;
+	themeId: string;
+}
 
-    public constructor(props: AppPropTypes) {
-        super(props);
+export class App extends ControlBase<IAppProps, IAppState> {
+	public static defaultProps: IAppProps = {};
+	private _shellRef: React.RefObject<Shell>;
+	private _themeManager: ThemeManager;
 
-        this._shellRef = React.createRef();
+	public constructor(props: IAppProps) {
+		super(props);
 
-        this.state = {
-            isLoaded: false,
-            themeId: "dark"
-        };
-    }
+		this._shellRef = React.createRef();
 
-    public get theme(): IAppTheme {
-        return Settings.themeManager.current;
-    }
+		this.state = {
+			isLoaded: false,
+			themeId: "dark"
+		} as IAppState;
+	}
 
-    public get logger(): ILogger {
-        return Settings.logger;
-    }
+	public get theme(): IAppTheme {
+		return Settings.themeManager.current;
+	}
 
-    public componentDidMount() {
-        const shell = this._shellRef.current as Shell;
+	public get logger(): ILogger {
+		return Settings.logger;
+	}
 
-        //simulate loading...
-        setTimeout(() => {
-            shell.isTitlebarVisible = true;
-            shell.titlebar.setTitle("hi");
-            this.setState({ isLoaded: true });
-        }, 3000);
-    }
+	protected loaded() {
+		super.willLoad();
+		const shell = this._shellRef.current as Shell;
 
-    public render() {
-        return (
-            <Shell
-                theme={this.theme}
-                logger={Settings.logger}
-                ref={this._shellRef}
-            >
-                {this._renderContent()}
-            </Shell>
-        );
-    }
+		console.log(shell);
+		//simulate loading...
+		setTimeout(() => {
+			shell.isTitlebarVisible = true;
+			shell.titlebar.setTitle("title bar text");
+			this.setState({ isLoaded: true });
+		}, 3000);
+	}
 
-    private _renderContent(): JSX.Element {
-        if (this.state.isLoaded) {
-            return this._renderApp();
-        } else {
-            return this._renderLaunchScreen();
-        }
-    }
+	public render() {
+		return (
+			<Shell
+				ref={this._shellRef}
+				theme={this.theme}
+				logger={Settings.logger}
+			>
+				{this._renderContent()}
+			</Shell>
+		);
+	}
 
-    private _renderLaunchScreen(): JSX.Element {
-        return <LaunchPage theme={this.theme} logger={Settings.logger} />;
-    }
+	private _renderContent(): JSX.Element {
+		if (this.state.isLoaded) {
+			return this._renderApp();
+		} else {
+			return this._renderLaunchScreen();
+		}
+	}
 
-    private _renderApp(): JSX.Element {
-        return (
-            <BrowserRouter>
-                <Switch>
-                    <Route
-                        exact={true}
-                        path="/"
-                        render={(props) => (
-                            <EditorPage
-                                {...props}
-                                theme={this.theme}
-                                logger={Settings.logger}
-                            />
-                        )}
-                    />
-                    <Route
-                        exact={true}
-                        path="/home"
-                        render={(props) => (
-                            <EditorPage
-                                {...props}
-                                theme={this.theme}
-                                logger={Settings.logger}
-                            />
-                        )}
-                    />
-                </Switch>
-            </BrowserRouter>
-        );
-    }
+	private _renderLaunchScreen(): JSX.Element {
+		return <LaunchPage theme={this.theme} logger={Settings.logger} />;
+	}
+
+	private _renderApp(): JSX.Element {
+		return (
+			<BrowserRouter>
+				<Switch>
+					<Route
+						exact={true}
+						path="/"
+						render={(props) => (
+							<EditorPage
+								{...props}
+								theme={this.theme}
+								logger={Settings.logger}
+							/>
+						)}
+					/>
+					<Route
+						exact={true}
+						path="/home"
+						render={(props) => (
+							<EditorPage
+								{...props}
+								theme={this.theme}
+								logger={Settings.logger}
+							/>
+						)}
+					/>
+				</Switch>
+			</BrowserRouter>
+		);
+	}
 }

@@ -1,62 +1,62 @@
 {
-    "name": "stencil",
-    "version": "0.1.0",
-    "private": true,
-    "dependencies": {
-        "defaultcss": "^1.1.1",
-        "domify": "^1.4.0",
-        "electron-is-dev": "^1.0.1",
-        "react": "^16.6.3",
-        "react-dom": "^16.6.3",
-        "react-router": "^4.3.1",
-        "react-router-dom": "^4.3.1",
-        "react-scripts-ts": "^4.0.8"
-    },
-    "scripts": {
-        "build-css": "node-sass-chokidar src/ -o src/  -r -i --output-style expanded",
-        "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/  -w -r --output-style expanded",
-        "start": "npm-run-all -p watch-css start-js",
-        "start-js": "react-scripts-ts start",
-        "build-dev": "npm run build-css && react-scripts-ts build",
-        "build": "npm run build-css && react-scripts-ts build",
-        "test": "react-scripts-ts test --env=jsdom",
-        "eject": "react-scripts-ts eject",
-        "electron-build": "tsc -p src/core/main/tsconfig.json",
-        "electron-dev": "npm run electron-build && set ELECTRON_START_URL=http://localhost:3000 && electron ./build/Main.js",
-        "electron-pack-win": "npm run preelectron-pack && build --windows --publish always",
-        "electron-pack-mac": "npm run preelectron-pack && build --macos --publish always",
-        "electron-pack-linux": "npm run preelectron-pack && build --linux --publish always",
-        "electron-pack": "build",
-        "preelectron-pack": "npm run build && npm run electron-build"
-    },
-    "build": {
-        "appId": "stencil.electron.react.typescript",
-        "files": [
-            "build/**/*",
-            "node_modules/**/*"
-        ],
-        "directories": {
-            "buildResources": "assets"
-        }
-    },
-    "devDependencies": {
-        "@types/electron-is-dev": "^0.3.0",
-        "@types/jest": "^23.3.10",
-        "@types/node": "^10.12.12",
-        "@types/react": "^16.7.13",
-        "@types/react-dom": "^16.0.11",
-        "@types/react-router": "^4.4.1",
-        "@types/react-router-dom": "^4.3.1",
-        "electron": "^3.0.10",
-        "electron-builder": "^20.38.2",
-        "node-sass-chokidar": "^1.3.4",
-        "npm-run-all": "^4.1.5",
-        "typescript": "^3.2.1"
-    },
-    "browserslist": [
-        ">0.2%",
-        "not dead",
-        "not ie <= 11",
-        "not op_mini all"
-    ]
+	"name": "stencil",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"defaultcss": "^1.1.1",
+		"domify": "^1.4.0",
+		"electron-is-dev": "^1.0.1",
+		"react": "^16.6.3",
+		"react-dom": "^16.6.3",
+		"react-router": "^4.3.1",
+		"react-router-dom": "^4.3.1",
+		"react-scripts-ts": "^4.0.8"
+	},
+	"scripts": {
+		"build-css": "node-sass-chokidar src/ -o src/  -r -i --output-style expanded",
+		"watch-css": "npm run build-css && node-sass-chokidar src/ -o src/  -w -r --output-style expanded",
+		"start": "npm-run-all -p watch-css start-js electron-dev",
+		"start-js": "react-scripts-ts start",
+		"build-dev": "npm run build-css && react-scripts-ts build",
+		"build": "npm run build-css && react-scripts-ts build",
+		"test": "react-scripts-ts test --env=jsdom",
+		"eject": "react-scripts-ts eject",
+		"electron-build": "tsc -p src/core/main/tsconfig.json",
+		"electron-dev": "npm run electron-build && set ELECTRON_START_URL=http://localhost:3000 && electron ./build/Main.js",
+		"electron-pack-win": "npm run preelectron-pack && build --windows --publish always",
+		"electron-pack-mac": "npm run preelectron-pack && build --macos --publish always",
+		"electron-pack-linux": "npm run preelectron-pack && build --linux --publish always",
+		"electron-pack": "build",
+		"preelectron-pack": "npm run build && npm run electron-build"
+	},
+	"build": {
+		"appId": "stencil.electron.react.typescript",
+		"files": [
+			"build/**/*",
+			"node_modules/**/*"
+		],
+		"directories": {
+			"buildResources": "assets"
+		}
+	},
+	"devDependencies": {
+		"@types/electron-is-dev": "^0.3.0",
+		"@types/jest": "^23.3.10",
+		"@types/node": "^10.12.12",
+		"@types/react": "^16.7.13",
+		"@types/react-dom": "^16.0.11",
+		"@types/react-router": "^4.4.1",
+		"@types/react-router-dom": "^4.3.1",
+		"electron": "^3.0.10",
+		"electron-builder": "^20.38.2",
+		"node-sass-chokidar": "^1.3.4",
+		"npm-run-all": "^4.1.5",
+		"typescript": "^3.2.1"
+	},
+	"browserslist": [
+		">0.2%",
+		"not dead",
+		"not ie <= 11",
+		"not op_mini all"
+	]
 }
