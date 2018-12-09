@@ -5,7 +5,7 @@ import { ThemeHelpers } from "@core.utils";
 export class LightTheme {
 	public static getTheme(): IAppTheme {
 		const chrome: IMonoColorScale = {
-			high: "#222222",
+			high: "#f2f2f2",
 			highMedium: "#e5e5e5",
 			medium: "#cccccc",
 			lowMedium: "#999999",
