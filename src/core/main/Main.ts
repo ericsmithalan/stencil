@@ -40,7 +40,6 @@ function createWindow(): void {
 
 	window.on("closed", () => {
 		window = null;
-
 		app.quit();
 	});
 

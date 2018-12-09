@@ -3,18 +3,18 @@ import * as React from "react";
 import { IAppTheme } from "@core.themes";
 import { ILogger } from "@core.debug";
 
-export interface IControlProps {
+export interface IComponentProps {
 	theme?: IAppTheme;
 	logger?: ILogger;
 }
-export interface IControlState {}
+export interface IComponentState {}
 
-export abstract class ControlBase<
-	TProps extends IControlProps,
-	TState extends IControlState
-> extends React.PureComponent<TProps, TState> {
-	public static defaultProps: Partial<IControlProps> = {};
-	public static defaultState: IControlState = {};
+export abstract class ComponentBase<
+	TProps extends IComponentProps,
+	TState extends IComponentState
+> extends React.Component<TProps, TState> {
+	public static defaultProps: Partial<IComponentProps> = {};
+	public static defaultState: IComponentState = {};
 	protected readonly _theme: IAppTheme;
 	protected readonly _logger: ILogger;
 	private _isLoaded: boolean;

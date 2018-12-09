@@ -1,43 +1,42 @@
 {
-    "compilerOptions": {
-        "baseUrl": ".",
-        "outDir": "build/dist",
-        "module": "esnext",
-        "target": "es6",
-        "lib": ["es6", "dom"],
-        "sourceMap": true,
-        "allowJs": true,
-        "jsx": "react",
-        "moduleResolution": "node",
-        "rootDir": "src",
-        "forceConsistentCasingInFileNames": true,
-        "noImplicitReturns": false,
-        "noImplicitThis": true,
-        "noImplicitAny": true,
-        "importHelpers": true,
-        "strictNullChecks": true,
-        "suppressImplicitAnyIndexErrors": true,
-        "noUnusedLocals": false,
-        "paths": {
-            "@core": ["src/core/index"],
-            "@core.debug": ["src/core/debug/index"],
-            "@core.components": ["src/core/components/index"],
-            "@core.main": ["src/core/main/index"],
-            "@core.enums": ["src/core/enums/index"],
-            "@core.interfaces": ["src/core/interfaces/index"],
-            "@core.utils": ["src/core/utils/index"],
-            "@core.theme": ["src/core/themes/index"],
-            "@app": ["src/app/index"],
-            "@app.pages": ["src/app/pages/index"]
-        }
-    },
-    "exclude": [
-        "node_modules",
-        "build",
-        "scripts",
-        "acceptance-tests",
-        "webpack",
-        "jest",
-        "src/setupTests.ts"
-    ]
+	"compilerOptions": {
+		"baseUrl": ".",
+		"outDir": "build/dist",
+		"module": "esnext",
+		"target": "es6",
+		"lib": ["es6", "dom"],
+		"sourceMap": true,
+		"allowJs": true,
+		"jsx": "react",
+		"moduleResolution": "node",
+		"rootDir": "src",
+		"forceConsistentCasingInFileNames": true,
+		"noImplicitReturns": false,
+		"noImplicitThis": true,
+		"noImplicitAny": true,
+		"importHelpers": true,
+		"strictNullChecks": true,
+		"suppressImplicitAnyIndexErrors": true,
+		"noUnusedLocals": false,
+		"paths": {
+			"@core": ["src/core/index"],
+			"@core.debug": ["src/core/debug/index"],
+			"@core.components": ["src/core/components/index"],
+			"@core.main": ["src/core/main/index"],
+			"@core.models": ["src/core/models/index"],
+			"@core.utils": ["src/core/utils/index"],
+			"@core.themes": ["src/core/themes/index"],
+			"@app": ["src/app/index"],
+			"@app.pages": ["src/app/pages/index"]
+		}
+	},
+	"exclude": [
+		"node_modules",
+		"build",
+		"scripts",
+		"acceptance-tests",
+		"webpack",
+		"jest",
+		"src/setupTests.ts"
+	]
 }

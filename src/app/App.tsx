@@ -5,8 +5,9 @@ import * as React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ControlBase, IControlProps, IControlState, ThemeManager } from "@core";
 import { EditorPage, LaunchPage } from "@app.pages";
-import { IAppTheme, ILogger } from "@core.interfaces";
+import { IAppTheme, ThemeType } from "@core.themes";
 
+import { ILogger } from "@core.debug";
 import { Settings } from "@app";
 import { Shell } from "@core.main";
 
@@ -27,6 +28,8 @@ export class App extends ControlBase<IAppProps, IAppState> {
 
 		this._shellRef = React.createRef();
 
+		this._themeManager = Settings.themeManager;
+
 		this.state = {
 			isLoaded: false,
 			themeId: "dark"
@@ -34,11 +37,17 @@ export class App extends ControlBase<IAppProps, IAppState> {
 	}
 
 	public get theme(): IAppTheme {
-		return Settings.themeManager.current;
+		return this._themeManager.current;
 	}
 
 	public get logger(): ILogger {
 		return Settings.logger;
+	}
+
+	protected willLoad() {
+		super.willLoad();
+
+		this._themeManager.setTheme(ThemeType.Light);
 	}
 
 	protected loaded() {
@@ -50,7 +59,10 @@ export class App extends ControlBase<IAppProps, IAppState> {
 		setTimeout(() => {
 			shell.isTitlebarVisible = true;
 			shell.titlebar.setTitle("title bar text");
-			this.setState({ isLoaded: true });
+			this.setState({
+				themeId: this._themeManager.currentId,
+				isLoaded: true
+			});
 		}, 3000);
 	}
 
