@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Titlebar } from "@core.electron";
+import { Titlebar } from "@core.main";
 import { ControlBase, IControlProps, IControlState } from "@core";
 
 export interface IShellProps extends IControlProps {
@@ -43,7 +43,10 @@ export class Shell extends ControlBase<IShellProps, IShellState> {
 
     public render() {
         return (
-            <div style={{ backgroundColor: this.theme.uiStyles.windowColor }} className="shell">
+            <div
+                style={{ backgroundColor: this.theme.uiStyles.windowColor }}
+                className="shell"
+            >
                 <div
                     style={{
                         height: this.props.titlebarHeight,
@@ -51,7 +54,11 @@ export class Shell extends ControlBase<IShellProps, IShellState> {
                     }}
                     className="shell-titlebar"
                 >
-                    <Titlebar height={this.props.titlebarHeight} ref={this._titlebar} />
+                    <Titlebar
+                        theme={this.theme}
+                        height={this.props.titlebarHeight}
+                        ref={this._titlebar}
+                    />
                 </div>
                 <div className="shell-content">{this.props.children}</div>
             </div>

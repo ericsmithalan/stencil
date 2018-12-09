@@ -1,18 +1,20 @@
 import * as React from "react";
-import { IAppTheme } from "@core.interfaces";
-import { Logger } from "@core.utils";
+import { IAppTheme, ILogger } from "@core.interfaces";
 
 export interface IControlProps {
     theme?: IAppTheme;
-    logger?: Logger;
+    logger?: ILogger;
 }
 export interface IControlState {}
 
-export abstract class ControlBase<TProps extends IControlProps, TState extends IControlState> extends React.PureComponent<TProps, TState> {
+export abstract class ControlBase<
+    TProps extends IControlProps,
+    TState extends IControlState
+> extends React.PureComponent<TProps, TState> {
     public static defaultProps: Partial<IControlProps> = {};
     public static defaultState: IControlState = {};
     private readonly _theme: IAppTheme;
-    private readonly _logger: Logger;
+    private readonly _logger: ILogger;
     private _isLoaded: boolean;
 
     protected constructor(props: TProps) {
@@ -65,7 +67,7 @@ export abstract class ControlBase<TProps extends IControlProps, TState extends I
         return this._theme;
     }
 
-    protected get logger(): Logger {
+    protected get logger(): ILogger {
         return this._logger;
     }
 

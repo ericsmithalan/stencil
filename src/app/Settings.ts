@@ -1,10 +1,10 @@
-import { IAppTheme } from "@core.interfaces";
+import { IAppTheme, ILogger } from "@core.interfaces";
 import { ThemeManager } from "@core";
-import { Logger } from "@core.utils";
+import { Logger } from "@core.debug";
 
 export class Settings {
     private static _themeManager: ThemeManager;
-    private static _logger: Logger;
+    private static _logger: ILogger;
 
     public static get themeManager(): ThemeManager {
         if (!this._themeManager) {
@@ -14,7 +14,7 @@ export class Settings {
         return this._themeManager;
     }
 
-    public static get Logger(): Logger {
+    public static get logger(): ILogger {
         if (!this._logger) {
             this._logger = new Logger();
         }

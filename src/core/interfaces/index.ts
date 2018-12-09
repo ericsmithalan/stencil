@@ -18,3 +18,4 @@ export * from "./IBounds";
 export * from "./IDegree";
 export * from "./ISpacing4";
 export * from "./ISpacing2";
+export * from "./ILogger";

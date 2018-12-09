@@ -4,7 +4,9 @@ import * as React from "react";
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { LaunchPage, EditorPage } from "@app.pages";
-import { Shell } from "@core.electron";
+import { Shell } from "@core.main";
+import { Settings } from "@app";
+import { IAppTheme, ILogger } from "@core.interfaces";
 
 type AppPropTypes = {};
 
@@ -27,6 +29,14 @@ export class App extends React.Component<AppPropTypes, AppStateTypes> {
         };
     }
 
+    public get theme(): IAppTheme {
+        return Settings.themeManager.current;
+    }
+
+    public get logger(): ILogger {
+        return Settings.logger;
+    }
+
     public componentDidMount() {
         const shell = this._shellRef.current as Shell;
 
@@ -39,7 +49,15 @@ export class App extends React.Component<AppPropTypes, AppStateTypes> {
     }
 
     public render() {
-        return <Shell ref={this._shellRef}>{this._renderContent()}</Shell>;
+        return (
+            <Shell
+                theme={this.theme}
+                logger={Settings.logger}
+                ref={this._shellRef}
+            >
+                {this._renderContent()}
+            </Shell>
+        );
     }
 
     private _renderContent(): JSX.Element {
@@ -51,15 +69,35 @@ export class App extends React.Component<AppPropTypes, AppStateTypes> {
     }
 
     private _renderLaunchScreen(): JSX.Element {
-        return <LaunchPage />;
+        return <LaunchPage theme={this.theme} logger={Settings.logger} />;
     }
 
     private _renderApp(): JSX.Element {
         return (
             <BrowserRouter>
                 <Switch>
-                    <Route exact={true} path="/" component={EditorPage} />
-                    <Route path="/home" component={EditorPage} />
+                    <Route
+                        exact={true}
+                        path="/"
+                        render={(props) => (
+                            <EditorPage
+                                {...props}
+                                theme={this.theme}
+                                logger={Settings.logger}
+                            />
+                        )}
+                    />
+                    <Route
+                        exact={true}
+                        path="/home"
+                        render={(props) => (
+                            <EditorPage
+                                {...props}
+                                theme={this.theme}
+                                logger={Settings.logger}
+                            />
+                        )}
+                    />
                 </Switch>
             </BrowserRouter>
         );

@@ -10,10 +10,11 @@ export class LaunchPage extends ControlBase<ILaunchProps, ILaunchState> {
     }
 
     public render() {
-        const { colors } = this.theme;
-
         return (
-            <div style={{ color: colors.font.highMedium }} className="launch">
+            <div
+                style={{ color: this.theme.colors.font.highMedium }}
+                className="launch"
+            >
                 <div className="launch-content">loading...</div>
             </div>
         );

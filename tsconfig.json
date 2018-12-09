@@ -20,17 +20,24 @@
         "noUnusedLocals": false,
         "paths": {
             "@core": ["src/core/index"],
+            "@core.debug": ["src/core/debug/index"],
             "@core.components": ["src/core/components/index"],
-            "@core.electron": ["src/core/electron/index"],
+            "@core.main": ["src/core/main/index"],
             "@core.enums": ["src/core/enums/index"],
-            "@core.icons": ["src/core/icons/index"],
             "@core.interfaces": ["src/core/interfaces/index"],
             "@core.utils": ["src/core/utils/index"],
             "@core.theme": ["src/core/themes/index"],
-
             "@app": ["src/app/index"],
             "@app.pages": ["src/app/pages/index"]
         }
     },
-    "exclude": ["node_modules", "build", "scripts", "acceptance-tests", "webpack", "jest", "src/setupTests.ts"]
+    "exclude": [
+        "node_modules",
+        "build",
+        "scripts",
+        "acceptance-tests",
+        "webpack",
+        "jest",
+        "src/setupTests.ts"
+    ]
 }

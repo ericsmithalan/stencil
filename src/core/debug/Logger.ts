@@ -1,10 +1,11 @@
 import { LogLevel } from "@core.enums";
+import { ILogger } from "@core.interfaces";
 
 export type LoggerOptionTypes = {
     isEnabled: boolean;
 };
 
-export class Logger {
+export class Logger implements ILogger {
     public static defaultOptions: LoggerOptionTypes = {
         isEnabled: true
     };

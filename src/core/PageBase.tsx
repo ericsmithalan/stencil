@@ -1,19 +1,32 @@
 import * as React from "react";
-import { IAppTheme } from "@core.interfaces";
+import { IAppTheme, ILogger } from "@core.interfaces";
 import { Settings } from "src/app/Settings";
 
-export interface IPageProps {}
+export interface IPageProps {
+    theme?: IAppTheme;
+    logger?: ILogger;
+}
 
 export interface IPageState {}
 
-export abstract class PageBase<TProps extends IPageProps, TState extends IPageState> extends React.Component<TProps, TState> {
-    public static defaultProps: IPageProps = {};
+export abstract class PageBase<
+    TProps extends IPageProps,
+    TState extends IPageState
+> extends React.Component<TProps, TState> {
+    public static defaultProps: Partial<IPageProps> = {};
     private readonly _theme: IAppTheme;
+    private readonly _logger: ILogger;
 
     public constructor(props: TProps) {
         super(props);
 
-        this._theme = Settings.themeManager.current;
+        if (props.theme) {
+            this._theme = props.theme;
+        }
+
+        if (props.logger) {
+            this._logger = props.logger;
+        }
     }
 
     /** @virtual */
@@ -42,5 +55,9 @@ export abstract class PageBase<TProps extends IPageProps, TState extends IPageSt
 
     protected get theme(): IAppTheme {
         return this._theme;
+    }
+
+    protected get logger(): ILogger {
+        return this._logger;
     }
 }
