@@ -52,23 +52,9 @@ export class IconButton extends Control<IIconButtonProps, IIconButtonState> {
 
     public render() {
         return (
-            <a href="#" onClick={this.click} onMouseEnter={this.enter} onMouseLeave={this.leave}>
-                <IconBase ref={this._iconRef} source={this.props.source} />>
+            <a href="#">
+                <IconBase ref={this._iconRef} />>
             </a>
         );
     }
-
-    protected click = (e: React.MouseEvent) => {
-        this.props.onClick(e);
-
-        if (this.props.isSelectable) {
-            this.setState({ isSelected: !this.state.isSelected });
-        }
-    };
-
-    protected enter = (event: React.MouseEvent) => {};
-
-    protected leave = (event: React.MouseEvent) => {};
-
-    protected press = (event: React.MouseEvent) => {};
 }

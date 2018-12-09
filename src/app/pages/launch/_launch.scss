@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     @include size-fill-absolute();
+    -webkit-app-region: drag;
 
     .launch-content {
         z-index: 1;

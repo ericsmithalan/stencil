@@ -404,6 +404,7 @@ template {
   left: 0;
   bottom: 0;
   right: 0;
+  -webkit-app-region: drag;
 }
 
 .launch .launch-content {

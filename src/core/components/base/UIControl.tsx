@@ -6,8 +6,6 @@ import { Control, IControlProps, IControlState } from "@core.components";
 export interface IUIControlProps extends IControlProps {
     width: number;
     height: number;
-    padding: ISpacing4 | ISpacing2;
-    margin: ISpacing4 | ISpacing2;
     preserveAspect: boolean;
     allowAutoScale: boolean;
 }
@@ -15,17 +13,13 @@ export interface IUIControlProps extends IControlProps {
 export interface IUIControlState extends IControlState {
     width: number;
     height: number;
-    padding: ISpacing4 | ISpacing2;
-    margin: ISpacing4 | ISpacing2;
 }
 
-export abstract class UIControl<TProps extends IUIControlProps, TState extends IUIControlState, TElement extends HTMLElement> extends Control<TProps, TState> {
+export abstract class UIControl<TElement extends HTMLElement, TProps extends IUIControlProps, TState extends IUIControlState> extends Control<TProps, TState> {
     public static defaultProps: Partial<IUIControlProps> = {
         width: 0,
         height: 0,
         preserveAspect: false,
-        padding: { x: 0, y: 0 },
-        margin: { x: 5, y: 5 },
         allowAutoScale: true
     };
 
@@ -47,6 +41,11 @@ export abstract class UIControl<TProps extends IUIControlProps, TState extends I
                 this._isAutoSizeX = true;
             }
         }
+
+        this.state = {
+            width: props.width,
+            height: props.height
+        } as TState;
     }
 
     public get width(): number {
@@ -74,40 +73,24 @@ export abstract class UIControl<TProps extends IUIControlProps, TState extends I
     }
 
     /** @virtual */
-    protected setDefaultState(): TState {
-        return {
-            width: this.props.width,
-            height: this.props.height
-        } as TState;
-    }
+    protected loaded(): void {
+        super.loaded();
 
-    protected abstract loaded(): void;
-
-    /** @virtual */
-    protected willLoad(): void {}
-
-    /** @virtual */
-    protected unLoaded(): void {}
-
-    public componentWillMount(): void {
-        this.willLoad();
-    }
-
-    public componentDidMount(): void {
         if (this.containerEl) {
             this.measure();
-            this._addEventListeners(this.containerEl);
+            this._addEventListeners();
 
-            this.loaded();
+            this.isLoaded = true;
         } else {
             this.logger.error("container element not found", this.containerEl);
         }
     }
 
     /** @virtual */
-    public componentWillUnmount(): void {
-        this._removeEventListeners(this.containerEl);
-        this.unLoaded();
+    protected unLoaded(): void {
+        super.unLoaded();
+        this._removeEventListeners();
+        this.isLoaded = false;
     }
 
     /** @virtual */
@@ -126,7 +109,7 @@ export abstract class UIControl<TProps extends IUIControlProps, TState extends I
     protected click(evt: MouseEvent): void {}
 
     protected measure() {
-        const size: ISize = this.calculateSize(this.containerEl);
+        const size: ISize = this.calculateSize();
 
         if (size.width <= 0 || size.height <= 0) {
             this.logger.warn(`size is 0; height: ${size.height} width: ${size.width}`);
@@ -136,118 +119,66 @@ export abstract class UIControl<TProps extends IUIControlProps, TState extends I
         this.height = size.height;
     }
 
-    protected calculateSize(element: TElement): ISize {
+    protected calculateSize(): ISize {
         let width: number = this.props.width;
         let height: number = this.props.height;
 
-        if (this._isAutoSizeX || this._isAutoSizeY) {
-            const parent = element.parentElement;
+        if (this.containerEl && this.containerEl instanceof HTMLElement) {
+            if (this._isAutoSizeX || this._isAutoSizeY) {
+                const parent = this.containerEl.parentElement;
 
-            if (parent) {
-                if (this._isAutoSizeX) {
-                    width = parent.offsetWidth;
+                if (parent) {
+                    if (this._isAutoSizeX) {
+                        width = parent.offsetWidth;
+                    }
+
+                    if (this._isAutoSizeY) {
+                        height = parent.offsetHeight;
+                    }
+                } else {
+                    this.logger.error("no parent element found");
                 }
-
-                if (this._isAutoSizeY) {
-                    height = parent.offsetHeight;
-                }
-            } else {
-                this.logger.error("no parent element found");
-            }
-        }
-
-        if (this.props.preserveAspect) {
-            // try min value first
-            let value = Math.min(width, height);
-
-            if (value <= 0) {
-                value = Math.max(width, height);
             }
 
-            width = value;
-            height = value;
+            if (this.props.preserveAspect) {
+                // try min value first
+                let value = Math.min(width, height);
+
+                if (value <= 0) {
+                    value = Math.max(width, height);
+                }
+
+                width = value;
+                height = value;
+            }
+        } else {
+            this.logger.error("element is null or not instance of HTMLElement", { element: this.containerEl });
         }
 
         return { width: width, height: height };
     }
 
-    private _factorYMargin(value: number): number {
-        let number = value;
-
-        if (this.props.margin.hasOwnProperty("x")) {
-            const prop = this.props.margin as ISpacing2;
-            value - prop.y * 2;
+    private _addEventListeners(): void {
+        if (this.containerEl && this.containerEl instanceof HTMLElement) {
+            this.containerEl.addEventListener("click", (e) => this.click(e));
+            this.containerEl.addEventListener("mouseenter", (e) => this.mouseEnter(e));
+            this.containerEl.addEventListener("mouseleave", (e) => this.mouseLeave(e));
+            this.containerEl.addEventListener("mousedown", (e) => this.mouseDown(e));
+            this.containerEl.addEventListener("mouseup", (e) => this.mouseUp(e));
+        } else {
+            this.logger.error("element is null or not instance of HTMLElement", { element: this.containerEl });
         }
-
-        if (this.props.margin.hasOwnProperty("left")) {
-            const prop = this.props.margin as ISpacing4;
-            value - prop.top + prop.bottom;
-        }
-
-        return number;
     }
 
-    private _factorXMargin(value: number): number {
-        let number = value;
-
-        if (this.props.margin.hasOwnProperty("x")) {
-            const prop = this.props.margin as ISpacing2;
-            value - prop.x * 2;
+    private _removeEventListeners(): void {
+        if (this.containerEl && this.containerEl instanceof HTMLElement) {
+            this.containerEl.removeEventListener("click", (e) => this.click(e));
+            this.containerEl.removeEventListener("mouseenter", (e) => this.mouseEnter(e));
+            this.containerEl.removeEventListener("mouseleave", (e) => this.mouseLeave(e));
+            this.containerEl.removeEventListener("mousedown", (e) => this.mouseDown(e));
+            this.containerEl.removeEventListener("mouseup", (e) => this.mouseUp(e));
+        } else {
+            this.logger.error("element is null or not instance of HTMLElement", { element: this.containerEl });
         }
-
-        if (this.props.margin.hasOwnProperty("left")) {
-            const prop = this.props.margin as ISpacing4;
-            value - prop.left + prop.right;
-        }
-
-        return number;
-    }
-
-    private _factorYPadding(value: number): number {
-        let number = value;
-
-        if (this.props.padding.hasOwnProperty("x")) {
-            const prop = this.props.padding as ISpacing2;
-            value - prop.y * 2;
-        }
-
-        if (this.props.padding.hasOwnProperty("left")) {
-            const prop = this.props.padding as ISpacing4;
-            value - prop.top + prop.bottom;
-        }
-
-        return number;
-    }
-
-    private _factorXPadding(value: number): number {
-        let number = value;
-
-        if (this.props.padding.hasOwnProperty("x")) {
-            const prop = this.props.padding as ISpacing2;
-            value - prop.x * 2;
-        }
-
-        if (this.props.padding.hasOwnProperty("left")) {
-            const prop = this.props.padding as ISpacing4;
-            value - prop.left + prop.right;
-        }
-
-        return number;
-    }
-
-    private _addEventListeners(element: TElement): void {
-        element.addEventListener("click", (e) => this.click(e));
-        element.addEventListener("mouseenter", (e) => this.mouseEnter(e));
-        element.addEventListener("mouseleave", (e) => this.mouseLeave(e));
-        element.addEventListener("mousedown", (e) => this.mouseDown(e));
-        element.addEventListener("mouseup", (e) => this.mouseUp(e));
-    }
-
-    private _removeEventListeners(element: TElement): void {
-        element.removeEventListener("click", (e) => this.click(e));
-        element.removeEventListener("mouseenter", (e) => this.mouseEnter(e));
-        element.removeEventListener("mouseleave", (e) => this.mouseLeave(e));
-        element.removeEventListener("mousedown", (e) => this.mouseDown(e));
-        element.removeEventListener("mouseup", (e) => this.mouseUp(e));
     }
 }

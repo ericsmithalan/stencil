@@ -6,40 +6,37 @@ import { SizeType } from "@core.enums";
 
 export interface IIconProps extends IUIControlProps {
     sizeType: SizeType;
-    source: JSX.Element;
 }
 
 export interface IIconState extends IUIControlState {
     color: string;
 }
 
-export abstract class IconBase extends UIControl<IIconProps, IIconState, HTMLDivElement> {
+export abstract class IconBase extends UIControl<HTMLDivElement, IIconProps, IIconState> {
     private readonly _size: ISize;
     private readonly _svgRef: React.RefObject<SVG>;
 
-    public static defaultProps: Partial<IIconProps> = {
+    public static defaultProps: IIconProps = {
         sizeType: SizeType.Normal,
         preserveAspect: true,
-        allowAutoScale: false
+        allowAutoScale: false,
+        width: 0,
+        height: 0
     };
 
     protected constructor(props: IIconProps) {
         super(props);
 
-        const size = this._getSize(this.props.sizeType);
-
-        this.width = size.width;
-        this.height = size.height;
-
         this._svgRef = React.createRef();
-        this.setDefaultState();
+
+        this.state = {
+            width: this.props.width,
+            height: this.props.height,
+            color: "purple"
+        };
     }
 
-    protected setDefaultState(): IIconState {
-        return { color: "purple" } as IIconState;
-    }
-
-    protected abstract iconRendering(): React.ReactNode;
+    protected abstract renderIcon(): React.ReactNode;
 
     public get color(): string {
         return this.svg.fill;
@@ -56,23 +53,15 @@ export abstract class IconBase extends UIControl<IIconProps, IIconState, HTMLDiv
     }
 
     protected loaded() {
+        super.loaded();
         // setTimeout(() => {
         //     this.color = "yellow";
         // }, 5000);
     }
 
-    public render() {
-        return (
-            <div ref={this._containerRef}>
-                <SVG ref={this._svgRef} width={this.width} height={this.height}>
-                    {this.iconRendering()}
-                </SVG>
-            </div>
-        );
-    }
-
-    private _getSize(size: SizeType): ISize {
-        switch (size) {
+    protected calculateSize(): ISize {
+        console.log("SIZE CALLED");
+        switch (this.props.sizeType) {
             case SizeType.Small:
                 return {
                     width: 18,
@@ -89,7 +78,17 @@ export abstract class IconBase extends UIControl<IIconProps, IIconState, HTMLDiv
                     height: 32
                 };
             default:
-                throw new Error(`size type is out of range ${size}`);
+                throw new Error(`size type is out of range ${this.props.sizeType}`);
         }
+    }
+
+    public render() {
+        return (
+            <div ref={this._containerRef}>
+                <SVG ref={this._svgRef} width={this.width} height={this.height}>
+                    {this.renderIcon()}
+                </SVG>
+            </div>
+        );
     }
 }
