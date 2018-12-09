@@ -42,10 +42,8 @@ export class Shell extends ControlBase<IShellProps, IShellState> {
     public componentDidMount() {}
 
     public render() {
-        const { uiStyles } = this.theme;
-
         return (
-            <div style={{ backgroundColor: uiStyles.windowColor }} className="shell">
+            <div style={{ backgroundColor: this.theme.uiStyles.windowColor }} className="shell">
                 <div
                     style={{
                         height: this.props.titlebarHeight,

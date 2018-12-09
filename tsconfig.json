@@ -25,13 +25,11 @@
             "@core.enums": ["src/core/enums/index"],
             "@core.icons": ["src/core/icons/index"],
             "@core.interfaces": ["src/core/interfaces/index"],
-            "@core.shell": ["src/core/shell/index"],
             "@core.utils": ["src/core/utils/index"],
-            "@core.theme": ["src/core/theme/index"],
+            "@core.theme": ["src/core/themes/index"],
+
             "@app": ["src/app/index"],
-            "@app.components": ["src/app/components/index"],
-            "@app.pages": ["src/app/pages/index"],
-            "@app.theme": ["src/app/theme/index"]
+            "@app.pages": ["src/app/pages/index"]
         }
     },
     "exclude": ["node_modules", "build", "scripts", "acceptance-tests", "webpack", "jest", "src/setupTests.ts"]

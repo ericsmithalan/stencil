@@ -1,7 +1,6 @@
 import { IAppTheme } from "@core.interfaces";
-import { DarkTheme, LightTheme } from "@app.theme";
-
-type AvailableThemes = "dark" | "light";
+import { DarkTheme, LightTheme } from "src/core/themes";
+import { ThemeType } from "@core.enums";
 
 export class ThemeManager {
     private _current: IAppTheme;
@@ -10,7 +9,7 @@ export class ThemeManager {
         this._current = DarkTheme.getTheme();
     }
 
-    public setTheme(name: AvailableThemes): void {
+    public setTheme(name: ThemeType): void {
         if (this._current.id !== name) {
             switch (name) {
                 case "dark":

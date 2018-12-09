@@ -1,5 +1,5 @@
 import { IAppTheme } from "@core.interfaces";
-import { ThemeManager } from "@app.theme";
+import { ThemeManager } from "@core";
 import { Logger } from "@core.utils";
 
 export class Settings {
