@@ -13,8 +13,11 @@ export interface IIconState extends IUIControlState {
     color: string;
 }
 
-export abstract class IconBase extends UIControlBase<HTMLDivElement, IIconProps, IIconState> {
-    private readonly _size: ISize;
+export abstract class IconBase extends UIControlBase<
+    HTMLDivElement,
+    IIconProps,
+    IIconState
+> {
     private readonly _svgRef: React.RefObject<SVG>;
 
     public static defaultProps: IIconProps = {
@@ -79,7 +82,9 @@ export abstract class IconBase extends UIControlBase<HTMLDivElement, IIconProps,
                     height: 32
                 };
             default:
-                throw new Error(`size type is out of range ${this.props.sizeType}`);
+                throw new Error(
+                    `size type is out of range ${this.props.sizeType}`
+                );
         }
     }
 

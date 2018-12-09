@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { IVector2, IBounds, IDegree, ISize, ISpacing4, ISpacing2 } from "@core.interfaces";
+import { IVector2, IDegree } from "@core.interfaces";
 import { UIControlBase, IUIControlProps, IUIControlState } from "@core";
 import { VectorHelpers } from "@core.utils";
 
@@ -114,7 +114,11 @@ export class SVG extends UIControlBase<HTMLDivElement, ISVGProps, ISVGState> {
 
     public render(): JSX.Element {
         return (
-            <div ref={this._containerRef} className="svg-container" style={{ width: this.width, height: this.height }}>
+            <div
+                ref={this._containerRef}
+                className="svg-container"
+                style={{ width: this.width, height: this.height }}
+            >
                 <svg
                     width={this.width}
                     height={this.height}
@@ -123,10 +127,15 @@ export class SVG extends UIControlBase<HTMLDivElement, ISVGProps, ISVGState> {
                     ref={this._svgRef}
                     className="svg-image"
                     fill={this.fill}
-                    viewBox={`${this.translate.x} ${this.translate.y} ${this.width} ${this.height}`}
+                    viewBox={`${this.translate.x} ${this.translate.y} ${
+                        this.width
+                    } ${this.height}`}
                 >
                     {this.clipPath()}
-                    <g clipPath="url(#clipper)" transform={this.transformString()}>
+                    <g
+                        clipPath="url(#clipper)"
+                        transform={this.transformString()}
+                    >
                         {this._renderChildren()}
                         {this.strokeRect()}
                     </g>
@@ -140,10 +149,28 @@ export class SVG extends UIControlBase<HTMLDivElement, ISVGProps, ISVGState> {
             return this.props.children;
         } else {
             return (
-                <g width={this.width} height={this.height} x={this.translate.x} y={this.translate.y}>
-                    <rect fill={this.state.fill} width={this.width} height={this.height} x={this.translate.x} y={this.translate.y} />
+                <g
+                    width={this.width}
+                    height={this.height}
+                    x={this.translate.x}
+                    y={this.translate.y}
+                >
+                    <rect
+                        fill={this.state.fill}
+                        width={this.width}
+                        height={this.height}
+                        x={this.translate.x}
+                        y={this.translate.y}
+                    />
 
-                    <text fill="#ffffff" style={{ fontSize: 10, opacity: 0.3 }} x={10} y={this.height / 2 + 5} width={this.width} height={this.height}>
+                    <text
+                        fill="#ffffff"
+                        style={{ fontSize: 10, opacity: 0.3 }}
+                        x={10}
+                        y={this.height / 2 + 5}
+                        width={this.width}
+                        height={this.height}
+                    >
                         PH
                     </text>
                 </g>
@@ -155,7 +182,13 @@ export class SVG extends UIControlBase<HTMLDivElement, ISVGProps, ISVGState> {
         if (this.props.clip) {
             return (
                 <clipPath id="clipper">
-                    <rect fill="transparent" width={this.width} height={this.height} x={this.translate.x} y={this.translate.y} />
+                    <rect
+                        fill="transparent"
+                        width={this.width}
+                        height={this.height}
+                        x={this.translate.x}
+                        y={this.translate.y}
+                    />
                 </clipPath>
             );
         }
@@ -165,7 +198,17 @@ export class SVG extends UIControlBase<HTMLDivElement, ISVGProps, ISVGState> {
 
     protected strokeRect(): JSX.Element | null {
         if (this.props.strokeWidth > 0) {
-            return <rect fill="transparent" stroke={this.props.stroke} strokeWidth={this.props.strokeWidth} width={this.width} height={this.height} x={this.translate.x} y={this.translate.y} />;
+            return (
+                <rect
+                    fill="transparent"
+                    stroke={this.props.stroke}
+                    strokeWidth={this.props.strokeWidth}
+                    width={this.width}
+                    height={this.height}
+                    x={this.translate.x}
+                    y={this.translate.y}
+                />
+            );
         }
 
         return null;
@@ -182,6 +225,8 @@ export class SVG extends UIControlBase<HTMLDivElement, ISVGProps, ISVGState> {
     }
 
     protected transformString(): string {
-        return `rotate(${this.rotate.deg}) translate(${this.translate.x} ${this.translate.y}) scale(${this.scale.x} ${this.scale.y})`;
+        return `rotate(${this.rotate.deg}) translate(${this.translate.x} ${
+            this.translate.y
+        }) scale(${this.scale.x} ${this.scale.y})`;
     }
 }

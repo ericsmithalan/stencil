@@ -1,5 +1,13 @@
 import { SizeType } from "@core.enums";
-import { ISize, IAlertColorScale, IAppFonts, IAppTheme, IAppUITheme, IFontFamilies, IFontSizes, IInteractiveColorScale, IMonoColorScale } from "@core.interfaces";
+import {
+    ISize,
+    IAlertColorScale,
+    IAppFonts,
+    IFontFamilies,
+    IFontSizes,
+    IInteractiveColorScale,
+    IMonoColorScale
+} from "@core.interfaces";
 
 export class ThemeHelpers {
     public static getIconButtonSize(size: SizeType): ISize {
@@ -79,7 +87,10 @@ export class ThemeHelpers {
         };
     }
 
-    public static defaultIconColors(base: IMonoColorScale, accent: IMonoColorScale): IInteractiveColorScale {
+    public static defaultIconColors(
+        base: IMonoColorScale,
+        accent: IMonoColorScale
+    ): IInteractiveColorScale {
         return {
             default: base.medium,
             selected: accent.high,

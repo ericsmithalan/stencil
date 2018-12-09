@@ -25,7 +25,7 @@ export class Titlebar extends ControlBase<ITitlebarProps, ITitlebarState> {
 
         this.state = {
             title: null
-        };
+        } as ITitlebarState;
     }
 
     public get currentWindow(): Electron.BrowserWindow {

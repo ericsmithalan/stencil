@@ -10,7 +10,12 @@ export class VectorHelpers {
     }
 
     public static isBoundsEqual(a: IBounds, b: IBounds) {
-        if (a.x === b.x && a.y === b.y && a.width === b.width && a.height === b.height) {
+        if (
+            a.x === b.x &&
+            a.y === b.y &&
+            a.width === b.width &&
+            a.height === b.height
+        ) {
             return true;
         }
 

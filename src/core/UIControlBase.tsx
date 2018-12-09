@@ -15,7 +15,11 @@ export interface IUIControlState extends IControlState {
     height: number;
 }
 
-export abstract class UIControlBase<TElement extends HTMLElement, TProps extends IUIControlProps, TState extends IUIControlState> extends ControlBase<TProps, TState> {
+export abstract class UIControlBase<
+    TElement extends HTMLElement,
+    TProps extends IUIControlProps,
+    TState extends IUIControlState
+> extends ControlBase<TProps, TState> {
     public static defaultProps: Partial<IUIControlProps> = {
         width: 0,
         height: 0,
@@ -112,7 +116,9 @@ export abstract class UIControlBase<TElement extends HTMLElement, TProps extends
         const size: ISize = this.calculateSize();
 
         if (size.width <= 0 || size.height <= 0) {
-            this.logger.warn(`size is 0; height: ${size.height} width: ${size.width}`);
+            this.logger.warn(
+                `size is 0; height: ${size.height} width: ${size.width}`
+            );
         }
 
         this.width = size.width;
@@ -152,7 +158,10 @@ export abstract class UIControlBase<TElement extends HTMLElement, TProps extends
                 height = value;
             }
         } else {
-            this.logger.error("element is null or not instance of HTMLElement", { element: this.containerEl });
+            this.logger.error(
+                "element is null or not instance of HTMLElement",
+                { element: this.containerEl }
+            );
         }
 
         return { width: width, height: height };
@@ -161,24 +170,46 @@ export abstract class UIControlBase<TElement extends HTMLElement, TProps extends
     private _addEventListeners(): void {
         if (this.containerEl && this.containerEl instanceof HTMLElement) {
             this.containerEl.addEventListener("click", (e) => this.click(e));
-            this.containerEl.addEventListener("mouseenter", (e) => this.mouseEnter(e));
-            this.containerEl.addEventListener("mouseleave", (e) => this.mouseLeave(e));
-            this.containerEl.addEventListener("mousedown", (e) => this.mouseDown(e));
-            this.containerEl.addEventListener("mouseup", (e) => this.mouseUp(e));
+            this.containerEl.addEventListener("mouseenter", (e) =>
+                this.mouseEnter(e)
+            );
+            this.containerEl.addEventListener("mouseleave", (e) =>
+                this.mouseLeave(e)
+            );
+            this.containerEl.addEventListener("mousedown", (e) =>
+                this.mouseDown(e)
+            );
+            this.containerEl.addEventListener("mouseup", (e) =>
+                this.mouseUp(e)
+            );
         } else {
-            this.logger.error("element is null or not instance of HTMLElement", { element: this.containerEl });
+            this.logger.error(
+                "element is null or not instance of HTMLElement",
+                { element: this.containerEl }
+            );
         }
     }
 
     private _removeEventListeners(): void {
         if (this.containerEl && this.containerEl instanceof HTMLElement) {
             this.containerEl.removeEventListener("click", (e) => this.click(e));
-            this.containerEl.removeEventListener("mouseenter", (e) => this.mouseEnter(e));
-            this.containerEl.removeEventListener("mouseleave", (e) => this.mouseLeave(e));
-            this.containerEl.removeEventListener("mousedown", (e) => this.mouseDown(e));
-            this.containerEl.removeEventListener("mouseup", (e) => this.mouseUp(e));
+            this.containerEl.removeEventListener("mouseenter", (e) =>
+                this.mouseEnter(e)
+            );
+            this.containerEl.removeEventListener("mouseleave", (e) =>
+                this.mouseLeave(e)
+            );
+            this.containerEl.removeEventListener("mousedown", (e) =>
+                this.mouseDown(e)
+            );
+            this.containerEl.removeEventListener("mouseup", (e) =>
+                this.mouseUp(e)
+            );
         } else {
-            this.logger.error("element is null or not instance of HTMLElement", { element: this.containerEl });
+            this.logger.error(
+                "element is null or not instance of HTMLElement",
+                { element: this.containerEl }
+            );
         }
     }
 }

@@ -1,8 +1,6 @@
 import * as React from "react";
 
-import { IPageProps, IPageState, PageBase } from "@app.pages";
-
-import { SVG } from "@core.components";
+import { IPageProps, IPageState, PageBase } from "@core";
 
 interface IEditorProps extends IPageProps {}
 
@@ -15,8 +13,11 @@ export class EditorPage extends PageBase<IEditorProps, IEditorState> {
 
     public render() {
         return (
-            <div style={{ color: this.theme.colors.font.highMedium }} className="editor">
-                <div>Hello</div>
+            <div
+                style={{ color: this.theme.colors.font.highMedium }}
+                className="editor"
+            >
+                <div>Edit Page</div>
             </div>
         );
     }
