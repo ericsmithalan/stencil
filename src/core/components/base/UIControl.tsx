@@ -9,6 +9,7 @@ export interface IUIControlProps extends IControlProps {
     padding: ISpacing4 | ISpacing2;
     margin: ISpacing4 | ISpacing2;
     preserveAspect: boolean;
+    allowAutoScale: boolean;
 }
 
 export interface IUIControlState extends IControlState {
@@ -24,7 +25,8 @@ export abstract class UIControl<TProps extends IUIControlProps, TState extends I
         height: 0,
         preserveAspect: false,
         padding: { x: 0, y: 0 },
-        margin: { x: 5, y: 5 }
+        margin: { x: 5, y: 5 },
+        allowAutoScale: true
     };
 
     private readonly _isAutoSizeY: boolean = false;
@@ -36,12 +38,14 @@ export abstract class UIControl<TProps extends IUIControlProps, TState extends I
 
         this._containerRef = React.createRef();
 
-        if (this.props.height === 0) {
-            this._isAutoSizeY = true;
-        }
+        if (this.props.allowAutoScale) {
+            if (this.props.height === 0) {
+                this._isAutoSizeY = true;
+            }
 
-        if (this.props.width === 0) {
-            this._isAutoSizeX = true;
+            if (this.props.width === 0) {
+                this._isAutoSizeX = true;
+            }
         }
     }
 
@@ -70,7 +74,7 @@ export abstract class UIControl<TProps extends IUIControlProps, TState extends I
     }
 
     /** @virtual */
-    protected defaultState(): TState {
+    protected setDefaultState(): TState {
         return {
             width: this.props.width,
             height: this.props.height

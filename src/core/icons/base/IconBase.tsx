@@ -1,36 +1,42 @@
 import * as React from "react";
 
 import { ISize } from "@core.interfaces";
-import { SVG, Control, IControlProps, IControlState } from "@core.components";
+import { SVG, UIControl, IUIControlProps, IUIControlState } from "@core.components";
 import { SizeType } from "@core.enums";
 
-export interface IIconProps extends IControlProps {
-    size: SizeType;
+export interface IIconProps extends IUIControlProps {
+    sizeType: SizeType;
     source: JSX.Element;
 }
 
-export interface IIconState extends IControlState {
+export interface IIconState extends IUIControlState {
     color: string;
 }
 
-export abstract class IconBase extends Control<IIconProps, IIconState> {
+export abstract class IconBase extends UIControl<IIconProps, IIconState, HTMLDivElement> {
     private readonly _size: ISize;
     private readonly _svgRef: React.RefObject<SVG>;
 
     public static defaultProps: Partial<IIconProps> = {
-        size: SizeType.Normal
+        sizeType: SizeType.Normal,
+        preserveAspect: true,
+        allowAutoScale: false
     };
 
     protected constructor(props: IIconProps) {
         super(props);
 
-        this._svgRef = React.createRef();
+        const size = this._getSize(this.props.sizeType);
 
-        this._size = this._getSize(props.size);
+        this.width = size.width;
+        this.height = size.height;
+
+        this._svgRef = React.createRef();
+        this.setDefaultState();
     }
 
-    protected defaultState(): IIconState {
-        return { color: this.theme.colors.icon.press } as IIconState;
+    protected setDefaultState(): IIconState {
+        return { color: "purple" } as IIconState;
     }
 
     protected abstract iconRendering(): React.ReactNode;
@@ -45,25 +51,23 @@ export abstract class IconBase extends Control<IIconProps, IIconState> {
         }
     }
 
-    public get size(): ISize {
-        return this._getSize(this.props.size);
-    }
-
     protected get svg(): SVG {
         return this._svgRef.current as SVG;
     }
 
-    public componentDidMount() {
-        setTimeout(() => {
-            this.color = "yellow";
-        }, 5000);
+    protected loaded() {
+        // setTimeout(() => {
+        //     this.color = "yellow";
+        // }, 5000);
     }
 
     public render() {
         return (
-            <SVG ref={this._svgRef} width={this.size.width} height={this.size.height}>
-                {this.iconRendering()}
-            </SVG>
+            <div ref={this._containerRef}>
+                <SVG ref={this._svgRef} width={this.width} height={this.height}>
+                    {this.iconRendering()}
+                </SVG>
+            </div>
         );
     }
 

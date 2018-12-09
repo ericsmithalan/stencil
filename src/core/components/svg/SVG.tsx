@@ -25,7 +25,7 @@ export interface ISVGState extends IUIControlState {
 }
 
 export class SVG extends UIControl<ISVGProps, ISVGState, HTMLDivElement> {
-    public static defaultProps: ISVGProps = {
+    public static defaultProps: Partial<ISVGProps> = {
         fill: "transparent",
         width: 0,
         height: 0,
@@ -37,7 +37,8 @@ export class SVG extends UIControl<ISVGProps, ISVGState, HTMLDivElement> {
         strokeWidth: 1,
         padding: { x: 0, y: 0 },
         margin: { x: 0, y: 0 },
-        clip: true
+        clip: true,
+        allowAutoScale: true
     };
 
     private readonly _svgRef: React.RefObject<SVGSVGElement>;
@@ -49,7 +50,7 @@ export class SVG extends UIControl<ISVGProps, ISVGState, HTMLDivElement> {
         this._svgRef = React.createRef();
     }
 
-    protected defaultState(): ISVGState {
+    protected setDefaultState(): ISVGState {
         return {
             fill: this.props.fill,
             width: this.props.width,
