@@ -22,7 +22,7 @@
         "test": "react-scripts-ts test --env=jsdom",
         "eject": "react-scripts-ts eject",
         "electron-build": "tsc -p src/core/electron/tsconfig.json",
-        "electron-dev": "npm run electron-build && set ELECTRON_START_URL=http://localhost:3000 && electron ./build/index.js",
+        "electron-dev": "npm run electron-build && set ELECTRON_START_URL=http://localhost:3000 && electron ./build/Main.js",
         "electron-pack-win": "npm run preelectron-pack && build --windows --publish always",
         "electron-pack-mac": "npm run preelectron-pack && build --macos --publish always",
         "electron-pack-linux": "npm run preelectron-pack && build --linux --publish always",

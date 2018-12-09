@@ -4,9 +4,7 @@ import * as React from "react";
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { LaunchPage, EditorPage } from "@app.pages";
-import { Shell } from "@core.shell";
-
-import { Settings } from "@core.settings";
+import { Shell } from "@core.electron";
 
 type AppPropTypes = {};
 
@@ -20,8 +18,6 @@ export class App extends React.Component<AppPropTypes, AppStateTypes> {
 
     public constructor(props: AppPropTypes) {
         super(props);
-
-        Settings.themeManager.setTheme("dark");
 
         this._shellRef = React.createRef();
 
@@ -40,11 +36,6 @@ export class App extends React.Component<AppPropTypes, AppStateTypes> {
             shell.titlebar.setTitle("hi");
             this.setState({ isLoaded: true });
         }, 3000);
-
-        // setTimeout(() => {
-        //     Settings.themeManager.setTheme("dark");
-        //     this.setState({ themeId: "dark" });
-        // }, 3000);
     }
 
     public render() {

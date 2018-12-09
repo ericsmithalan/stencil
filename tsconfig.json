@@ -28,8 +28,6 @@
             "@core.shell": ["src/core/shell/index"],
             "@core.utils": ["src/core/utils/index"],
             "@core.theme": ["src/core/theme/index"],
-            "@core.settings": ["src/core/Settings.ts"],
-
             "@app": ["src/app/index"],
             "@app.components": ["src/app/components/index"],
             "@app.pages": ["src/app/pages/index"],

@@ -1,17 +1,16 @@
 import * as React from "react";
-import { Settings } from "@core.settings";
+import { ControlBase } from "@core";
 
 interface ILaunchProps {}
-
 interface ILaunchState {}
 
-export class LaunchPage extends React.Component<ILaunchProps, ILaunchState> {
+export class LaunchPage extends ControlBase<ILaunchProps, ILaunchState> {
     public constructor(props: ILaunchProps) {
         super(props);
     }
 
     public render() {
-        const { colors } = Settings.themeManager.current;
+        const { colors } = this.theme;
 
         return (
             <div style={{ color: colors.font.highMedium }} className="launch">

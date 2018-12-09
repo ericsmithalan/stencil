@@ -4,7 +4,7 @@ declare const window: any;
 import * as React from "react";
 
 import { MenuIcon } from "@core.icons";
-import { Settings } from "@core.settings";
+import { Settings } from "src/app/Settings";
 
 type TitlebarPropTypes = {
     height: number;

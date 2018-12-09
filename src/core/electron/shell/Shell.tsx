@@ -1,26 +1,26 @@
 import * as React from "react";
 
-import { Settings } from "@core.settings";
-import { Titlebar } from "@core.shell";
+import { Titlebar } from "@core.electron";
+import { ControlBase, IControlProps, IControlState } from "@core";
 
-type ShellPropTypes = {
+export interface IShellProps extends IControlProps {
     titlebarHeight: number;
     title: string;
-};
+}
 
-type ShellStateTypes = {
+export interface IShellState extends IControlState {
     title: string;
     isTitlebarVisible: boolean;
-};
+}
 
-export class Shell extends React.Component<ShellPropTypes, ShellStateTypes> {
-    public static defaultProps: Partial<ShellPropTypes> = {
+export class Shell extends ControlBase<IShellProps, IShellState> {
+    public static defaultProps: Partial<IShellProps> = {
         titlebarHeight: 30
     };
 
     private _titlebar: React.RefObject<Titlebar>;
 
-    public constructor(props: ShellPropTypes) {
+    public constructor(props: IShellProps) {
         super(props);
 
         this._titlebar = React.createRef();
@@ -28,7 +28,7 @@ export class Shell extends React.Component<ShellPropTypes, ShellStateTypes> {
         this.state = {
             title: props.title,
             isTitlebarVisible: false
-        };
+        } as IShellState;
     }
 
     public set isTitlebarVisible(value: boolean) {
@@ -42,7 +42,7 @@ export class Shell extends React.Component<ShellPropTypes, ShellStateTypes> {
     public componentDidMount() {}
 
     public render() {
-        const { uiStyles } = Settings.themeManager.current;
+        const { uiStyles } = this.theme;
 
         return (
             <div style={{ backgroundColor: uiStyles.windowColor }} className="shell">

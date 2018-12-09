@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { ISize, ISpacing4, ISpacing2 } from "@core.interfaces";
-import { Control, IControlProps, IControlState } from "@core.components";
+import { ControlBase, IControlProps, IControlState } from "@core";
 
 export interface IUIControlProps extends IControlProps {
     width: number;
@@ -15,7 +15,7 @@ export interface IUIControlState extends IControlState {
     height: number;
 }
 
-export abstract class UIControl<TElement extends HTMLElement, TProps extends IUIControlProps, TState extends IUIControlState> extends Control<TProps, TState> {
+export abstract class UIControlBase<TElement extends HTMLElement, TProps extends IUIControlProps, TState extends IUIControlState> extends ControlBase<TProps, TState> {
     public static defaultProps: Partial<IUIControlProps> = {
         width: 0,
         height: 0,

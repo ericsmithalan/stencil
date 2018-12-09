@@ -1,7 +1,8 @@
 import * as React from "react";
 
 import { ISize } from "@core.interfaces";
-import { SVG, UIControl, IUIControlProps, IUIControlState } from "@core.components";
+import { UIControlBase, IUIControlProps, IUIControlState } from "@core";
+import { SVG } from "@core.components";
 import { SizeType } from "@core.enums";
 
 export interface IIconProps extends IUIControlProps {
@@ -12,7 +13,7 @@ export interface IIconState extends IUIControlState {
     color: string;
 }
 
-export abstract class IconBase extends UIControl<HTMLDivElement, IIconProps, IIconState> {
+export abstract class IconBase extends UIControlBase<HTMLDivElement, IIconProps, IIconState> {
     private readonly _size: ISize;
     private readonly _svgRef: React.RefObject<SVG>;
 

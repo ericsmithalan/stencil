@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { IVector2, IBounds, IDegree, ISize, ISpacing4, ISpacing2 } from "@core.interfaces";
-import { UIControl, IUIControlProps, IUIControlState } from "@core.components";
+import { UIControlBase, IUIControlProps, IUIControlState } from "@core";
 import { VectorHelpers } from "@core.utils";
 
 export interface ISVGProps extends IUIControlProps {
@@ -24,7 +24,7 @@ export interface ISVGState extends IUIControlState {
     clip: boolean;
 }
 
-export class SVG extends UIControl<HTMLDivElement, ISVGProps, ISVGState> {
+export class SVG extends UIControlBase<HTMLDivElement, ISVGProps, ISVGState> {
     public static defaultProps: Partial<ISVGProps> = {
         fill: "transparent",
         width: 0,

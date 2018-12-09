@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { ISize } from "@core.interfaces";
-import { IconBase } from "@core.icons";
+import { IconBase } from "@core";
 
 export class MenuIcon extends IconBase {
     protected renderIcon(): React.ReactNode {

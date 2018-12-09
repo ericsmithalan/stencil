@@ -1,12 +1,14 @@
 import * as React from "react";
 import { IAppTheme } from "@core.interfaces";
-import { Settings } from "@core.settings";
 import { Logger } from "@core.utils";
 
-export interface IControlProps {}
+export interface IControlProps {
+    theme?: IAppTheme;
+    logger?: Logger;
+}
 export interface IControlState {}
 
-export abstract class Control<TProps extends IControlProps, TState extends IControlState> extends React.PureComponent<TProps, TState> {
+export abstract class ControlBase<TProps extends IControlProps, TState extends IControlState> extends React.PureComponent<TProps, TState> {
     public static defaultProps: Partial<IControlProps> = {};
     public static defaultState: IControlState = {};
     private readonly _theme: IAppTheme;
@@ -15,8 +17,14 @@ export abstract class Control<TProps extends IControlProps, TState extends ICont
 
     protected constructor(props: TProps) {
         super(props);
-        this._theme = Settings.themeManager.current;
-        this._logger = Settings.Logger;
+
+        if (props.theme) {
+            this._theme = props.theme;
+        }
+
+        if (props.logger) {
+            this._logger = props.logger;
+        }
 
         this._isLoaded = false;
     }
@@ -30,14 +38,17 @@ export abstract class Control<TProps extends IControlProps, TState extends ICont
     /** @virtual */
     protected unLoaded(): void {}
 
+    /** @final */
     public componentWillMount() {
         this.willLoad();
     }
 
+    /** @final */
     public componentDidMount() {
         this.loaded();
     }
 
+    /** @final */
     public componentWillUnmount() {
         this.unLoaded();
     }

@@ -19,13 +19,6 @@
         "suppressImplicitAnyIndexErrors": true,
         "noUnusedLocals": false
     },
-    "exclude": [
-        "node_modules",
-        "build",
-        "scripts",
-        "acceptance-tests",
-        "webpack",
-        "jest",
-        "src/setupTests.ts"
-    ]
+    "files": ["./Main.ts"],
+    "exclude": ["node_modules", "build", "scripts", "acceptance-tests", "webpack", "jest", "src/setupTests.ts"]
 }
