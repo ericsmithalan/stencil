@@ -32,6 +32,7 @@
             "@core.utils": ["src/core/utils/index"],
             "@core.themes": ["src/core/themes/index"],
             "@app": ["src/app/index"],
+            "@app.drawings": ["src/app/drawings/index"],
             "@app.pages": ["src/app/pages/index"]
         }
     },
