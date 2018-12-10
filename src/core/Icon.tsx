@@ -1,9 +1,7 @@
 import * as React from "react";
-
-import { ISize, SizeType } from "@core.models";
 import { IUIControlProps, IUIControlState, UIControlBase } from "@core";
-
-import { DarkTheme, IButtonTheme } from "@core.themes";
+import { ISize, SizeType } from "@core.models";
+import { IButtonTheme, DarkTheme } from "@core.themes";
 import { SVG } from "@core.components";
 
 export interface IIconProps extends IUIControlProps {
@@ -21,17 +19,18 @@ export class Icon extends UIControlBase<
     IIconProps,
     IIconState
 > {
-    private readonly _svgRef: React.RefObject<SVG>;
+    protected readonly _svgRef: React.RefObject<SVG>;
 
     public static defaultProps: Partial<IIconProps> = {
         sizeType: SizeType.Normal,
         preserveAspect: true,
         allowAutoScale: false,
         width: 0,
-        height: 0
+        height: 0,
+        theme: DarkTheme.getTheme()
     };
 
-    protected constructor(props: IIconProps) {
+    public constructor(props: IIconProps) {
         super(props);
 
         this._svgRef = React.createRef();

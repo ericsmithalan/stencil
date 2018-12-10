@@ -17,3 +17,8 @@ https://github.com/snoopdave/mbcanvas
 
 
 https://github.com/lutzroeder/textor/tree/master/src/texteditor
+
+Dependancy Injection
+https://github.com/soundstep/infuse.js
+
+http://inversify.io/

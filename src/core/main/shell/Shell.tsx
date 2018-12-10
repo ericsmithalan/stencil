@@ -1,11 +1,6 @@
 import * as React from "react";
 
-import {
-    ComponentBase,
-    IComponentProps,
-    IComponentState,
-    ThemeManager
-} from "@core";
+import { ComponentBase, IComponentProps, IComponentState } from "@core";
 
 import { DarkTheme } from "@core.themes";
 import { Titlebar } from "@core.main";
@@ -49,7 +44,7 @@ export class Shell extends ComponentBase<IShellProps, IShellState> {
     }
 
     public render() {
-        const { uiStyles, colors } = this.state.theme;
+        const { uiStyles } = this.state.theme;
 
         return (
             <div

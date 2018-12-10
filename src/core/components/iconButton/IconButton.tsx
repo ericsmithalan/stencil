@@ -1,6 +1,7 @@
 import * as React from "react";
 import { UIControlBase, IUIControlProps, IUIControlState } from "@core";
 import { Icon } from "@core";
+import { DarkTheme } from "@core.themes";
 
 export interface IIconButtonProps extends IUIControlProps {
     onClick(e: MouseEvent): void;
@@ -15,6 +16,10 @@ export class IconButton extends UIControlBase<
 > {
     public constructor(props: IIconButtonProps) {
         super(props);
+
+        this.state = {
+            theme: DarkTheme.getTheme()
+        } as IIconButtonState;
     }
 
     protected click(e: MouseEvent) {

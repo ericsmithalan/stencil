@@ -1,8 +1,5 @@
-import * as React from "react";
+import { IAppTheme } from "@core.themes";
 
-import { DarkTheme, IAppTheme } from "@core.themes";
-
-import { ILogger } from "@core.debug";
 import { ComponentBase } from "@core";
 
 export interface IPageProps {

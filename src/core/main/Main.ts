@@ -69,8 +69,7 @@ function createWindow(): void {
 function createLoadingScreen() {
     splashWindow = new BrowserWindow(
         Object.assign(windowProps, {
-            parent: mainWindow,
-            show: true
+            parent: mainWindow
         })
     );
 
