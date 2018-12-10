@@ -345,6 +345,10 @@ template {
   position: relative;
 }
 
+.icon-container {
+  border: 1px solid red;
+}
+
 .shell {
   display: flex;
   flex-direction: column;
@@ -387,6 +391,13 @@ template {
 .titlebar .titlebar-middle {
   -webkit-app-region: drag;
   flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.titlebar .titlebar-middle .title {
+  margin-left: 10px;
+  vertical-align: middle;
 }
 
 .titlebar .title {

@@ -43,6 +43,12 @@ export class DarkTheme {
                 windowColor: chrome.high,
                 toobarColor: chrome.high,
                 toolbarMenuColor: chrome.highMedium,
+                buttonTheme: {
+                    default: chrome.medium,
+                    selected: chrome.high,
+                    hover: chrome.highMedium,
+                    press: chrome.highMedium
+                },
                 toolbarButtonIconTheme: {
                     default: chrome.medium,
                     selected: chrome.high,

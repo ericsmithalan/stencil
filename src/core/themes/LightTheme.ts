@@ -42,6 +42,12 @@ export class LightTheme {
             uiStyles: {
                 windowColor: chrome.high,
                 toobarColor: chrome.high,
+                buttonTheme: {
+                    default: chrome.medium,
+                    selected: chrome.high,
+                    hover: chrome.highMedium,
+                    press: chrome.highMedium
+                },
                 toolbarMenuColor: chrome.highMedium,
                 toolbarButtonIconTheme: {
                     default: chrome.medium,

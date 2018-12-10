@@ -6,9 +6,11 @@ import * as React from "react";
 import {
     PureComponentBase,
     IPureComponentProps,
-    IPureComponentState,
-    ThemeManager
+    IPureComponentState
 } from "@core";
+
+import { IconButton } from "@core.components";
+
 import { DarkTheme, ThemeType } from "@core.themes";
 
 // todo: I don't like this here but will figure out a better way later
@@ -53,21 +55,21 @@ export class Titlebar extends PureComponentBase<
         }
     }
 
-    protected close = () => {
+    protected close() {
         this.currentWindow.close();
-    };
+    }
 
-    protected maximize = () => {
+    protected maximize() {
         this.currentWindow.maximize();
-    };
+    }
 
-    protected minimize = () => {
+    protected minimize() {
         this.currentWindow.minimize();
-    };
+    }
 
-    protected toggleMenu = () => {
+    protected toggleMenu() {
         this.setState({ showMenu: !this.state.showMenu });
-    };
+    }
 
     protected toggleTheme = () => {
         if (this.props.theme.id === ThemeType.Light) {
@@ -90,16 +92,16 @@ export class Titlebar extends PureComponentBase<
                 className="titlebar"
             >
                 <div className="titlebar-left">
-                    <button onClick={this.toggleMenu}>menu</button>
+                    <IconButton onClick={(e) => this.toggleMenu()} />
                 </div>
 
                 <div className="titlebar-middle">{this._renderTitle()}</div>
 
                 <div className="titlebar-right">
-                    <button onClick={this.toggleTheme}>theme</button>
-                    <button onClick={this.minimize}>min</button>
-                    <button onClick={this.maximize}>max</button>
-                    <button onClick={this.close}>close</button>
+                    <button onClick={(e) => this.toggleTheme()}>theme</button>
+                    <button onClick={(e) => this.minimize()}>min</button>
+                    <button onClick={(e) => this.maximize()}>max</button>
+                    <button onClick={(e) => this.close()}>close</button>
                 </div>
 
                 <div

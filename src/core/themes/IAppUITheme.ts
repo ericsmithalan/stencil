@@ -1,9 +1,10 @@
-import { IInteractiveColorScale } from "@core.themes";
+import { IButtonTheme } from "@core.themes";
 
 export interface IAppUITheme {
     windowColor: string;
     toobarColor: string;
     toolbarMenuColor: string;
-    toolbarButtonTheme: IInteractiveColorScale;
-    toolbarButtonIconTheme: IInteractiveColorScale;
+    toolbarButtonTheme: IButtonTheme;
+    toolbarButtonIconTheme: IButtonTheme;
+    buttonTheme: IButtonTheme;
 }

@@ -1,6 +1,7 @@
 export * from "./IAlertColorScale";
 export * from "./IMonoColorScale";
 export * from "./IInteractiveColorScale";
+export * from "./IButtonTheme";
 export * from "./IAppColors";
 export * from "./IFontFamilies";
 export * from "./IFontSizes";

@@ -16,6 +16,13 @@
     .titlebar-middle {
         -webkit-app-region: drag;
         flex-grow: 1;
+        justify-content: center;
+        align-items: center;
+
+        .title {
+            margin-left: 10px;
+            vertical-align: middle;
+        }
     }
 
     .titlebar-right {
