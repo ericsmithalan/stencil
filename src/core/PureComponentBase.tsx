@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { IAppTheme } from "@core.themes";
+import { IAppTheme, DarkTheme } from "@core.themes";
 
 export interface IPureComponentProps {
     theme: IAppTheme;
@@ -20,7 +20,7 @@ export abstract class PureComponentBase<
 
         this._isLoaded = false;
         this.state = {
-            theme: this.props.theme
+            theme: this.props.theme || DarkTheme.getTheme()
         } as TState;
     }
 

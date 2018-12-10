@@ -52,8 +52,7 @@ export abstract class UIControlBase<
 
         this.state = {
             width: this.props.width,
-            height: this.props.height,
-            theme: this.props.theme
+            height: this.props.height
         } as TState;
     }
 
@@ -93,25 +92,6 @@ export abstract class UIControlBase<
         } else {
             console.error("container element not found", this.containerEl);
         }
-    }
-
-    public static getDerivedStateFromProps(
-        props: IUIControlProps,
-        state: IUIControlState
-    ) {
-        console.log("UI CONTROL: props", props);
-        console.log("UI CONTROL: state", state);
-        if (props.theme && state.theme) {
-            console.log("theme should changed");
-            if (props.theme.id !== state.theme.id) {
-                console.log("theme changed");
-                return {
-                    theme: props.theme
-                };
-            }
-        }
-
-        return null;
     }
 
     /** @virtual */

@@ -20,7 +20,7 @@ export abstract class ComponentBase<
 
         this._isLoaded = false;
         this.state = {
-            theme: this.props.theme
+            theme: this.props.theme || DarkTheme.getTheme()
         } as TState;
     }
 
