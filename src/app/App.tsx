@@ -1,9 +1,16 @@
+"use strict";
+
 import "../index.css";
 
 import * as React from "react";
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { ControlBase, IControlProps, IControlState, ThemeManager } from "@core";
+import {
+    PureComponentBase,
+    IPureComponentProps,
+    IPureComponentState,
+    ThemeManager
+} from "@core";
 import { DarkTheme, IAppTheme, ThemeType } from "@core.themes";
 import { EditorPage, LaunchPage } from "@app.pages";
 
@@ -11,13 +18,13 @@ import { ILogger } from "@core.debug";
 import { Settings } from "@app";
 import { Shell } from "@core.main";
 
-export interface IAppProps extends IControlProps {}
+export interface IAppProps extends IPureComponentProps {}
 
-export interface IAppState extends IControlState {
+export interface IAppState extends IPureComponentState {
     isLoaded: boolean;
 }
 
-export class App extends ControlBase<IAppProps, IAppState> {
+export class App extends PureComponentBase<IAppProps, IAppState> {
     public static defaultProps: Partial<IAppProps> = {};
     private _shellRef: React.RefObject<Shell>;
     private _themeManager: ThemeManager;
@@ -28,10 +35,6 @@ export class App extends ControlBase<IAppProps, IAppState> {
         this._shellRef = React.createRef();
 
         this._themeManager = Settings.themeManager;
-        this._themeManager.current.subscribe((value) => {
-            this._handleThemeChanged(value);
-        });
-
         this._themeManager.setTheme(ThemeType.Dark);
 
         this.state = {
@@ -47,6 +50,10 @@ export class App extends ControlBase<IAppProps, IAppState> {
     protected loaded() {
         const shell = this._shellRef.current as Shell;
 
+        this._themeManager.current.subscribe((value) => {
+            this._handleThemeChanged(value);
+        });
+
         //simulate loading...
         setTimeout(() => {
             shell.isTitlebarVisible = true;
@@ -55,6 +62,10 @@ export class App extends ControlBase<IAppProps, IAppState> {
                 isLoaded: true
             });
         }, 3000);
+    }
+
+    protected unLoaded() {
+        this._themeManager.current.unsubscribe();
     }
 
     private _handleThemeChanged(theme: IAppTheme): void {

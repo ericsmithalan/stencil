@@ -3,23 +3,31 @@ declare const window: any;
 
 import * as React from "react";
 
-import { ControlBase, IControlProps, IControlState, ThemeManager } from "@core";
+import {
+    PureComponentBase,
+    IPureComponentProps,
+    IPureComponentState,
+    ThemeManager
+} from "@core";
 import { DarkTheme, ThemeType } from "@core.themes";
 
 // todo: I don't like this here but will figure out a better way later
 import { Settings } from "@app";
 
-export interface ITitlebarProps extends IControlProps {
+export interface ITitlebarProps extends IPureComponentProps {
     height: number;
     themeManager: ThemeManager;
 }
 
-export interface ITitlebarState extends IControlState {
+export interface ITitlebarState extends IPureComponentState {
     title: string | null;
     backgroundColor: string;
 }
 
-export class Titlebar extends ControlBase<ITitlebarProps, ITitlebarState> {
+export class Titlebar extends PureComponentBase<
+    ITitlebarProps,
+    ITitlebarState
+> {
     public static defaultProps: Partial<ITitlebarProps> = {
         height: 30,
         theme: DarkTheme.getTheme()

@@ -2,16 +2,16 @@ import * as React from "react";
 
 import { IAppTheme } from "@core.themes";
 
-export interface IControlProps {
+export interface IPureComponentProps {
     theme: IAppTheme;
 }
-export interface IControlState {
+export interface IPureComponentState {
     theme: IAppTheme;
 }
 
-export abstract class ControlBase<
-    TProps extends IControlProps,
-    TState extends IControlState
+export abstract class PureComponentBase<
+    TProps extends IPureComponentProps,
+    TState extends IPureComponentState
 > extends React.PureComponent<TProps, TState> {
     private _isLoaded: boolean;
 
@@ -25,8 +25,8 @@ export abstract class ControlBase<
     }
 
     public static getDerivedStateFromProps(
-        props: IControlProps,
-        state: IControlState
+        props: IPureComponentProps,
+        state: IPureComponentState
     ) {
         if (props.theme && state.theme) {
             if (props.theme.id !== state.theme.id) {

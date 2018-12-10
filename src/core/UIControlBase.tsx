@@ -1,16 +1,20 @@
 import * as React from "react";
 
-import { ControlBase, IControlProps, IControlState } from "@core";
+import {
+    PureComponentBase,
+    IPureComponentProps,
+    IPureComponentState
+} from "@core";
 import { ISize } from "@core.models";
 
-export interface IUIControlProps extends IControlProps {
+export interface IUIControlProps extends IPureComponentProps {
     width: number;
     height: number;
     preserveAspect: boolean;
     allowAutoScale: boolean;
 }
 
-export interface IUIControlState extends IControlState {
+export interface IUIControlState extends IPureComponentState {
     width: number;
     height: number;
 }
@@ -19,7 +23,7 @@ export abstract class UIControlBase<
     TElement extends HTMLElement,
     TProps extends IUIControlProps,
     TState extends IUIControlState
-> extends ControlBase<TProps, TState> {
+> extends PureComponentBase<TProps, TState> {
     public static defaultProps: Partial<IUIControlProps> = {
         width: 0,
         height: 0,

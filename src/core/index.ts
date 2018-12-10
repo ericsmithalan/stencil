@@ -1,4 +1,4 @@
-export * from "./ControlBase";
+export * from "./PureComponentBase";
 export * from "./ComponentBase";
 export * from "./UIControlBase";
 export * from "./IconBase";
