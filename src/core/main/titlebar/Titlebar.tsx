@@ -57,7 +57,7 @@ export class Titlebar extends ControlBase<ITitlebarProps, ITitlebarState> {
 	};
 
 	protected toggleTheme = () => {
-		if (this.props.themeManager.current.id === ThemeType.Light) {
+		if (this.props.theme.id === ThemeType.Light) {
 			this.props.themeManager.setTheme(ThemeType.Dark);
 		} else {
 			this.props.themeManager.setTheme(ThemeType.Light);
@@ -65,12 +65,14 @@ export class Titlebar extends ControlBase<ITitlebarProps, ITitlebarState> {
 	};
 
 	public render() {
+		const { uiStyles, colors } = this.state.theme;
+
 		return (
 			<div
 				style={{
 					height: this.props.height,
-					backgroundColor: this.state.theme.uiStyles.toobarColor,
-					color: this.theme.colors.font.medium
+					backgroundColor: uiStyles.toobarColor,
+					color: colors.font.medium
 				}}
 				className="titlebar"
 			>

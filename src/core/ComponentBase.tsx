@@ -19,10 +19,6 @@ export abstract class ComponentBase<
 	protected readonly _logger: ILogger;
 	private _isLoaded: boolean;
 
-	public static defaultProps: Partial<IComponentProps> = {
-		theme: DarkTheme.getTheme()
-	};
-
 	protected constructor(props: TProps) {
 		super(props);
 
@@ -34,6 +30,22 @@ export abstract class ComponentBase<
 		this.state = {
 			theme: this.props.theme
 		} as TState;
+	}
+
+	public static getDerivedStateFromProps(
+		props: IComponentProps,
+		state: IComponentState
+	) {
+		// console.log("asldfj", props.theme, state.theme);
+		if (props.theme && state.theme) {
+			if (props.theme.id !== state.theme.id) {
+				return {
+					theme: props.theme
+				};
+			}
+		}
+
+		return null;
 	}
 
 	/** @virtual */
@@ -52,35 +64,12 @@ export abstract class ComponentBase<
 		this.unLoaded();
 	}
 
-	public static getDerivedStateFromProps(
-		props: IComponentProps,
-		state: IComponentState
-	) {
-		console.log("COMPONENT: props", props);
-		console.log("COMPONENT: state", state);
-		if (props.theme && state.theme) {
-			console.log("theme should changed");
-			if (props.theme.id !== state.theme.id) {
-				console.log("theme changed");
-				return {
-					theme: props.theme
-				};
-			}
-		}
-
-		return null;
-	}
-
 	protected get isLoaded(): boolean {
 		return this._isLoaded;
 	}
 
 	protected set isLoaded(value: boolean) {
 		this._isLoaded = value;
-	}
-
-	protected get theme(): IAppTheme {
-		return this.state.theme;
 	}
 
 	protected get logger(): ILogger {

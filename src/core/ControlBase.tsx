@@ -19,16 +19,10 @@ export abstract class ControlBase<
 	protected readonly _logger: ILogger;
 	private _isLoaded: boolean;
 
-	public static defaultProps: Partial<IControlProps> = {
-		theme: DarkTheme.getTheme()
-	};
-
 	protected constructor(props: TProps) {
 		super(props);
 
-		if (props.logger) {
-			this._logger = props.logger;
-		}
+		this._logger = props.logger;
 
 		this._isLoaded = false;
 		this.state = {
@@ -40,12 +34,9 @@ export abstract class ControlBase<
 		props: IControlProps,
 		state: IControlState
 	) {
-		console.log("CONTROL: props", props);
-		console.log("CONTROL: state", state);
+		// console.log("asldfj", props.theme, state.theme);
 		if (props.theme && state.theme) {
-			console.log("theme should changed");
 			if (props.theme.id !== state.theme.id) {
-				console.log("theme changed");
 				return {
 					theme: props.theme
 				};
@@ -77,10 +68,6 @@ export abstract class ControlBase<
 
 	protected set isLoaded(value: boolean) {
 		this._isLoaded = value;
-	}
-
-	protected get theme(): IAppTheme {
-		return this.state.theme;
 	}
 
 	protected get logger(): ILogger {

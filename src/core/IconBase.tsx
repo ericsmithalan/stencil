@@ -26,8 +26,7 @@ export abstract class IconBase extends UIControlBase<
 		preserveAspect: true,
 		allowAutoScale: false,
 		width: 0,
-		height: 0,
-		theme: DarkTheme.getTheme()
+		height: 0
 	};
 
 	protected constructor(props: IIconProps) {

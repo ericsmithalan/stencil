@@ -50,9 +50,11 @@ export class Shell extends ComponentBase<IShellProps, IShellState> {
 	}
 
 	public render() {
+		const { uiStyles, colors } = this.state.theme;
+
 		return (
 			<div
-				style={{ backgroundColor: this.theme.uiStyles.windowColor }}
+				style={{ backgroundColor: uiStyles.windowColor }}
 				className="shell"
 			>
 				<div
@@ -64,7 +66,7 @@ export class Shell extends ComponentBase<IShellProps, IShellState> {
 				>
 					<Titlebar
 						themeManager={this.props.themeManager}
-						theme={this.theme}
+						theme={this.state.theme}
 						height={this.props.titlebarHeight}
 						ref={this._titlebar}
 					/>

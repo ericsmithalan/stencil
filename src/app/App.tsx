@@ -4,8 +4,8 @@ import * as React from "react";
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ControlBase, IControlProps, IControlState, ThemeManager } from "@core";
+import { DarkTheme, IAppTheme, ThemeType } from "@core.themes";
 import { EditorPage, LaunchPage } from "@app.pages";
-import { IAppTheme, ThemeType } from "@core.themes";
 
 import { ILogger } from "@core.debug";
 import { Settings } from "@app";
@@ -15,10 +15,10 @@ export interface IAppProps extends IControlProps {}
 
 export interface IAppState extends IControlState {
 	isLoaded: boolean;
-	themeId: string;
 }
 
 export class App extends ControlBase<IAppProps, IAppState> {
+	public static defaultProps: Partial<IAppProps> = {};
 	private _shellRef: React.RefObject<Shell>;
 	private _themeManager: ThemeManager;
 
@@ -28,20 +28,16 @@ export class App extends ControlBase<IAppProps, IAppState> {
 		this._shellRef = React.createRef();
 
 		this._themeManager = Settings.themeManager;
-		this._themeManager.setTheme(ThemeType.Light);
-		this._themeManager.currentId.subscribe((value) => {
+		this._themeManager.current.subscribe((value) => {
 			this._handleThemeChanged(value);
 		});
 
+		this._themeManager.setTheme(ThemeType.Dark);
+
 		this.state = {
 			isLoaded: false,
-			themeId: "dark",
-			theme: this._themeManager.current
+			theme: DarkTheme.getTheme()
 		} as IAppState;
-	}
-
-	public get theme(): IAppTheme {
-		return this._themeManager.current;
 	}
 
 	public get logger(): ILogger {
@@ -61,9 +57,8 @@ export class App extends ControlBase<IAppProps, IAppState> {
 		}, 3000);
 	}
 
-	private _handleThemeChanged(value: ThemeType): void {
-		this.setState({ themeId: value });
-		console.log("theme", value, this.theme);
+	private _handleThemeChanged(theme: IAppTheme): void {
+		this.setState({ theme: theme });
 	}
 
 	public render() {
@@ -71,8 +66,8 @@ export class App extends ControlBase<IAppProps, IAppState> {
 			<Shell
 				ref={this._shellRef}
 				themeManager={this._themeManager}
-				theme={this.theme}
-				logger={Settings.logger}
+				theme={this.state.theme}
+				logger={this._logger}
 			>
 				{this._renderContent()}
 			</Shell>
@@ -88,7 +83,7 @@ export class App extends ControlBase<IAppProps, IAppState> {
 	}
 
 	private _renderLaunchScreen(): JSX.Element {
-		return <LaunchPage theme={this.theme} logger={Settings.logger} />;
+		return <LaunchPage theme={this.state.theme} logger={this.logger} />;
 	}
 
 	private _renderApp(): JSX.Element {
@@ -101,8 +96,8 @@ export class App extends ControlBase<IAppProps, IAppState> {
 						render={(props) => (
 							<EditorPage
 								{...props}
-								theme={this.theme}
-								logger={Settings.logger}
+								theme={this.state.theme}
+								logger={this.logger}
 							/>
 						)}
 					/>
@@ -112,8 +107,8 @@ export class App extends ControlBase<IAppProps, IAppState> {
 						render={(props) => (
 							<EditorPage
 								{...props}
-								theme={this.theme}
-								logger={Settings.logger}
+								theme={this.state.theme}
+								logger={this.logger}
 							/>
 						)}
 					/>

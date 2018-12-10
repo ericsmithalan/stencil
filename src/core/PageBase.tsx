@@ -7,7 +7,7 @@ import { Settings } from "src/app/Settings";
 
 export interface IPageProps {
 	theme: IAppTheme;
-	logger?: ILogger;
+	logger: ILogger;
 }
 
 export interface IPageState {
@@ -21,16 +21,10 @@ export abstract class PageBase<
 	private readonly _theme: IAppTheme;
 	private readonly _logger: ILogger;
 
-	public static defaultProps: Partial<IPageProps> = {
-		theme: DarkTheme.getTheme()
-	};
-
 	public constructor(props: TProps) {
 		super(props);
 
-		if (props.logger) {
-			this._logger = props.logger;
-		}
+		this._logger = props.logger;
 
 		this.state = {
 			theme: this.props.theme
@@ -46,6 +40,21 @@ export abstract class PageBase<
 	/** @final */
 	public componentDidMount() {
 		this.loaded();
+	}
+
+	public static getDerivedStateFromProps(
+		props: IPageProps,
+		state: IPageState
+	) {
+		if (props.theme && state.theme) {
+			if (props.theme.id !== state.theme.id) {
+				return {
+					theme: props.theme
+				};
+			}
+		}
+
+		return null;
 	}
 
 	/** @final */

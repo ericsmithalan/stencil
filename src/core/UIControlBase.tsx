@@ -26,8 +26,7 @@ export abstract class UIControlBase<
 		width: 0,
 		height: 0,
 		preserveAspect: false,
-		allowAutoScale: true,
-		theme: DarkTheme.getTheme()
+		allowAutoScale: true
 	};
 
 	private readonly _isAutoSizeY: boolean = false;
