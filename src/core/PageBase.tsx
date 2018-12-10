@@ -3,62 +3,40 @@ import * as React from "react";
 import { DarkTheme, IAppTheme } from "@core.themes";
 
 import { ILogger } from "@core.debug";
-import { Settings } from "src/app/Settings";
+import { ComponentBase } from "@core";
 
 export interface IPageProps {
-	theme: IAppTheme;
-	logger: ILogger;
+    theme: IAppTheme;
 }
 
 export interface IPageState {
-	theme: IAppTheme;
+    theme: IAppTheme;
 }
 
 export abstract class PageBase<
-	TProps extends IPageProps,
-	TState extends IPageState
-> extends React.Component<TProps, TState> {
-	private readonly _theme: IAppTheme;
-	private readonly _logger: ILogger;
+    TProps extends IPageProps,
+    TState extends IPageState
+> extends ComponentBase<TProps, TState> {
+    public constructor(props: TProps) {
+        super(props);
 
-	public constructor(props: TProps) {
-		super(props);
+        this.state = {
+            theme: this.props.theme
+        } as TState;
+    }
 
-		this._logger = props.logger;
+    public static getDerivedStateFromProps(
+        props: IPageProps,
+        state: IPageState
+    ) {
+        if (props.theme && state.theme) {
+            if (props.theme.id !== state.theme.id) {
+                return {
+                    theme: props.theme
+                };
+            }
+        }
 
-		this.state = {
-			theme: this.props.theme
-		} as TState;
-	}
-
-	/** @virtual */
-	protected loaded(): void {}
-
-	/** @virtual */
-	protected unLoaded(): void {}
-
-	/** @final */
-	public componentDidMount() {
-		this.loaded();
-	}
-
-	public static getDerivedStateFromProps(
-		props: IPageProps,
-		state: IPageState
-	) {
-		if (props.theme && state.theme) {
-			if (props.theme.id !== state.theme.id) {
-				return {
-					theme: props.theme
-				};
-			}
-		}
-
-		return null;
-	}
-
-	/** @final */
-	public componentWillUnmount() {
-		this.unLoaded();
-	}
+        return null;
+    }
 }

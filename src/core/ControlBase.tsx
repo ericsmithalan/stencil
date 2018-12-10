@@ -1,76 +1,65 @@
 import * as React from "react";
 
-import { DarkTheme, IAppTheme } from "@core.themes";
-
-import { ILogger } from "@core.debug";
+import { IAppTheme } from "@core.themes";
 
 export interface IControlProps {
-	theme: IAppTheme;
-	logger: ILogger;
+    theme: IAppTheme;
 }
 export interface IControlState {
-	theme: IAppTheme;
+    theme: IAppTheme;
 }
 
 export abstract class ControlBase<
-	TProps extends IControlProps,
-	TState extends IControlState
+    TProps extends IControlProps,
+    TState extends IControlState
 > extends React.PureComponent<TProps, TState> {
-	protected readonly _logger: ILogger;
-	private _isLoaded: boolean;
+    private _isLoaded: boolean;
 
-	protected constructor(props: TProps) {
-		super(props);
+    protected constructor(props: TProps) {
+        super(props);
 
-		this._logger = props.logger;
+        this._isLoaded = false;
+        this.state = {
+            theme: this.props.theme
+        } as TState;
+    }
 
-		this._isLoaded = false;
-		this.state = {
-			theme: this.props.theme
-		} as TState;
-	}
+    public static getDerivedStateFromProps(
+        props: IControlProps,
+        state: IControlState
+    ) {
+        if (props.theme && state.theme) {
+            if (props.theme.id !== state.theme.id) {
+                return {
+                    theme: props.theme
+                };
+            }
+        }
 
-	public static getDerivedStateFromProps(
-		props: IControlProps,
-		state: IControlState
-	) {
-		// console.log("asldfj", props.theme, state.theme);
-		if (props.theme && state.theme) {
-			if (props.theme.id !== state.theme.id) {
-				return {
-					theme: props.theme
-				};
-			}
-		}
+        return null;
+    }
 
-		return null;
-	}
+    /** @virtual */
+    protected loaded(): void {}
 
-	/** @virtual */
-	protected loaded(): void {}
+    /** @virtual */
+    protected unLoaded(): void {}
 
-	/** @virtual */
-	protected unLoaded(): void {}
+    /** @final */
+    public componentDidMount() {
+        this.loaded();
+    }
 
-	/** @final */
-	public componentDidMount() {
-		this.loaded();
-	}
+    /** @final */
+    public componentWillUnmount() {
+        this.unLoaded();
+    }
 
-	/** @final */
-	public componentWillUnmount() {
-		this.unLoaded();
-	}
+    protected get isLoaded(): boolean {
+        return this._isLoaded;
+    }
 
-	protected get isLoaded(): boolean {
-		return this._isLoaded;
-	}
-
-	protected set isLoaded(value: boolean) {
-		this._isLoaded = value;
-	}
-
-	protected get logger(): ILogger {
-		return this._logger;
-	}
+    protected set isLoaded(value: boolean) {
+        this._isLoaded = value;
+    }
 }
