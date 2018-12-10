@@ -42,13 +42,14 @@ export class DarkTheme {
             uiStyles: {
                 windowColor: chrome.high,
                 toobarColor: chrome.high,
-                titlebarButtonTheme: {
+                toolbarMenuColor: chrome.highMedium,
+                toolbarButtonIconTheme: {
                     default: chrome.medium,
                     selected: chrome.high,
                     hover: chrome.highMedium,
                     press: chrome.highMedium
                 },
-                titlebarButtonIconTheme: {
+                toolbarButtonTheme: {
                     default: base.medium,
                     selected: base.high,
                     hover: base.highMedium,

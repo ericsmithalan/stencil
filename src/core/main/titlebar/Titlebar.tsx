@@ -103,6 +103,8 @@ export class Titlebar extends PureComponentBase<
 
                 <div
                     style={{
+                        backgroundColor: this.state.theme.uiStyles
+                            .toolbarMenuColor,
                         top: this.props.height,
                         display: this.state.showMenu ? "block" : "none"
                     }}
