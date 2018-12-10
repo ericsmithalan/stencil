@@ -92,6 +92,7 @@ export class Titlebar extends PureComponentBase<
                 <div className="titlebar-left">
                     <button onClick={this.toggleMenu}>menu</button>
                 </div>
+
                 <div className="titlebar-middle">{this._renderTitle()}</div>
 
                 <div className="titlebar-right">
