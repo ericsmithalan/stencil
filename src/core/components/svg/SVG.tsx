@@ -57,10 +57,6 @@ export class SVG extends UIControlBase<HTMLDivElement, ISVGProps, ISVGState> {
 		} as ISVGState;
 	}
 
-	protected willLoad(): void {
-		super.willLoad();
-	}
-
 	protected loaded(): void {
 		super.loaded();
 	}

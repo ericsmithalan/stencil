@@ -36,8 +36,9 @@ export abstract class IconBase extends UIControlBase<
 		this.state = {
 			width: this.props.width,
 			height: this.props.height,
-			color: "purple"
-		};
+			color: "purple",
+			theme: this.props.theme
+		} as IIconState;
 	}
 
 	protected abstract renderIcon(): React.ReactNode;

@@ -3,14 +3,18 @@ declare const window: any;
 
 import * as React from "react";
 
-import { ControlBase, IControlProps, IControlState } from "@core";
+import { ControlBase, IControlProps, IControlState, ThemeManager } from "@core";
+
+import { ThemeType } from "@core.themes";
 
 export interface ITitlebarProps extends IControlProps {
 	height: number;
+	themeManager: ThemeManager;
 }
 
 export interface ITitlebarState extends IControlState {
 	title: string | null;
+	backgroundColor: string;
 }
 
 export class Titlebar extends ControlBase<ITitlebarProps, ITitlebarState> {
@@ -51,6 +55,14 @@ export class Titlebar extends ControlBase<ITitlebarProps, ITitlebarState> {
 		this.currentWindow.minimize();
 	};
 
+	protected toggleTheme = () => {
+		if (this.props.themeManager.current.id === ThemeType.Light) {
+			this.props.themeManager.setTheme(ThemeType.Dark);
+		} else {
+			this.props.themeManager.setTheme(ThemeType.Light);
+		}
+	};
+
 	public render() {
 		return (
 			<div
@@ -64,6 +76,7 @@ export class Titlebar extends ControlBase<ITitlebarProps, ITitlebarState> {
 				<div className="titlebar-middle">{this._renderTitle()}</div>
 
 				<div className="titlebar-right">
+					<button onClick={this.toggleTheme}>theme</button>
 					<button onClick={this.minimize}>min</button>
 					<button onClick={this.maximize}>max</button>
 					<button onClick={this.close}>close</button>

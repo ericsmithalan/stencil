@@ -7,14 +7,14 @@ export interface IComponentProps {
 	theme?: IAppTheme;
 	logger?: ILogger;
 }
-export interface IComponentState {}
+export interface IComponentState {
+	theme?: IAppTheme;
+}
 
 export abstract class ComponentBase<
 	TProps extends IComponentProps,
 	TState extends IComponentState
 > extends React.Component<TProps, TState> {
-	public static defaultProps: Partial<IComponentProps> = {};
-	public static defaultState: IComponentState = {};
 	protected readonly _theme: IAppTheme;
 	protected readonly _logger: ILogger;
 	private _isLoaded: boolean;
@@ -31,21 +31,16 @@ export abstract class ComponentBase<
 		}
 
 		this._isLoaded = false;
+		this.state = {
+			theme: this.props.theme
+		} as TState;
 	}
 
 	/** @virtual */
 	protected loaded(): void {}
 
 	/** @virtual */
-	protected willLoad(): void {}
-
-	/** @virtual */
 	protected unLoaded(): void {}
-
-	/** @final */
-	public componentWillMount() {
-		this.willLoad();
-	}
 
 	/** @final */
 	public componentDidMount() {
@@ -55,6 +50,25 @@ export abstract class ComponentBase<
 	/** @final */
 	public componentWillUnmount() {
 		this.unLoaded();
+	}
+
+	public static getDerivedStateFromProps(
+		props: IComponentProps,
+		state: IComponentState
+	) {
+		console.log("COMPONENT: props", props);
+		console.log("COMPONENT: state", state);
+		if (props.theme && state.theme) {
+			console.log("theme should changed");
+			if (props.theme.id !== state.theme.id) {
+				console.log("theme changed");
+				return {
+					theme: props.theme
+				};
+			}
+		}
+
+		return null;
 	}
 
 	protected get isLoaded(): boolean {

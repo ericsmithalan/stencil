@@ -29,6 +29,10 @@ export class App extends ControlBase<IAppProps, IAppState> {
 		this._shellRef = React.createRef();
 
 		this._themeManager = Settings.themeManager;
+		this._themeManager.setTheme(ThemeType.Light);
+		this._themeManager.currentId.subscribe((value) => {
+			this._handleThemeChanged(value);
+		});
 
 		this.state = {
 			isLoaded: false,
@@ -44,32 +48,29 @@ export class App extends ControlBase<IAppProps, IAppState> {
 		return Settings.logger;
 	}
 
-	protected willLoad() {
-		super.willLoad();
-
-		this._themeManager.setTheme(ThemeType.Light);
-	}
-
 	protected loaded() {
-		super.willLoad();
 		const shell = this._shellRef.current as Shell;
 
-		console.log(shell);
 		//simulate loading...
 		setTimeout(() => {
 			shell.isTitlebarVisible = true;
 			shell.titlebar.setTitle("title bar text");
 			this.setState({
-				themeId: this._themeManager.currentId,
 				isLoaded: true
 			});
 		}, 3000);
+	}
+
+	private _handleThemeChanged(value: ThemeType): void {
+		this.setState({ themeId: value });
+		console.log("theme", value, this.theme);
 	}
 
 	public render() {
 		return (
 			<Shell
 				ref={this._shellRef}
+				themeManager={this._themeManager}
 				theme={this.theme}
 				logger={Settings.logger}
 			>

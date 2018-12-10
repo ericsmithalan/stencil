@@ -7,14 +7,14 @@ export interface IControlProps {
 	theme?: IAppTheme;
 	logger?: ILogger;
 }
-export interface IControlState {}
+export interface IControlState {
+	theme?: IAppTheme;
+}
 
 export abstract class ControlBase<
 	TProps extends IControlProps,
 	TState extends IControlState
 > extends React.PureComponent<TProps, TState> {
-	public static defaultProps: Partial<IControlProps> = {};
-	public static defaultState: IControlState = {};
 	protected readonly _theme: IAppTheme;
 	protected readonly _logger: ILogger;
 	private _isLoaded: boolean;
@@ -31,21 +31,35 @@ export abstract class ControlBase<
 		}
 
 		this._isLoaded = false;
+		this.state = {
+			theme: this.props.theme
+		} as TState;
+	}
+
+	public static getDerivedStateFromProps(
+		props: IControlProps,
+		state: IControlState
+	) {
+		console.log("CONTROL: props", props);
+		console.log("CONTROL: state", state);
+		if (props.theme && state.theme) {
+			console.log("theme should changed");
+			if (props.theme.id !== state.theme.id) {
+				console.log("theme changed");
+				return {
+					theme: props.theme
+				};
+			}
+		}
+
+		return null;
 	}
 
 	/** @virtual */
 	protected loaded(): void {}
 
 	/** @virtual */
-	protected willLoad(): void {}
-
-	/** @virtual */
 	protected unLoaded(): void {}
-
-	/** @final */
-	public componentWillMount() {
-		this.willLoad();
-	}
 
 	/** @final */
 	public componentDidMount() {

@@ -1,12 +1,18 @@
 import * as React from "react";
 
-import { ComponentBase, IComponentProps, IComponentState } from "@core";
+import {
+	ComponentBase,
+	IComponentProps,
+	IComponentState,
+	ThemeManager
+} from "@core";
 
 import { Titlebar } from "@core.main";
 
 export interface IShellProps extends IComponentProps {
 	titlebarHeight: number;
 	title: string;
+	themeManager: ThemeManager;
 }
 
 export interface IShellState extends IComponentState {
@@ -54,6 +60,7 @@ export class Shell extends ComponentBase<IShellProps, IShellState> {
 					className="shell-titlebar"
 				>
 					<Titlebar
+						themeManager={this.props.themeManager}
 						theme={this.theme}
 						height={this.props.titlebarHeight}
 						ref={this._titlebar}
