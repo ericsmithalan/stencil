@@ -16,12 +16,11 @@ import { Settings } from "@app";
 
 export interface ITitlebarProps extends IPureComponentProps {
     height: number;
-    themeManager: ThemeManager;
 }
 
 export interface ITitlebarState extends IPureComponentState {
     title: string | null;
-    backgroundColor: string;
+    showMenu: boolean;
 }
 
 export class Titlebar extends PureComponentBase<
@@ -29,8 +28,7 @@ export class Titlebar extends PureComponentBase<
     ITitlebarState
 > {
     public static defaultProps: Partial<ITitlebarProps> = {
-        height: 30,
-        theme: DarkTheme.getTheme()
+        height: 30
     };
 
     //hack to bypass an issue
@@ -41,7 +39,7 @@ export class Titlebar extends PureComponentBase<
 
         this.state = {
             title: null,
-            theme: this.props.theme
+            theme: this.props.theme || DarkTheme.getTheme()
         } as ITitlebarState;
     }
 
@@ -67,6 +65,10 @@ export class Titlebar extends PureComponentBase<
         this.currentWindow.minimize();
     };
 
+    protected toggleMenu = () => {
+        this.setState({ showMenu: !this.state.showMenu });
+    };
+
     protected toggleTheme = () => {
         if (this.props.theme.id === ThemeType.Light) {
             Settings.themeManager.setTheme(ThemeType.Dark);
@@ -87,6 +89,9 @@ export class Titlebar extends PureComponentBase<
                 }}
                 className="titlebar"
             >
+                <div className="titlebar-left">
+                    <button onClick={this.toggleMenu}>menu</button>
+                </div>
                 <div className="titlebar-middle">{this._renderTitle()}</div>
 
                 <div className="titlebar-right">
@@ -94,6 +99,16 @@ export class Titlebar extends PureComponentBase<
                     <button onClick={this.minimize}>min</button>
                     <button onClick={this.maximize}>max</button>
                     <button onClick={this.close}>close</button>
+                </div>
+
+                <div
+                    style={{
+                        top: this.props.height,
+                        display: this.state.showMenu ? "block" : "none"
+                    }}
+                    className="title-bar-menu"
+                >
+                    menu
                 </div>
             </div>
         );

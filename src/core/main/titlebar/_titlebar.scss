@@ -3,15 +3,26 @@
     flex-direction: row;
     @include size-fill-absolute();
 
+    .title-bar-menu {
+        position: absolute;
+        left: 0;
+        width: 200px;
+        height: 200px;
+        background-color: #fff;
+    }
+
     .titlebar-left {
+        background-color: green;
     }
 
     .titlebar-middle {
         -webkit-app-region: drag;
         flex-grow: 1;
+        background-color: blue;
     }
 
     .titlebar-right {
+        background-color: red;
     }
 
     .title {

@@ -377,9 +377,26 @@ template {
   right: 0;
 }
 
+.titlebar .title-bar-menu {
+  position: absolute;
+  left: 0;
+  width: 200px;
+  height: 200px;
+  background-color: #fff;
+}
+
+.titlebar .titlebar-left {
+  background-color: green;
+}
+
 .titlebar .titlebar-middle {
   -webkit-app-region: drag;
   flex-grow: 1;
+  background-color: blue;
+}
+
+.titlebar .titlebar-right {
+  background-color: red;
 }
 
 .titlebar .title {
