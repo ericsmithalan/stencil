@@ -4,8 +4,7 @@ declare const window: any;
 import * as React from "react";
 
 import { ControlBase, IControlProps, IControlState, ThemeManager } from "@core";
-
-import { ThemeType } from "@core.themes";
+import { DarkTheme, ThemeType } from "@core.themes";
 
 export interface ITitlebarProps extends IControlProps {
 	height: number;
@@ -19,7 +18,8 @@ export interface ITitlebarState extends IControlState {
 
 export class Titlebar extends ControlBase<ITitlebarProps, ITitlebarState> {
 	public static defaultProps: Partial<ITitlebarProps> = {
-		height: 30
+		height: 30,
+		theme: DarkTheme.getTheme()
 	};
 
 	//hack to bypass an issue
@@ -29,7 +29,8 @@ export class Titlebar extends ControlBase<ITitlebarProps, ITitlebarState> {
 		super(props);
 
 		this.state = {
-			title: null
+			title: null,
+			theme: this.props.theme
 		} as ITitlebarState;
 	}
 
@@ -68,7 +69,7 @@ export class Titlebar extends ControlBase<ITitlebarProps, ITitlebarState> {
 			<div
 				style={{
 					height: this.props.height,
-					backgroundColor: this.theme.uiStyles.toobarColor,
+					backgroundColor: this.state.theme.uiStyles.toobarColor,
 					color: this.theme.colors.font.medium
 				}}
 				className="titlebar"

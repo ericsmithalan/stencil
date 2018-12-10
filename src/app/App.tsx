@@ -19,7 +19,6 @@ export interface IAppState extends IControlState {
 }
 
 export class App extends ControlBase<IAppProps, IAppState> {
-	public static defaultProps: IAppProps = {};
 	private _shellRef: React.RefObject<Shell>;
 	private _themeManager: ThemeManager;
 
@@ -36,7 +35,8 @@ export class App extends ControlBase<IAppProps, IAppState> {
 
 		this.state = {
 			isLoaded: false,
-			themeId: "dark"
+			themeId: "dark",
+			theme: this._themeManager.current
 		} as IAppState;
 	}
 

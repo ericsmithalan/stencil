@@ -1,30 +1,30 @@
 import * as React from "react";
 
-import { IAppTheme } from "@core.themes";
+import { DarkTheme, IAppTheme } from "@core.themes";
+
 import { ILogger } from "@core.debug";
 
 export interface IComponentProps {
-	theme?: IAppTheme;
-	logger?: ILogger;
+	theme: IAppTheme;
+	logger: ILogger;
 }
 export interface IComponentState {
-	theme?: IAppTheme;
+	theme: IAppTheme;
 }
 
 export abstract class ComponentBase<
 	TProps extends IComponentProps,
 	TState extends IComponentState
 > extends React.Component<TProps, TState> {
-	protected readonly _theme: IAppTheme;
 	protected readonly _logger: ILogger;
 	private _isLoaded: boolean;
 
+	public static defaultProps: Partial<IComponentProps> = {
+		theme: DarkTheme.getTheme()
+	};
+
 	protected constructor(props: TProps) {
 		super(props);
-
-		if (props.theme) {
-			this._theme = props.theme;
-		}
 
 		if (props.logger) {
 			this._logger = props.logger;
@@ -80,7 +80,7 @@ export abstract class ComponentBase<
 	}
 
 	protected get theme(): IAppTheme {
-		return this._theme;
+		return this.state.theme;
 	}
 
 	protected get logger(): ILogger {

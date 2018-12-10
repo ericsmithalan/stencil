@@ -7,6 +7,7 @@ import {
 	ThemeManager
 } from "@core";
 
+import { DarkTheme } from "@core.themes";
 import { Titlebar } from "@core.main";
 
 export interface IShellProps extends IComponentProps {
@@ -22,7 +23,8 @@ export interface IShellState extends IComponentState {
 
 export class Shell extends ComponentBase<IShellProps, IShellState> {
 	public static defaultProps: Partial<IShellProps> = {
-		titlebarHeight: 30
+		titlebarHeight: 30,
+		theme: DarkTheme.getTheme()
 	};
 
 	private _titlebar: React.RefObject<Titlebar>;
@@ -34,7 +36,8 @@ export class Shell extends ComponentBase<IShellProps, IShellState> {
 
 		this.state = {
 			title: props.title,
-			isTitlebarVisible: false
+			isTitlebarVisible: false,
+			theme: props.theme
 		} as IShellState;
 	}
 

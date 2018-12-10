@@ -1,49 +1,47 @@
 import * as React from "react";
 
-import { IAppTheme } from "@core.themes";
+import { DarkTheme, IAppTheme } from "@core.themes";
+
 import { ILogger } from "@core.debug";
 import { Settings } from "src/app/Settings";
 
 export interface IPageProps {
-	theme?: IAppTheme;
+	theme: IAppTheme;
 	logger?: ILogger;
 }
 
-export interface IPageState {}
+export interface IPageState {
+	theme: IAppTheme;
+}
 
 export abstract class PageBase<
 	TProps extends IPageProps,
 	TState extends IPageState
 > extends React.Component<TProps, TState> {
-	public static defaultProps: Partial<IPageProps> = {};
 	private readonly _theme: IAppTheme;
 	private readonly _logger: ILogger;
+
+	public static defaultProps: Partial<IPageProps> = {
+		theme: DarkTheme.getTheme()
+	};
 
 	public constructor(props: TProps) {
 		super(props);
 
-		if (props.theme) {
-			this._theme = props.theme;
-		}
-
 		if (props.logger) {
 			this._logger = props.logger;
 		}
-	}
 
-	/** @virtual */
-	protected willLoad(): void {}
+		this.state = {
+			theme: this.props.theme
+		} as TState;
+	}
 
 	/** @virtual */
 	protected loaded(): void {}
 
 	/** @virtual */
 	protected unLoaded(): void {}
-
-	/** @final */
-	public componentWillMount() {
-		this.willLoad();
-	}
 
 	/** @final */
 	public componentDidMount() {
@@ -53,13 +51,5 @@ export abstract class PageBase<
 	/** @final */
 	public componentWillUnmount() {
 		this.unLoaded();
-	}
-
-	protected get theme(): IAppTheme {
-		return this._theme;
-	}
-
-	protected get logger(): ILogger {
-		return this._logger;
 	}
 }

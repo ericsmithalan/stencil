@@ -3,6 +3,8 @@ import * as React from "react";
 import { ControlBase, IControlProps, IControlState } from "@core";
 import { ISize, ISpacing2, ISpacing4 } from "@core.models";
 
+import { DarkTheme } from "@core.themes";
+
 export interface IUIControlProps extends IControlProps {
 	width: number;
 	height: number;
@@ -24,7 +26,8 @@ export abstract class UIControlBase<
 		width: 0,
 		height: 0,
 		preserveAspect: false,
-		allowAutoScale: true
+		allowAutoScale: true,
+		theme: DarkTheme.getTheme()
 	};
 
 	private readonly _isAutoSizeY: boolean = false;
