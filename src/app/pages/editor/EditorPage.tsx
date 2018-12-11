@@ -4,7 +4,13 @@ import { IPageProps, IPageState, PageBase } from "@stencil.components/index";
 import { Grid } from "@stencil.app/drawings";
 import { States, Actions } from "@stencil.store";
 
-class Editor extends PageBase<IPageProps, IPageState> {
+export class Page extends PageBase<IPageProps, IPageState> {
+    protected loaded() {
+        super.loaded();
+
+        console.log(this.props);
+    }
+
     public render() {
         return (
             <div className="editor">
@@ -17,14 +23,14 @@ class Editor extends PageBase<IPageProps, IPageState> {
 }
 
 const mapStateToProps = (state: States) => ({
-    theme: state.themeState
+    theme: state.theme
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-    fetchMembers: () => dispatch(Actions.theme.changeTheme(dispatch))
+    changeTheme: () => dispatch(Actions.theme.changeTheme(dispatch))
 });
 
 export const EditorPage = connect(
     mapStateToProps,
     mapDispatchToProps
-)(Editor);
+)(Page);

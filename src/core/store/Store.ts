@@ -3,27 +3,31 @@ import reduxThunk from "redux-thunk";
 import { combineReducers } from "redux";
 
 import {
-    ThemeState,
+    IThemeState,
     ThemeReducers,
-    ThemeActions,
-    ThemeActionTypes
+    ThemeActions
 } from "@stencil.features/theme";
 
+import {
+    IShellState,
+    ShellReducers,
+    ShellActions
+} from "@stencil.features/electron";
+
 export type States = {
-    themeState: ThemeState;
+    theme: IThemeState;
+    shell: IShellState;
+};
+
+export const Actions = {
+    theme: ThemeActions,
+    shell: ShellActions
 };
 
 export const state = combineReducers<States>({
-    themeState: ThemeReducers.reducer
+    theme: ThemeReducers.reducer,
+    shell: ShellReducers.reducer
 });
-
-export const Actions = {
-    theme: ThemeActions
-};
-
-export const ActionTypes = {
-    theme: ThemeActionTypes
-};
 
 export const store: Store<States> = createStore(
     state,

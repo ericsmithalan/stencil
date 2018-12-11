@@ -1,22 +1,10 @@
 import * as React from "react";
+import { connect } from "react-redux";
+import { States, Actions } from "@stencil.store";
 
-import {
-    ComponentBase,
-    IComponentProps,
-    IComponentState
-} from "@stencil.components/index";
+import { ComponentBase } from "@stencil.components/index";
 
-import { Titlebar } from "@stencil.features/electron";
-
-export interface IShellProps extends IComponentProps {
-    titlebarHeight: number;
-    title: string;
-}
-
-export interface IShellState extends IComponentState {
-    title: string;
-    isTitlebarVisible: boolean;
-}
+import { Titlebar, IShellState, IShellProps } from "@stencil.features/electron";
 
 export class Shell extends ComponentBase<IShellProps, IShellState> {
     public static defaultProps: Partial<IShellProps> = {
@@ -31,7 +19,6 @@ export class Shell extends ComponentBase<IShellProps, IShellState> {
         this._titlebar = React.createRef();
 
         this.state = {
-            title: props.title,
             isTitlebarVisible: false
         } as IShellState;
     }
@@ -44,9 +31,22 @@ export class Shell extends ComponentBase<IShellProps, IShellState> {
         return this._titlebar.current as Titlebar;
     }
 
+    protected loaded() {
+        super.loaded();
+
+        this.titlebar.setTitle(this.props.shell.title);
+
+        console.log(this.props);
+    }
+
     public render() {
+        const { colors } = this.props.theme;
+
         return (
-            <div style={{ backgroundColor: "black" }} className="shell">
+            <div
+                style={{ backgroundColor: colors.chrome.high }}
+                className="shell"
+            >
                 <div
                     style={{
                         height: this.props.titlebarHeight,
@@ -64,3 +64,18 @@ export class Shell extends ComponentBase<IShellProps, IShellState> {
         );
     }
 }
+
+const mapStateToProps = (state: States) => ({
+    theme: state.theme,
+    shell: state.shell
+});
+
+const mapDispatchToProps = (dispatch: any) => ({
+    changeTheme: () => dispatch(Actions.theme.changeTheme(dispatch)),
+    updateTitle: () => dispatch(Actions.shell.updateTitle(dispatch))
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Shell);

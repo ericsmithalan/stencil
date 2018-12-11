@@ -1,2 +1,1 @@
-export * from "./window/shell/Shell";
-export * from "./window/titlebar/Titlebar";
+export * from "./window/index";

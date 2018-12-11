@@ -23,7 +23,7 @@
         "stripInternal": true,
         "allowSyntheticDefaultImports": true,
         "paths": {
-            "@stencil.store": ["src/core/Store"],
+            "@stencil.store": ["src/core/store/index"],
             "@stencil.features/*": ["src/core/features/*"],
             "@stencil.components/*": ["src/core/components/*"],
             "@stencil.app/*": ["src/app/*"]

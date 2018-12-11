@@ -1,8 +1,12 @@
-import { ComponentBase } from "@stencil.components/index";
+import {
+    ComponentBase,
+    IComponentProps,
+    IComponentState
+} from "@stencil.components/index";
 
-export interface IPageProps {}
+export interface IPageProps extends IComponentProps {}
 
-export interface IPageState {}
+export interface IPageState extends IComponentState {}
 
 export abstract class PageBase<
     TProps extends IPageProps,
