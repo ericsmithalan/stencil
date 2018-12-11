@@ -38,30 +38,7 @@ export class DarkTheme {
                 icon: ThemeHelpers.defaultIconColors(chrome, accent),
                 font: base
             },
-            fonts: ThemeHelpers.defaultFontStyles(),
-            uiStyles: {
-                windowColor: chrome.high,
-                toobarColor: chrome.high,
-                toolbarMenuColor: chrome.highMedium,
-                buttonTheme: {
-                    default: chrome.medium,
-                    selected: chrome.high,
-                    hover: chrome.highMedium,
-                    press: chrome.highMedium
-                },
-                toolbarButtonIconTheme: {
-                    default: chrome.medium,
-                    selected: chrome.high,
-                    hover: chrome.highMedium,
-                    press: chrome.highMedium
-                },
-                toolbarButtonTheme: {
-                    default: base.medium,
-                    selected: base.high,
-                    hover: base.highMedium,
-                    press: base.highMedium
-                }
-            }
+            fonts: ThemeHelpers.defaultFontStyles()
         };
 
         return theme;
