@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { IPageProps, IPageState, PageBase } from "@stencil.components/index";
 import { Grid } from "@stencil.app/drawings";
-import { States, Actions } from "@stencil.store";
+import { IRootState } from "@stencil.store";
 
 export class Page extends PageBase<IPageProps, IPageState> {
     protected loaded() {
@@ -22,12 +22,12 @@ export class Page extends PageBase<IPageProps, IPageState> {
     }
 }
 
-const mapStateToProps = (state: States) => ({
+const mapStateToProps = (state: IRootState) => ({
     theme: state.theme
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-    changeTheme: () => dispatch(Actions.theme.changeTheme(dispatch))
+    changeTheme: () => dispatch(dispatch.theme.changeTheme(dispatch))
 });
 
 export const EditorPage = connect(

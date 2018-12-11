@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { States, Actions } from "@stencil.store";
+import { IRootState } from "@stencil.store";
 
 import { ComponentBase } from "@stencil.components/index";
 
@@ -34,19 +34,12 @@ export class Shell extends ComponentBase<IShellProps, IShellState> {
     protected loaded() {
         super.loaded();
 
-        this.titlebar.setTitle(this.props.shell.title);
-
         console.log(this.props);
     }
 
     public render() {
-        const { colors } = this.props.theme;
-
         return (
-            <div
-                style={{ backgroundColor: colors.chrome.high }}
-                className="shell"
-            >
+            <div style={{ backgroundColor: "red" }} className="shell">
                 <div
                     style={{
                         height: this.props.titlebarHeight,
@@ -65,14 +58,14 @@ export class Shell extends ComponentBase<IShellProps, IShellState> {
     }
 }
 
-const mapStateToProps = (state: States) => ({
+const mapStateToProps = (state: IRootState) => ({
     theme: state.theme,
     shell: state.shell
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-    changeTheme: () => dispatch(Actions.theme.changeTheme(dispatch)),
-    updateTitle: () => dispatch(Actions.shell.updateTitle(dispatch))
+    changeTheme: () => dispatch(dispatch.theme.changeTheme(dispatch)),
+    updateTitle: () => dispatch(dispatch.shell.updateTitle(dispatch))
 });
 
 export default connect(
