@@ -1,6 +1,7 @@
 import { DrawBase } from "@core";
 
 export class Grid extends DrawBase {
+    protected init() {}
     protected draw(
         canvas: HTMLCanvasElement,
         context: CanvasRenderingContext2D

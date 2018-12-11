@@ -1,13 +1,13 @@
-import { IAppTheme } from "@core.themes";
+import { ITheme } from "@core.themes";
 
 import { ComponentBase } from "@core";
 
 export interface IPageProps {
-    theme: IAppTheme;
+    theme: ITheme;
 }
 
 export interface IPageState {
-    theme: IAppTheme;
+    theme: ITheme;
 }
 
 export abstract class PageBase<

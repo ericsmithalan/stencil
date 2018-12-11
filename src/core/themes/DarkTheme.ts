@@ -1,9 +1,9 @@
-import { IAppTheme, IMonoColorScale } from "@core.themes";
+import { ITheme, IMonoColorScale } from "@core.themes";
 
 import { ThemeHelpers } from "@core.utils";
 
 export class DarkTheme {
-    public static getTheme(): IAppTheme {
+    public static getTheme(): ITheme {
         const chrome: IMonoColorScale = {
             high: "#222222",
             highMedium: "#333333",
@@ -28,7 +28,7 @@ export class DarkTheme {
             low: "#a9cafc"
         };
 
-        const theme: IAppTheme = {
+        const theme: ITheme = {
             id: "dark",
             colors: {
                 chrome: chrome,

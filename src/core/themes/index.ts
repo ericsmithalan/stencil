@@ -6,7 +6,7 @@ export * from "./IAppColors";
 export * from "./IFontFamilies";
 export * from "./IFontSizes";
 export * from "./IAppFonts";
-export * from "./IAppTheme";
+export * from "./ITheme";
 export * from "./IAppUITheme";
 export * from "./DarkTheme";
 export * from "./LightTheme";

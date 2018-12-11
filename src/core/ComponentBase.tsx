@@ -1,12 +1,12 @@
 import * as React from "react";
 
-import { DarkTheme, IAppTheme } from "@core.themes";
+import { DarkTheme, ITheme } from "@core.themes";
 
 export interface IComponentProps {
-    theme: IAppTheme;
+    theme: ITheme;
 }
 export interface IComponentState {
-    theme: IAppTheme;
+    theme: ITheme;
 }
 
 export abstract class ComponentBase<

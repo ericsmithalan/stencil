@@ -11,7 +11,7 @@ import {
     IPureComponentState,
     ThemeManager
 } from "@core";
-import { DarkTheme, IAppTheme, ThemeType } from "@core.themes";
+import { DarkTheme, ITheme, ThemeType } from "@core.themes";
 import { EditorPage, LaunchPage } from "@app.pages";
 
 import { ILogger } from "@core.debug";
@@ -68,7 +68,7 @@ export class App extends PureComponentBase<IAppProps, IAppState> {
         this._themeManager.current.unsubscribe();
     }
 
-    private _handleThemeChanged(theme: IAppTheme): void {
+    private _handleThemeChanged(theme: ITheme): void {
         this.setState({ theme: theme });
     }
 
