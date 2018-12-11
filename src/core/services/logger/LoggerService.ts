@@ -1,5 +1,5 @@
 import { ILoggerService } from "@core.services";
-import { LogLevel } from "@core.models";
+import { LogLevel } from "@core.enums";
 
 export type LoggerOptionTypes = {
     isEnabled: boolean;

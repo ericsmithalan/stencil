@@ -33,6 +33,7 @@
             "@core.services": ["src/core/services/index"],
             "@core.models": ["src/core/models/index"],
             "@core.utils": ["src/core/utils/index"],
+            "@core.enums": ["src/core/enums/index"],
             "@app": ["src/app/index"],
             "@app.drawings": ["src/app/drawings/index"],
             "@app.pages": ["src/app/pages/index"]

@@ -18,5 +18,3 @@ export * from "./interfaces/IFontSizes";
 export * from "./interfaces/IAppFonts";
 export * from "./interfaces/ITheme";
 export * from "./interfaces/ILogger";
-export * from "./LogLevel";
-export * from "./SizeType";

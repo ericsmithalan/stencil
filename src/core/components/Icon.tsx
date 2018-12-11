@@ -5,8 +5,8 @@ import {
     UIControlBase,
     SVG
 } from "@core.components";
-import { ISize, SizeType, IButtonTheme } from "@core.models";
-
+import { ISize, IButtonTheme } from "@core.models";
+import { SizeType } from "@core.enums";
 export interface IIconProps extends IUIControlProps {
     sizeType: SizeType;
     buttonTheme: IButtonTheme;

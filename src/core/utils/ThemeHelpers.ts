@@ -6,7 +6,8 @@ import {
     IInteractiveColorScale,
     IMonoColorScale
 } from "@core.models";
-import { ISize, SizeType } from "@core.models";
+import { ISize } from "@core.models";
+import { SizeType } from "@core.enums";
 
 export class ThemeHelpers {
     public static getIconButtonSize(size: SizeType): ISize {
