@@ -14,7 +14,7 @@ import {
 import { DarkTheme, ITheme, ThemeType } from "@core.themes";
 import { EditorPage, LaunchPage } from "@app.pages";
 
-import { ILogger } from "@core.debug";
+import { ILogger } from "@core.services";
 import { Settings } from "@app";
 import { Shell } from "@core.main";
 

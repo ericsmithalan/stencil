@@ -24,7 +24,6 @@
         "allowSyntheticDefaultImports": true,
         "paths": {
             "@core": ["src/core/index"],
-            "@core.debug": ["src/core/debug/index"],
             "@core.actionTypes": ["src/core/redux/types/index"],
             "@core.reducers": ["src/core/redux/reducers/index"],
             "@core.store": ["src/core/redux/Store"],
@@ -32,6 +31,7 @@
             "@core.actions": ["src/core/redux/Actions"],
             "@core.components": ["src/core/components/index"],
             "@core.main": ["src/core/main/index"],
+            "@core.services": ["src/core/services/index"],
             "@core.models": ["src/core/models/index"],
             "@core.utils": ["src/core/utils/index"],
             "@core.themes": ["src/core/themes/index"],
