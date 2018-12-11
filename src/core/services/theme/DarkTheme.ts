@@ -1,4 +1,4 @@
-import { ITheme, IMonoColorScale } from "@core.themes";
+import { ITheme, IMonoColorScale } from "@core.models";
 
 import { ThemeHelpers } from "@core.utils";
 

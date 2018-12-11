@@ -1,18 +1,26 @@
-import { ILogger, LogLevel } from "@core.services";
+import { ILoggerService } from "@core.services";
+import { LogLevel } from "@core.models";
 
 export type LoggerOptionTypes = {
     isEnabled: boolean;
 };
 
-export class Logger implements ILogger {
-    public static defaultOptions: LoggerOptionTypes = {
+export class LoggerService implements ILoggerService {
+    private static _defaultOptions: LoggerOptionTypes = {
         isEnabled: true
     };
 
     private readonly _options: LoggerOptionTypes;
 
     public constructor(options?: LoggerOptionTypes) {
-        this._options = Object.assign(Logger.defaultOptions, options || {});
+        this._options = Object.assign(
+            LoggerService.defaultOptions,
+            options || {}
+        );
+    }
+
+    public static get defaultOptions(): LoggerOptionTypes {
+        return this._defaultOptions;
     }
 
     public log(message: string, data?: object): void {

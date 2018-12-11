@@ -4,7 +4,7 @@ import {
     PureComponentBase,
     IPureComponentProps,
     IPureComponentState
-} from "@core";
+} from "@core.components";
 import { ISize } from "@core.models";
 
 export interface IUIControlProps extends IPureComponentProps {

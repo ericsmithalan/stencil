@@ -3,9 +3,7 @@ import {
     PureComponentBase,
     IPureComponentProps,
     IPureComponentState
-} from "@core";
-
-import { DarkTheme } from "@core.themes";
+} from "@core.components";
 
 export interface IDrawProps extends IPureComponentProps {}
 
@@ -22,10 +20,6 @@ export abstract class DrawBase extends PureComponentBase<
 
         this._canvasRef = React.createRef();
         this.init();
-
-        this.state = {
-            theme: DarkTheme.getTheme()
-        } as IDrawState;
     }
 
     protected abstract init(): void;

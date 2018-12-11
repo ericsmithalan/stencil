@@ -23,7 +23,6 @@
         "stripInternal": true,
         "allowSyntheticDefaultImports": true,
         "paths": {
-            "@core": ["src/core/index"],
             "@core.actionTypes": ["src/core/redux/types/index"],
             "@core.reducers": ["src/core/redux/reducers/index"],
             "@core.store": ["src/core/redux/Store"],
@@ -34,7 +33,6 @@
             "@core.services": ["src/core/services/index"],
             "@core.models": ["src/core/models/index"],
             "@core.utils": ["src/core/utils/index"],
-            "@core.themes": ["src/core/themes/index"],
             "@app": ["src/app/index"],
             "@app.drawings": ["src/app/drawings/index"],
             "@app.pages": ["src/app/pages/index"]

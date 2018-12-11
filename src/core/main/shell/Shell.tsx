@@ -1,8 +1,11 @@
 import * as React from "react";
 
-import { ComponentBase, IComponentProps, IComponentState } from "@core";
+import {
+    ComponentBase,
+    IComponentProps,
+    IComponentState
+} from "@core.components";
 
-import { DarkTheme } from "@core.themes";
 import { Titlebar } from "@core.main";
 
 export interface IShellProps extends IComponentProps {
@@ -17,8 +20,7 @@ export interface IShellState extends IComponentState {
 
 export class Shell extends ComponentBase<IShellProps, IShellState> {
     public static defaultProps: Partial<IShellProps> = {
-        titlebarHeight: 30,
-        theme: DarkTheme.getTheme()
+        titlebarHeight: 30
     };
 
     private _titlebar: React.RefObject<Titlebar>;
@@ -30,8 +32,7 @@ export class Shell extends ComponentBase<IShellProps, IShellState> {
 
         this.state = {
             title: props.title,
-            isTitlebarVisible: false,
-            theme: props.theme
+            isTitlebarVisible: false
         } as IShellState;
     }
 
@@ -44,13 +45,8 @@ export class Shell extends ComponentBase<IShellProps, IShellState> {
     }
 
     public render() {
-        const { uiStyles } = this.state.theme;
-
         return (
-            <div
-                style={{ backgroundColor: uiStyles.windowColor }}
-                className="shell"
-            >
+            <div style={{ backgroundColor: "black" }} className="shell">
                 <div
                     style={{
                         height: this.props.titlebarHeight,
@@ -59,7 +55,6 @@ export class Shell extends ComponentBase<IShellProps, IShellState> {
                     className="shell-titlebar"
                 >
                     <Titlebar
-                        theme={this.state.theme}
                         height={this.props.titlebarHeight}
                         ref={this._titlebar}
                     />

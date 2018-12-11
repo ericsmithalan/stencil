@@ -1,4 +1,4 @@
-import { ITheme } from "@core.themes";
+import { ITheme } from "@core.models";
 
 export type ApplicationState = {
     theme: ITheme;

@@ -6,15 +6,9 @@ import * as React from "react";
 import {
     PureComponentBase,
     IPureComponentProps,
-    IPureComponentState
-} from "@core";
-
-import { IconButton } from "@core.components";
-
-import { DarkTheme, ThemeType } from "@core.themes";
-
-// todo: I don't like this here but will figure out a better way later
-import { Settings } from "@app";
+    IPureComponentState,
+    IconButton
+} from "@core.components";
 
 export interface ITitlebarProps extends IPureComponentProps {
     height: number;
@@ -40,8 +34,7 @@ export class Titlebar extends PureComponentBase<
         super(props);
 
         this.state = {
-            title: null,
-            theme: this.props.theme || DarkTheme.getTheme()
+            title: null
         } as ITitlebarState;
     }
 
@@ -72,22 +65,14 @@ export class Titlebar extends PureComponentBase<
     }
 
     protected toggleTheme = () => {
-        if (this.props.theme.id === ThemeType.Light) {
-            Settings.themeManager.setTheme(ThemeType.Dark);
-        } else {
-            Settings.themeManager.setTheme(ThemeType.Light);
-        }
+        // Settings.themeService.toggle();
     };
 
     public render() {
-        const { uiStyles, colors } = this.state.theme;
-
         return (
             <div
                 style={{
-                    height: this.props.height,
-                    backgroundColor: uiStyles.toobarColor,
-                    color: colors.font.medium
+                    height: this.props.height
                 }}
                 className="titlebar"
             >
@@ -106,8 +91,6 @@ export class Titlebar extends PureComponentBase<
 
                 <div
                     style={{
-                        backgroundColor: this.state.theme.uiStyles
-                            .toolbarMenuColor,
                         top: this.props.height,
                         display: this.state.showMenu ? "block" : "none"
                     }}

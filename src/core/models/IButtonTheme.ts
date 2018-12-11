@@ -1,3 +1,3 @@
-import { IInteractiveColorScale } from "@core.themes";
+import { IInteractiveColorScale } from "@core.models";
 
 export interface IButtonTheme extends IInteractiveColorScale {}

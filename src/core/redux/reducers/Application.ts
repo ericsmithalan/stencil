@@ -1,7 +1,7 @@
 import { ApplicationTypes } from "@core.actionTypes";
 import * as States from "@core.states";
 import { ApplicationActions } from "@core.actions";
-import { DarkTheme } from "@core.themes";
+import { DarkTheme } from "@core.services";
 
 export namespace ApplicationReducers {
     const defaultState: States.ApplicationState = {

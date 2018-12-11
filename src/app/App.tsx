@@ -8,14 +8,10 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import {
     PureComponentBase,
     IPureComponentProps,
-    IPureComponentState,
-    ThemeManager
-} from "@core";
-import { DarkTheme, ITheme, ThemeType } from "@core.themes";
-import { EditorPage, LaunchPage } from "@app.pages";
+    IPureComponentState
+} from "@core.components";
 
-import { ILogger } from "@core.services";
-import { Settings } from "@app";
+import { EditorPage, LaunchPage } from "@app.pages";
 import { Shell } from "@core.main";
 
 export interface IAppProps extends IPureComponentProps {}
@@ -27,32 +23,19 @@ export interface IAppState extends IPureComponentState {
 export class App extends PureComponentBase<IAppProps, IAppState> {
     public static defaultProps: Partial<IAppProps> = {};
     private _shellRef: React.RefObject<Shell>;
-    private _themeManager: ThemeManager;
 
     public constructor(props: IAppProps) {
         super(props);
 
         this._shellRef = React.createRef();
 
-        this._themeManager = Settings.themeManager;
-        this._themeManager.setTheme(ThemeType.Dark);
-
         this.state = {
-            isLoaded: false,
-            theme: DarkTheme.getTheme()
+            isLoaded: false
         } as IAppState;
-    }
-
-    public get logger(): ILogger {
-        return Settings.logger;
     }
 
     protected loaded() {
         const shell = this._shellRef.current as Shell;
-
-        this._themeManager.current.subscribe((value) => {
-            this._handleThemeChanged(value);
-        });
 
         //simulate loading...
         setTimeout(() => {
@@ -64,20 +47,10 @@ export class App extends PureComponentBase<IAppProps, IAppState> {
         }, 3000);
     }
 
-    protected unLoaded() {
-        this._themeManager.current.unsubscribe();
-    }
-
-    private _handleThemeChanged(theme: ITheme): void {
-        this.setState({ theme: theme });
-    }
+    protected unLoaded() {}
 
     public render() {
-        return (
-            <Shell ref={this._shellRef} theme={this.state.theme}>
-                {this._renderContent()}
-            </Shell>
-        );
+        return <Shell ref={this._shellRef}>{this._renderContent()}</Shell>;
     }
 
     private _renderContent(): JSX.Element {
@@ -89,7 +62,7 @@ export class App extends PureComponentBase<IAppProps, IAppState> {
     }
 
     private _renderLaunchScreen(): JSX.Element {
-        return <LaunchPage theme={this.state.theme} />;
+        return <LaunchPage />;
     }
 
     private _renderApp(): JSX.Element {
@@ -99,16 +72,12 @@ export class App extends PureComponentBase<IAppProps, IAppState> {
                     <Route
                         exact={true}
                         path="/"
-                        render={(props) => (
-                            <EditorPage {...props} theme={this.state.theme} />
-                        )}
+                        render={(props) => <EditorPage {...props} />}
                     />
                     <Route
                         exact={true}
                         path="/home"
-                        render={(props) => (
-                            <EditorPage {...props} theme={this.state.theme} />
-                        )}
+                        render={(props) => <EditorPage {...props} />}
                     />
                 </Switch>
             </BrowserRouter>

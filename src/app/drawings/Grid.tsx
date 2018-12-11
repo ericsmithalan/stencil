@@ -1,4 +1,4 @@
-import { DrawBase } from "@core";
+import { DrawBase } from "@core.components";
 
 export class Grid extends DrawBase {
     protected init() {}

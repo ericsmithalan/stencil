@@ -1,4 +1,4 @@
-import { IButtonTheme } from "@core.themes";
+import { IButtonTheme } from "@core.models";
 
 export interface IAppUITheme {
     windowColor: string;

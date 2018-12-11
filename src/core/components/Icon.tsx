@@ -1,8 +1,11 @@
 import * as React from "react";
-import { IUIControlProps, IUIControlState, UIControlBase } from "@core";
-import { ISize, SizeType } from "@core.models";
-import { IButtonTheme, DarkTheme } from "@core.themes";
-import { SVG } from "@core.components";
+import {
+    IUIControlProps,
+    IUIControlState,
+    UIControlBase,
+    SVG
+} from "@core.components";
+import { ISize, SizeType, IButtonTheme } from "@core.models";
 
 export interface IIconProps extends IUIControlProps {
     sizeType: SizeType;
@@ -26,8 +29,7 @@ export class Icon extends UIControlBase<
         preserveAspect: true,
         allowAutoScale: false,
         width: 0,
-        height: 0,
-        theme: DarkTheme.getTheme()
+        height: 0
     };
 
     public constructor(props: IIconProps) {
@@ -38,8 +40,7 @@ export class Icon extends UIControlBase<
         this.state = {
             width: this.props.width,
             height: this.props.height,
-            color: "purple",
-            theme: this.props.theme
+            color: "purple"
         } as IIconState;
     }
 
@@ -48,7 +49,7 @@ export class Icon extends UIControlBase<
         return (
             <rect
                 width={this.state.width}
-                fill={this.state.theme.colors.accent.high}
+                fill="red"
                 height={this.state.height}
             />
         );

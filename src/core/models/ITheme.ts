@@ -1,4 +1,4 @@
-import { IAppColors, IAppFonts, IAppUITheme } from "@core.themes";
+import { IAppColors, IAppFonts, IAppUITheme } from "@core.models";
 
 export interface ITheme {
     id: string;

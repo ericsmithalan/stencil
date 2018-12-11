@@ -1,13 +1,7 @@
 import * as React from "react";
 
-import { DarkTheme, ITheme } from "@core.themes";
-
-export interface IComponentProps {
-    theme: ITheme;
-}
-export interface IComponentState {
-    theme: ITheme;
-}
+export interface IComponentProps {}
+export interface IComponentState {}
 
 export abstract class ComponentBase<
     TProps extends IComponentProps,
@@ -19,24 +13,6 @@ export abstract class ComponentBase<
         super(props);
 
         this._isLoaded = false;
-        this.state = {
-            theme: this.props.theme || DarkTheme.getTheme()
-        } as TState;
-    }
-
-    public static getDerivedStateFromProps(
-        props: IComponentProps,
-        state: IComponentState
-    ) {
-        if (props.theme && state.theme) {
-            if (props.theme.id !== state.theme.id) {
-                return {
-                    theme: props.theme
-                };
-            }
-        }
-
-        return null;
     }
 
     /** @virtual */

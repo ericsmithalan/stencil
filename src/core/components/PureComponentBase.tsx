@@ -1,13 +1,7 @@
 import * as React from "react";
 
-import { ITheme, DarkTheme } from "@core.themes";
-
-export interface IPureComponentProps {
-    theme: ITheme;
-}
-export interface IPureComponentState {
-    theme: ITheme;
-}
+export interface IPureComponentProps {}
+export interface IPureComponentState {}
 
 export abstract class PureComponentBase<
     TProps extends IPureComponentProps,
@@ -19,24 +13,6 @@ export abstract class PureComponentBase<
         super(props);
 
         this._isLoaded = false;
-        this.state = {
-            theme: this.props.theme || DarkTheme.getTheme()
-        } as TState;
-    }
-
-    public static getDerivedStateFromProps(
-        props: IPureComponentProps,
-        state: IPureComponentState
-    ) {
-        if (props.theme && state.theme) {
-            if (props.theme.id !== state.theme.id) {
-                return {
-                    theme: props.theme
-                };
-            }
-        }
-
-        return null;
     }
 
     /** @virtual */
