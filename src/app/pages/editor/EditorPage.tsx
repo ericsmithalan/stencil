@@ -1,9 +1,10 @@
 import * as React from "react";
-
+import { connect } from "react-redux";
 import { IPageProps, IPageState, PageBase } from "@stencil.components/index";
 import { Grid } from "@stencil.app/drawings";
+import { States, Actions } from "@stencil.store";
 
-export class EditorPage extends PageBase<IPageProps, IPageState> {
+class Editor extends PageBase<IPageProps, IPageState> {
     public render() {
         return (
             <div className="editor">
@@ -14,3 +15,16 @@ export class EditorPage extends PageBase<IPageProps, IPageState> {
         );
     }
 }
+
+const mapStateToProps = (state: States) => ({
+    theme: state.themeState
+});
+
+const mapDispatchToProps = (dispatch: any) => ({
+    fetchMembers: () => dispatch(Actions.theme.changeTheme(dispatch))
+});
+
+export const EditorPage = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Editor);

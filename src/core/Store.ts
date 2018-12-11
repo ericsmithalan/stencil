@@ -1,16 +1,29 @@
 import { Store, createStore, compose, applyMiddleware } from "redux";
 import reduxThunk from "redux-thunk";
-import { ApplicationState } from "@stencil.redux/states";
 import { combineReducers } from "redux";
-import * as Reducers from "@stencil.redux/reducers";
+
+import {
+    ThemeState,
+    ThemeReducers,
+    ThemeActions,
+    ThemeActionTypes
+} from "@stencil.features/theme";
 
 export type States = {
-    application: ApplicationState;
+    themeState: ThemeState;
 };
 
 export const state = combineReducers<States>({
-    application: Reducers.ApplicationReducers.reducer
+    themeState: ThemeReducers.reducer
 });
+
+export const Actions = {
+    theme: ThemeActions
+};
+
+export const ActionTypes = {
+    theme: ThemeActionTypes
+};
 
 export const store: Store<States> = createStore(
     state,

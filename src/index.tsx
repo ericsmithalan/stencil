@@ -3,7 +3,7 @@ import * as ReactDOM from "react-dom";
 import { App } from "@stencil.app/App";
 
 import { Provider } from "react-redux";
-import { store } from "@stencil.redux/Store";
+import { store } from "@stencil.store";
 
 ReactDOM.render(
     <Provider store={store}>

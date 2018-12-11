@@ -1,6 +1,6 @@
 import { ITheme } from "@stencil.features/theme";
 
-export namespace ApplicationActions {
+export namespace ThemeActions {
     export type ChangeTheme = {
         type: "THEME_CHANGE";
         value: ITheme;

@@ -1,5 +1,5 @@
 import { ITheme } from "@stencil.features/theme";
 
-export type ApplicationState = {
+export type ThemeState = {
     theme: ITheme;
 };

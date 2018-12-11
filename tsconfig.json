@@ -23,7 +23,7 @@
         "stripInternal": true,
         "allowSyntheticDefaultImports": true,
         "paths": {
-            "@stencil.redux/*": ["src/core/redux/*"],
+            "@stencil.store": ["src/core/Store"],
             "@stencil.features/*": ["src/core/features/*"],
             "@stencil.components/*": ["src/core/components/*"],
             "@stencil.app/*": ["src/app/*"]
