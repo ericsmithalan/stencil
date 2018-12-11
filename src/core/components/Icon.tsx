@@ -1,12 +1,14 @@
 import * as React from "react";
+import { SVG } from "@stencil.features/svg";
 import {
     IUIControlProps,
     IUIControlState,
-    UIControlBase,
-    SVG
-} from "@core.components";
-import { ISize, IButtonTheme } from "@core.models";
-import { SizeType } from "@core.enums";
+    UIControlBase
+} from "@stencil.components/index";
+
+import { ISize, SizeType } from "@stencil.features/vectors";
+import { IButtonTheme } from "@stencil.features/theme";
+
 export interface IIconProps extends IUIControlProps {
     sizeType: SizeType;
     buttonTheme: IButtonTheme;

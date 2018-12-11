@@ -1,4 +1,4 @@
-import { ComponentBase } from "@core.components";
+import { ComponentBase } from "@stencil.components/index";
 
 export interface IPageProps {}
 

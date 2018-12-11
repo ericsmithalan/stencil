@@ -337,18 +337,6 @@ template {
   display: none;
 }
 
-.svg-container {
-  position: relative;
-}
-
-.svg-container .svg-image {
-  position: relative;
-}
-
-.icon-container {
-  border: 1px solid red;
-}
-
 .shell {
   display: flex;
   flex-direction: column;

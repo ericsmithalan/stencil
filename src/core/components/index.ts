@@ -4,5 +4,4 @@ export * from "./UIControlBase";
 export * from "./PageBase";
 export * from "./DrawBase";
 export * from "./Icon";
-export * from "./svg/SVG";
-export * from "./iconButton/IconButton";
+export * from "./IconButton";

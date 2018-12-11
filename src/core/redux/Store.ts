@@ -1,8 +1,8 @@
 import { Store, createStore, compose, applyMiddleware } from "redux";
 import reduxThunk from "redux-thunk";
-import { ApplicationState } from "@core.states";
+import { ApplicationState } from "@stencil.redux/states";
 import { combineReducers } from "redux";
-import * as Reducers from "@core.reducers";
+import * as Reducers from "@stencil.redux/reducers";
 
 export type States = {
     application: ApplicationState;

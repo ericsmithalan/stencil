@@ -1,4 +1,4 @@
-import { ITheme } from "@core.models";
+import { ITheme } from "@stencil.features/theme";
 
 export namespace ApplicationActions {
     export type ChangeTheme = {

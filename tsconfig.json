@@ -23,20 +23,10 @@
         "stripInternal": true,
         "allowSyntheticDefaultImports": true,
         "paths": {
-            "@core.actionTypes": ["src/core/redux/types/index"],
-            "@core.reducers": ["src/core/redux/reducers/index"],
-            "@core.store": ["src/core/redux/Store"],
-            "@core.states": ["src/core/redux/states/index"],
-            "@core.actions": ["src/core/redux/Actions"],
-            "@core.components": ["src/core/components/index"],
-            "@core.main": ["src/core/main/index"],
-            "@core.services": ["src/core/services/index"],
-            "@core.models": ["src/core/models/index"],
-            "@core.utils": ["src/core/utils/index"],
-            "@core.enums": ["src/core/enums/index"],
-            "@app": ["src/app/index"],
-            "@app.drawings": ["src/app/drawings/index"],
-            "@app.pages": ["src/app/pages/index"]
+            "@stencil.redux/*": ["src/core/redux/*"],
+            "@stencil.features/*": ["src/core/features/*"],
+            "@stencil.components/*": ["src/core/components/*"],
+            "@stencil.app/*": ["src/app/*"]
         }
     },
     "exclude": [

@@ -1,7 +1,7 @@
-import { ApplicationTypes } from "@core.actionTypes";
-import * as States from "@core.states";
-import { ApplicationActions } from "@core.actions";
-import { DarkTheme } from "@core.services";
+import { ApplicationTypes } from "@stencil.redux/types";
+import * as States from "@stencil.redux/states";
+import { ApplicationActions } from "@stencil.redux/actions";
+import { DarkTheme } from "@stencil.features/theme";
 
 export namespace ApplicationReducers {
     const defaultState: States.ApplicationState = {

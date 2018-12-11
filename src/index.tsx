@@ -1,9 +1,9 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { App } from "@app";
+import { App } from "@stencil.app/App";
 
 import { Provider } from "react-redux";
-import { store } from "@core.store";
+import { store } from "@stencil.redux/Store";
 
 ReactDOM.render(
     <Provider store={store}>

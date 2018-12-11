@@ -9,10 +9,10 @@ import {
     PureComponentBase,
     IPureComponentProps,
     IPureComponentState
-} from "@core.components";
+} from "@stencil.components/index";
 
-import { EditorPage, LaunchPage } from "@app.pages";
-import { Shell } from "@core.main";
+import { EditorPage, LaunchPage } from "@stencil.app/pages";
+import { Shell } from "@stencil.features/electron";
 
 export interface IAppProps extends IPureComponentProps {}
 
