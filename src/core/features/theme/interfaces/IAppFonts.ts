@@ -1,4 +1,4 @@
-import { IFontFamilies, IFontSizes } from "@stencil.features/theme/interfaces";
+import { IFontFamilies, IFontSizes } from "@features/theme/interfaces";
 
 export interface IAppFonts {
     sizes: IFontSizes;

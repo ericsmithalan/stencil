@@ -1,13 +1,13 @@
 import * as React from "react";
 
-import { IDegree, IVector2 } from "@stencil.features/vectors";
+import { IDegree, IVector2 } from "@features/vectors";
 import {
     IUIControlProps,
     IUIControlState,
     UIControlBase
-} from "@stencil.components/index";
+} from "@components/index";
 
-import { VectorHelpers } from "@stencil.features/vectors";
+import { VectorHelpers } from "@features/vectors";
 
 export interface ISVGProps extends IUIControlProps {
     fill: string;

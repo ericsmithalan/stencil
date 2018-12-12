@@ -4,7 +4,7 @@ import {
     PureComponentBase,
     IComponentProps,
     IComponentState
-} from "@stencil.components/index";
+} from "@components/index";
 
 interface ILaunchProps extends IComponentProps {}
 interface ILaunchState extends IComponentState {}

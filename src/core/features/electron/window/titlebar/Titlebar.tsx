@@ -8,7 +8,7 @@ import {
     IPureComponentProps,
     IPureComponentState,
     IconButton
-} from "@stencil.components/index";
+} from "@components/index";
 
 export interface ITitlebarProps extends IPureComponentProps {
     height: number;

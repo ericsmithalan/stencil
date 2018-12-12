@@ -1,4 +1,4 @@
-import { ILogger, LogLevel } from "@stencil.features/logger";
+import { ILogger, LogLevel } from "@features/logger";
 
 export type LoggerOptionTypes = {
     isEnabled: boolean;

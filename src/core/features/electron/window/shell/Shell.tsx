@@ -1,10 +1,10 @@
 import * as React from "react";
+
+import { ComponentBase } from "@components/index";
 import { connect } from "react-redux";
-import { IRootState } from "@stencil.store";
+import { ITheme } from "@features/theme";
 
-import { ComponentBase } from "@stencil.components/index";
-
-import { Titlebar, IShellState, IShellProps } from "@stencil.features/electron";
+import { Titlebar, IShellProps, IShellState } from "@features/electron";
 
 export class Shell extends ComponentBase<IShellProps, IShellState> {
     public static defaultProps: Partial<IShellProps> = {
@@ -17,14 +17,6 @@ export class Shell extends ComponentBase<IShellProps, IShellState> {
         super(props);
 
         this._titlebar = React.createRef();
-
-        this.state = {
-            isTitlebarVisible: false
-        } as IShellState;
-    }
-
-    public set isTitlebarVisible(value: boolean) {
-        this.setState({ isTitlebarVisible: value });
     }
 
     public get titlebar(): Titlebar {
@@ -34,7 +26,7 @@ export class Shell extends ComponentBase<IShellProps, IShellState> {
     protected loaded() {
         super.loaded();
 
-        console.log(this.props);
+        console.log("props", this.props);
     }
 
     public render() {
@@ -42,8 +34,7 @@ export class Shell extends ComponentBase<IShellProps, IShellState> {
             <div style={{ backgroundColor: "red" }} className="shell">
                 <div
                     style={{
-                        height: this.props.titlebarHeight,
-                        display: this.state.isTitlebarVisible ? "block" : "none"
+                        height: this.props.titlebarHeight
                     }}
                     className="shell-titlebar"
                 >
@@ -58,17 +49,32 @@ export class Shell extends ComponentBase<IShellProps, IShellState> {
     }
 }
 
-const mapStateToProps = (state: IRootState) => ({
-    theme: state.theme,
-    shell: state.shell
+interface IPropsFromState {
+    title: string;
+    isTitlebarVisible: boolean;
+}
+
+interface IDispatchFromProps {
+    changeTheme: (value: ITheme) => void;
+    updateTitle: (value: string) => void;
+}
+
+const mapStateToProps = (state: IShellState): IPropsFromState => ({
+    title: state.title,
+    isTitlebarVisible: state.isTitlebarVisible
 });
 
-const mapDispatchToProps = (dispatch: any) => ({
-    changeTheme: () => dispatch(dispatch.theme.changeTheme(dispatch)),
-    updateTitle: () => dispatch(dispatch.shell.updateTitle(dispatch))
+const mapDispatchToProps = (dispatch: any): IDispatchFromProps => ({
+    changeTheme: () => dispatch(dispatch.theme.changeTheme(dispatch.theme)),
+    updateTitle: () => dispatch(dispatch.shell.updateTitle(dispatch.shell))
 });
 
-export default connect(
+export const ShellContainer = connect<
+    IPropsFromState,
+    IDispatchFromProps,
+    IShellProps,
+    IShellState
+>(
     mapStateToProps,
     mapDispatchToProps
 )(Shell);

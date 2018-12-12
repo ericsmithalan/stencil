@@ -1,4 +1,4 @@
-import { IBounds, IVector2 } from "@stencil.features/vectors";
+import { IBounds, IVector2 } from "@features/vectors";
 
 export class VectorHelpers {
     public static isVector2Equal(a: IVector2, b: IVector2) {

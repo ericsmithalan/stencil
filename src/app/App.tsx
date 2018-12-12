@@ -9,10 +9,10 @@ import {
     PureComponentBase,
     IPureComponentProps,
     IPureComponentState
-} from "@stencil.components/index";
+} from "@components/index";
 
-import { EditorPage, LaunchPage } from "@stencil.app/pages";
-import { Shell } from "@stencil.features/electron";
+import { EditorPage, LaunchPage } from "@app/pages";
+import { ShellContainer, Shell } from "@features/electron/window/shell/Shell";
 
 export interface IAppProps extends IPureComponentProps {}
 
@@ -35,22 +35,19 @@ export class App extends PureComponentBase<IAppProps, IAppState> {
     }
 
     protected loaded() {
-        const shell = this._shellRef.current as Shell;
-
-        //simulate loading...
-        setTimeout(() => {
-            shell.isTitlebarVisible = true;
-            shell.titlebar.setTitle("title bar text");
-            this.setState({
-                isLoaded: true
-            });
-        }, 3000);
+        this.setState({
+            isLoaded: true
+        });
     }
 
     protected unLoaded() {}
 
     public render() {
-        return <Shell ref={this._shellRef}>{this._renderContent()}</Shell>;
+        return (
+            <ShellContainer ref={this._shellRef}>
+                {this._renderContent()}
+            </ShellContainer>
+        );
     }
 
     private _renderContent(): JSX.Element {

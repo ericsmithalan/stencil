@@ -1,8 +1,8 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { IPageProps, IPageState, PageBase } from "@stencil.components/index";
-import { Grid } from "@stencil.app/drawings";
-import { IRootState } from "@stencil.store";
+import { IPageProps, IPageState, PageBase } from "@components/index";
+import { Grid } from "@app/drawings";
+import { IRootState } from "@store";
 
 export class Page extends PageBase<IPageProps, IPageState> {
     protected loaded() {

@@ -1,3 +1,3 @@
-import { IInteractiveColorScale } from "@stencil.features/theme/interfaces";
+import { IInteractiveColorScale } from "@features/theme/interfaces";
 
 export interface IButtonTheme extends IInteractiveColorScale {}

@@ -1,4 +1,4 @@
-import { ILocalStorageService } from "@stencil.features/storage";
+import { ILocalStorageService } from "@features/storage";
 
 export class LocalStorageService implements ILocalStorageService {
     private readonly _key: string;

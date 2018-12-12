@@ -3,7 +3,7 @@ import {
     PureComponentBase,
     IPureComponentProps,
     IPureComponentState
-} from "@stencil.components/index";
+} from "@components/index";
 
 export interface IDrawProps extends IPureComponentProps {}
 

@@ -2,7 +2,7 @@ import {
     IAlertColorScale,
     IInteractiveColorScale,
     IMonoColorScale
-} from "@stencil.features/theme/interfaces";
+} from "@features/theme/interfaces";
 
 export interface IAppColors {
     chrome: IMonoColorScale;

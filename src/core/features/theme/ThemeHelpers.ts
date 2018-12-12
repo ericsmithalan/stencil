@@ -5,9 +5,9 @@ import {
     IFontSizes,
     IInteractiveColorScale,
     IMonoColorScale
-} from "@stencil.features/theme";
+} from "@features/theme";
 
-import { ISize, SizeType } from "@stencil.features/vectors";
+import { ISize, SizeType } from "@features/vectors";
 
 export class ThemeHelpers {
     public static getIconButtonSize(size: SizeType): ISize {

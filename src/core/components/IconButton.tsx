@@ -4,7 +4,7 @@ import {
     IUIControlProps,
     IUIControlState,
     Icon
-} from "@stencil.components/index";
+} from "@components/index";
 
 export interface IIconButtonProps extends IUIControlProps {
     onClick(e: MouseEvent): void;

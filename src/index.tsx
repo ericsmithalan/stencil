@@ -1,9 +1,13 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { App } from "@stencil.app/App";
+import { App } from "@app/App";
 
 import { Provider } from "react-redux";
-import { store } from "@stencil.store";
+import { configureStore } from "@store";
+import { createHashHistory } from "history";
+
+const history = createHashHistory();
+const store = configureStore(history);
 
 ReactDOM.render(
     <Provider store={store}>

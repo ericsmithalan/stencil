@@ -1,4 +1,4 @@
-import { IAppColors, IAppFonts } from "@stencil.features/theme/interfaces";
+import { IAppColors, IAppFonts } from "@features/theme/interfaces";
 
 export interface ITheme {
     id: string;

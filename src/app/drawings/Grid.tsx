@@ -1,4 +1,4 @@
-import { DrawBase } from "@stencil.components/index";
+import { DrawBase } from "@components/index";
 
 export class Grid extends DrawBase {
     protected init() {}

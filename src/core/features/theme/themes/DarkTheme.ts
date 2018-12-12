@@ -1,6 +1,6 @@
-import { ITheme, IMonoColorScale } from "@stencil.features/theme";
+import { ITheme, IMonoColorScale } from "@features/theme";
 
-import { ThemeHelpers } from "@stencil.features/theme";
+import { ThemeHelpers } from "@features/theme";
 
 export class DarkTheme {
     public static getTheme(): ITheme {

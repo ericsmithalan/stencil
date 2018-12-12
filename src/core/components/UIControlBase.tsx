@@ -4,8 +4,8 @@ import {
     PureComponentBase,
     IPureComponentProps,
     IPureComponentState
-} from "@stencil.components/index";
-import { ISize } from "@stencil.features/vectors";
+} from "@components/index";
+import { ISize } from "@features/vectors";
 
 export interface IUIControlProps extends IPureComponentProps {
     width: number;

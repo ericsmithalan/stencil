@@ -2,7 +2,7 @@ import {
     ComponentBase,
     IComponentProps,
     IComponentState
-} from "@stencil.components/index";
+} from "@components/index";
 
 export interface IPageProps extends IComponentProps {}
 
