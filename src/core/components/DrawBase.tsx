@@ -1,49 +1,50 @@
 import * as React from "react";
+
 import {
-    PureComponentBase,
-    IPureComponentProps,
-    IPureComponentState
-} from "@components/index";
+	IPureComponentProps,
+	IPureComponentState,
+	PureComponentBase
+} from "@core/components";
 
 export interface IDrawProps extends IPureComponentProps {}
 
 export interface IDrawState extends IPureComponentState {}
 
 export abstract class DrawBase extends PureComponentBase<
-    IDrawProps,
-    IDrawState
+	IDrawProps,
+	IDrawState
 > {
-    private readonly _canvasRef: React.RefObject<HTMLCanvasElement>;
+	private readonly _canvasRef: React.RefObject<HTMLCanvasElement>;
 
-    public constructor(props: IPureComponentProps) {
-        super(props);
+	public constructor(props: IPureComponentProps) {
+		super(props);
 
-        this._canvasRef = React.createRef();
-        this.init();
-    }
+		this._canvasRef = React.createRef();
+		this.init();
+	}
 
-    protected abstract init(): void;
+	protected abstract init(): void;
 
-    /** @virtual */
-    protected abstract draw(
-        canvas: HTMLCanvasElement,
-        context: CanvasRenderingContext2D
-    ): void;
+	/** @virtual */
+	protected abstract draw(
+		canvas: HTMLCanvasElement,
+		context: CanvasRenderingContext2D
+	): void;
 
-    protected loaded() {
-        super.loaded();
+	protected loaded() {
+		super.loaded();
 
-        const canvas: HTMLCanvasElement = this._canvasRef
-            .current as HTMLCanvasElement;
+		const canvas: HTMLCanvasElement = this._canvasRef
+			.current as HTMLCanvasElement;
 
-        const context: CanvasRenderingContext2D = canvas.getContext(
-            "2d"
-        ) as CanvasRenderingContext2D;
+		const context: CanvasRenderingContext2D = canvas.getContext(
+			"2d"
+		) as CanvasRenderingContext2D;
 
-        this.draw(canvas, context);
-    }
+		this.draw(canvas, context);
+	}
 
-    public render() {
-        return <canvas ref={this._canvasRef} />;
-    }
+	public render() {
+		return <canvas ref={this._canvasRef} />;
+	}
 }

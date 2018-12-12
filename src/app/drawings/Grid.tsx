@@ -1,12 +1,12 @@
-import { DrawBase } from "@components/index";
+import { DrawBase } from "@core/components";
 
 export class Grid extends DrawBase {
-    protected init() {}
-    protected draw(
-        canvas: HTMLCanvasElement,
-        context: CanvasRenderingContext2D
-    ) {
-        context.fillStyle = "red";
-        context.rect(0, 0, 200, 200);
-    }
+	protected init() {}
+	protected draw(
+		canvas: HTMLCanvasElement,
+		context: CanvasRenderingContext2D
+	) {
+		context.fillStyle = "red";
+		context.rect(0, 0, 200, 200);
+	}
 }

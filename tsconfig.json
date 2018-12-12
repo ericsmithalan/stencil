@@ -23,9 +23,7 @@
 		"stripInternal": true,
 		"allowSyntheticDefaultImports": true,
 		"paths": {
-			"@store": ["src/core/store/index"],
 			"@core/*": ["src/core/*"],
-			"@components/*": ["src/core/components/*"],
 			"@app/*": ["src/app/*"]
 		}
 	},
