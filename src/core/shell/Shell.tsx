@@ -5,8 +5,8 @@ import {
 	IComponentProps,
 	IComponentState
 } from "@core/components";
-import { ShellRedux, Titlebar } from "@core/electron";
-import { Theme, ThemeColor, ThemeRedux } from "@core/theme";
+import { ShellRedux, Titlebar } from "@core/shell";
+import { ThemeColor, ThemeRedux } from "@core/theme";
 
 import { IRootState } from "@core/store";
 import { connect } from "react-redux";
@@ -21,8 +21,6 @@ export interface IShellProps extends IComponentProps {
 export interface IShellState extends IComponentState {}
 
 export class Shell extends ComponentBase<IShellProps, IShellState> {
-	private readonly _theme: Theme;
-
 	public static defaultProps: Partial<IShellProps> = {
 		titlebarHeight: 30
 	};
@@ -32,7 +30,6 @@ export class Shell extends ComponentBase<IShellProps, IShellState> {
 	public constructor(props: IShellProps) {
 		super(props);
 
-		this._theme = new Theme();
 		this._titlebar = React.createRef();
 	}
 
@@ -42,7 +39,6 @@ export class Shell extends ComponentBase<IShellProps, IShellState> {
 
 	protected loaded() {
 		super.loaded();
-		console.log(this._theme.color);
 		console.log("props", this.props);
 	}
 

@@ -337,6 +337,14 @@ template {
   display: none;
 }
 
+.svg-container {
+  position: relative;
+}
+
+.svg-container .svg-image {
+  position: relative;
+}
+
 .shell {
   display: flex;
   flex-direction: column;
@@ -392,14 +400,6 @@ template {
   font-size: 13px;
   align-self: center;
   justify-self: center;
-}
-
-.svg-container {
-  position: relative;
-}
-
-.svg-container .svg-image {
-  position: relative;
 }
 
 .editor {

@@ -10,7 +10,7 @@ import {
 	IPureComponentState,
 	PureComponentBase
 } from "@core/components";
-import { Shell, ShellContainer } from "@core/electron/window/shell/Shell";
+import { Shell, ShellContainer } from "@core/shell";
 
 import { EditorPage } from "@app/pages";
 
