@@ -1,3 +1,4 @@
 export * from "./Shell";
+export * from "./Shell.Container";
 export * from "./Titlebar";
-export * from "./ShellRedux";
+export * from "./Shell.Store";

@@ -23,6 +23,11 @@ export interface ITitlebarState extends IPureComponentState {
 	showMenu: boolean;
 }
 
+export interface ITitlebarTheme {
+	backgroundColor: string;
+	height: number;
+}
+
 export class Titlebar extends PureComponentBase<
 	ITitlebarProps,
 	ITitlebarState

@@ -9,15 +9,15 @@ import {
 } from "redux";
 
 import { History } from "history";
-import { ShellRedux } from "@core/shell";
-import { ThemeRedux } from "@core/theme";
+import { ShellStore } from "@core/shell";
+import { ThemeStore } from "@core/theme";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { routerMiddleware } from "connected-react-router";
 import thunk from "redux-thunk";
 
 export interface IRootState {
-	theme: ThemeRedux.IState;
-	shell: ShellRedux.IState;
+	theme: ThemeStore.IState;
+	shell: ShellStore.IState;
 }
 
 export interface ConnectedReduxProps<A extends Action = AnyAction> {
@@ -25,8 +25,8 @@ export interface ConnectedReduxProps<A extends Action = AnyAction> {
 }
 
 export const rootReducer = combineReducers<IRootState>({
-	theme: ThemeRedux.reducer,
-	shell: ShellRedux.reducer
+	theme: ThemeStore.reducer,
+	shell: ShellStore.reducer
 });
 
 export function configureStore(history: History): Store<IRootState> {

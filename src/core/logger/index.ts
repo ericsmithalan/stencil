@@ -1,3 +1,3 @@
-export * from "./LogLevel";
-export * from "./ILogger";
+export * from "./models/LogLevel";
+export * from "./models/ILogger";
 export * from "./Logger";

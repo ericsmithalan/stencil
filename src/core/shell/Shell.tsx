@@ -5,26 +5,28 @@ import {
 	IComponentProps,
 	IComponentState
 } from "@core/components";
-import { ShellRedux, Titlebar } from "@core/shell";
-import { ThemeColor, ThemeRedux } from "@core/theme";
+import { ShellStore, Titlebar } from "@core/shell";
+import { ThemeColor, ThemeStore } from "@core/theme";
 
-import { IRootState } from "@core/store";
-import { connect } from "react-redux";
-
+/** PROPS */
 export interface IShellProps extends IComponentProps {
 	titlebarHeight: number;
-	shellState: ShellRedux.IState;
-	themeState: ThemeRedux.IState;
+	shellState: ShellStore.IState;
+	themeState: ThemeStore.IState;
 	changeTheme(value: ThemeColor): void;
 }
 
+/** STATE */
 export interface IShellState extends IComponentState {}
 
-export class Shell extends ComponentBase<IShellProps, IShellState> {
-	public static defaultProps: Partial<IShellProps> = {
-		titlebarHeight: 30
-	};
+/** THEME */
+export interface IShellTheme {
+	backgroundColor: string;
+	titlebarHeight: number;
+}
 
+/** SHELL */
+export class Shell extends ComponentBase<IShellProps, IShellState> {
 	private _titlebar: React.RefObject<Titlebar>;
 
 	public constructor(props: IShellProps) {
@@ -32,6 +34,10 @@ export class Shell extends ComponentBase<IShellProps, IShellState> {
 
 		this._titlebar = React.createRef();
 	}
+
+	public static defaultProps: Partial<IShellProps> = {
+		titlebarHeight: 30
+	};
 
 	public get titlebar(): Titlebar {
 		return this._titlebar.current as Titlebar;
@@ -45,23 +51,29 @@ export class Shell extends ComponentBase<IShellProps, IShellState> {
 	public render() {
 		const { colors } = this.props.themeState.theme;
 
-		const styles = {
-			backgroundColor: colors.chrome.high
+		const shellTheme: IShellTheme = {
+			backgroundColor: colors.chrome.high,
+			titlebarHeight: 30
 		};
 
 		return (
 			<div
-				style={{ backgroundColor: styles.backgroundColor }}
+				style={{ backgroundColor: shellTheme.backgroundColor }}
 				className="shell"
 			>
 				<div
-					style={{ height: this.props.titlebarHeight }}
+					style={{
+						height: shellTheme.titlebarHeight,
+						display: this.props.shellState.isTitlebarVisible
+							? "block"
+							: "hidden"
+					}}
 					className="shell-titlebar"
 				>
 					<Titlebar
 						onThemeChanged={() => this._handleThemeChange()}
 						theme={this.props.themeState.theme}
-						height={this.props.titlebarHeight}
+						height={shellTheme.titlebarHeight}
 						ref={this._titlebar}
 					/>
 				</div>
@@ -80,30 +92,3 @@ export class Shell extends ComponentBase<IShellProps, IShellState> {
 		console.log(this.props.themeState.themeColor);
 	}
 }
-
-interface IPropsFromState {
-	shellState: ShellRedux.IState;
-	themeState: ThemeRedux.IState;
-}
-
-interface IDispatchFromProps {
-	changeTheme: (value: ThemeColor) => void;
-	updateTitle: (value: string) => void;
-}
-
-const mapStateToProps = (state: IRootState): IPropsFromState => ({
-	shellState: state.shell,
-	themeState: state.theme
-});
-
-const mapDispatchToProps = (dispatch: any): IDispatchFromProps => ({
-	changeTheme: (value: ThemeColor) =>
-		dispatch(ThemeRedux.actions.changeTheme(value)),
-	updateTitle: (value: string) =>
-		dispatch(ShellRedux.actions.changeTitle(value))
-});
-
-export const ShellContainer = connect<IPropsFromState, IDispatchFromProps>(
-	mapStateToProps,
-	mapDispatchToProps
-)(Shell);
