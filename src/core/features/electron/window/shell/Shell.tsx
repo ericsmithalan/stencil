@@ -1,12 +1,28 @@
 import * as React from "react";
 
-import { ComponentBase } from "@components/index";
+import {
+    ComponentBase,
+    IComponentProps,
+    IComponentState
+} from "@components/index";
 import { connect } from "react-redux";
-import { ITheme } from "@features/theme";
+import { ThemeRedux, Theme, ThemeColor } from "@features/theme";
 
-import { Titlebar, IShellProps, IShellState } from "@features/electron";
+import { Titlebar, ShellRedux } from "@features/electron";
+import { IRootState } from "@store";
+
+export interface IShellProps extends IComponentProps {
+    titlebarHeight: number;
+    shellState: ShellRedux.IState;
+    themeState: ThemeRedux.IState;
+    changeTheme(value: ThemeColor): void;
+}
+
+export interface IShellState extends IComponentState {}
 
 export class Shell extends ComponentBase<IShellProps, IShellState> {
+    private readonly _theme: Theme;
+
     public static defaultProps: Partial<IShellProps> = {
         titlebarHeight: 30
     };
@@ -16,6 +32,7 @@ export class Shell extends ComponentBase<IShellProps, IShellState> {
     public constructor(props: IShellProps) {
         super(props);
 
+        this._theme = new Theme();
         this._titlebar = React.createRef();
     }
 
@@ -25,20 +42,29 @@ export class Shell extends ComponentBase<IShellProps, IShellState> {
 
     protected loaded() {
         super.loaded();
-
+        console.log(this._theme.color);
         console.log("props", this.props);
     }
 
     public render() {
+        const { colors } = this.props.themeState.theme;
+
+        const styles = {
+            backgroundColor: colors.chrome.high
+        };
+
         return (
-            <div style={{ backgroundColor: "red" }} className="shell">
+            <div
+                style={{ backgroundColor: styles.backgroundColor }}
+                className="shell"
+            >
                 <div
-                    style={{
-                        height: this.props.titlebarHeight
-                    }}
+                    style={{ height: this.props.titlebarHeight }}
                     className="shell-titlebar"
                 >
                     <Titlebar
+                        onThemeChanged={() => this._handleThemeChange()}
+                        theme={this.props.themeState.theme}
                         height={this.props.titlebarHeight}
                         ref={this._titlebar}
                     />
@@ -47,34 +73,41 @@ export class Shell extends ComponentBase<IShellProps, IShellState> {
             </div>
         );
     }
+
+    private _handleThemeChange(): void {
+        if (this.props.themeState.themeColor === ThemeColor.Light) {
+            this.props.changeTheme(ThemeColor.Dark);
+        } else {
+            this.props.changeTheme(ThemeColor.Light);
+        }
+
+        console.log(this.props.themeState.themeColor);
+    }
 }
 
 interface IPropsFromState {
-    title: string;
-    isTitlebarVisible: boolean;
+    shellState: ShellRedux.IState;
+    themeState: ThemeRedux.IState;
 }
 
 interface IDispatchFromProps {
-    changeTheme: (value: ITheme) => void;
+    changeTheme: (value: ThemeColor) => void;
     updateTitle: (value: string) => void;
 }
 
-const mapStateToProps = (state: IShellState): IPropsFromState => ({
-    title: state.title,
-    isTitlebarVisible: state.isTitlebarVisible
+const mapStateToProps = (state: IRootState): IPropsFromState => ({
+    shellState: state.shell,
+    themeState: state.theme
 });
 
 const mapDispatchToProps = (dispatch: any): IDispatchFromProps => ({
-    changeTheme: () => dispatch(dispatch.theme.changeTheme(dispatch.theme)),
-    updateTitle: () => dispatch(dispatch.shell.updateTitle(dispatch.shell))
+    changeTheme: (value: ThemeColor) =>
+        dispatch(ThemeRedux.actions.changeTheme(value)),
+    updateTitle: (value: string) =>
+        dispatch(ShellRedux.actions.changeTitle(value))
 });
 
-export const ShellContainer = connect<
-    IPropsFromState,
-    IDispatchFromProps,
-    IShellProps,
-    IShellState
->(
+export const ShellContainer = connect<IPropsFromState, IDispatchFromProps>(
     mapStateToProps,
     mapDispatchToProps
 )(Shell);

@@ -11,36 +11,31 @@ import {
     IPureComponentState
 } from "@components/index";
 
-import { EditorPage, LaunchPage } from "@app/pages";
+import { EditorPage } from "@app/pages";
 import { ShellContainer, Shell } from "@features/electron/window/shell/Shell";
 
 export interface IAppProps extends IPureComponentProps {}
 
-export interface IAppState extends IPureComponentState {
-    isLoaded: boolean;
-}
+export interface IAppState extends IPureComponentState {}
 
 export class App extends PureComponentBase<IAppProps, IAppState> {
-    public static defaultProps: Partial<IAppProps> = {};
     private _shellRef: React.RefObject<Shell>;
 
     public constructor(props: IAppProps) {
         super(props);
 
         this._shellRef = React.createRef();
-
-        this.state = {
-            isLoaded: false
-        } as IAppState;
     }
+
+    public static defaultProps: Partial<IAppProps> = {};
 
     protected loaded() {
-        this.setState({
-            isLoaded: true
-        });
+        super.loaded();
     }
 
-    protected unLoaded() {}
+    protected unLoaded() {
+        super.unLoaded();
+    }
 
     public render() {
         return (
@@ -51,15 +46,7 @@ export class App extends PureComponentBase<IAppProps, IAppState> {
     }
 
     private _renderContent(): JSX.Element {
-        if (this.state.isLoaded) {
-            return this._renderApp();
-        } else {
-            return this._renderLaunchScreen();
-        }
-    }
-
-    private _renderLaunchScreen(): JSX.Element {
-        return <LaunchPage />;
+        return this._renderApp();
     }
 
     private _renderApp(): JSX.Element {

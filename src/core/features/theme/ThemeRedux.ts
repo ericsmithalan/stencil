@@ -1,32 +1,49 @@
-import { LightTheme } from "./themes/LightTheme";
-import { ITheme, IThemeState } from "@features/theme";
-import { IAction } from "@store";
 import { Reducer } from "redux";
+import { action } from "typesafe-actions";
+import { ITheme, ThemeColor, DarkTheme, LightTheme } from "@features/theme";
 
-const initialState: IThemeState = LightTheme.getTheme();
-
-export const THEME_CHANGE = "@@theme/THEME_CHANGE";
-export type THEME_CHANGE = typeof THEME_CHANGE;
-
-const changeTheme = (value: ITheme): IAction<ITheme> => ({
-    type: THEME_CHANGE,
-    value
-});
-
-export const themeReduce: Reducer<IThemeState> = (
-    state: IThemeState = initialState,
-    action: IAction<any>
-) => {
-    switch (action.type) {
-        case THEME_CHANGE:
-            return action.value;
-
-        default: {
-            return state;
-        }
+export namespace ThemeRedux {
+    /** STATE */
+    export interface IState {
+        themeColor: ThemeColor;
+        theme: ITheme;
     }
-};
 
-export const themeActions = {
-    changeTheme: changeTheme
-};
+    /** INITIAL STATE */
+    export const initialState: IState = {
+        themeColor: ThemeColor.Light,
+        theme: LightTheme.getTheme()
+    };
+
+    /** ACTION TYPES */
+    export const enum actionTypes {
+        CHANGE_THEME = "@@theme/CHANGE_THEME"
+    }
+
+    /** ACTIONS */
+    export const actions = {
+        changeTheme: (value: ThemeColor) =>
+            action(actionTypes.CHANGE_THEME, value)
+    };
+
+    /** REDUCER */
+    export const reducer: Reducer<IState> = (
+        state: IState = initialState,
+        action
+    ) => {
+        switch (action.type) {
+            case actionTypes.CHANGE_THEME:
+                let theme: ITheme;
+                if (action.payload === ThemeColor.Dark) {
+                    theme = DarkTheme.getTheme();
+                } else {
+                    theme = LightTheme.getTheme();
+                }
+                console.log(theme, action, action.payload);
+                return { ...state, theme: theme, themeColor: action.payload };
+            default: {
+                return state;
+            }
+        }
+    };
+}

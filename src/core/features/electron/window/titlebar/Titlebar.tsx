@@ -9,13 +9,16 @@ import {
     IPureComponentState,
     IconButton
 } from "@components/index";
+import { ITheme } from "@features/theme";
 
 export interface ITitlebarProps extends IPureComponentProps {
     height: number;
+    theme: ITheme;
+    title: string;
+    onThemeChanged(): void;
 }
 
 export interface ITitlebarState extends IPureComponentState {
-    title: string | null;
     showMenu: boolean;
 }
 
@@ -23,10 +26,6 @@ export class Titlebar extends PureComponentBase<
     ITitlebarProps,
     ITitlebarState
 > {
-    public static defaultProps: Partial<ITitlebarProps> = {
-        height: 30
-    };
-
     //hack to bypass an issue
     private _remote = window.require("electron").remote;
 
@@ -34,19 +33,19 @@ export class Titlebar extends PureComponentBase<
         super(props);
 
         this.state = {
-            title: null
-        } as ITitlebarState;
+            showMenu: false
+        };
     }
+
+    public static defaultProps: Partial<ITitlebarProps> = {
+        height: 30
+    };
 
     public get currentWindow(): Electron.BrowserWindow {
         return this._remote.getCurrentWindow();
     }
 
-    public setTitle(value: string | null) {
-        if (this.state.title != value) {
-            this.setState({ title: value });
-        }
-    }
+    public setTitle(value: string | null) {}
 
     protected close() {
         this.currentWindow.close();
@@ -60,18 +59,25 @@ export class Titlebar extends PureComponentBase<
         this.currentWindow.minimize();
     }
 
-    protected toggleMenu() {
-        this.setState({ showMenu: !this.state.showMenu });
-    }
+    protected toggleMenu() {}
 
     protected toggleTheme = () => {
+        this.props.onThemeChanged();
+
         // Settings.themeService.toggle();
     };
 
     public render() {
+        const { colors } = this.props.theme;
+
+        const styles = {
+            backgroundColor: colors.chrome.high
+        };
+
         return (
             <div
                 style={{
+                    backgroundColor: styles.backgroundColor,
                     height: this.props.height
                 }}
                 className="titlebar"
@@ -103,8 +109,8 @@ export class Titlebar extends PureComponentBase<
     }
 
     private _renderTitle(): JSX.Element | null {
-        if (this.state.title) {
-            return <div className="title">{this.state.title}</div>;
+        if (this.props.title) {
+            return <div className="title">{this.props.title}</div>;
         }
 
         return null;

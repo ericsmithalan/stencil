@@ -1,45 +1,45 @@
-import { IAction } from "@store";
-import { IShellState } from "@features/electron";
 import { Reducer } from "redux";
-const initialState: IShellState = {
-    title: "cool",
-    isTitlebarVisible: true
-};
+import { action } from "typesafe-actions";
 
-export const UPDATE_TITLE_ACTION = "@@shell/UPDATE_TITLE_ACTION";
-export type UPDATE_TITLE_ACTION = typeof UPDATE_TITLE_ACTION;
-
-export const UPDATE_TITLEBAR_VISIBILITY = "@@shell/UPDATE_TITLEBAR_VISIBILITY";
-export type UPDATE_TITLEBAR_VISIBILITY = typeof UPDATE_TITLEBAR_VISIBILITY;
-
-export const shellReduce: Reducer<IShellState> = (
-    state: IShellState = initialState,
-    action: IAction<any>
-) => {
-    switch (action.type) {
-        case UPDATE_TITLE_ACTION:
-            console.log("STATE: ", { ...state, title: action.value });
-            return { ...state, title: action.value };
-        case UPDATE_TITLEBAR_VISIBILITY:
-            console.log("STATE: ", { ...state, title: action.value });
-            return { ...state, isTitlebarVisible: action.value };
-        default: {
-            return state;
-        }
+export namespace ShellRedux {
+    /** STATE */
+    export interface IState {
+        title: string;
+        isTitlebarVisible: boolean;
     }
-};
 
-const updateTitle = (value: string): IAction<string> => ({
-    type: UPDATE_TITLE_ACTION,
-    value
-});
+    /** INITIAL STATE */
+    export const initialState: IState = {
+        title: "initial title",
+        isTitlebarVisible: true
+    };
 
-const updateTitlebarVisibility = (value: boolean): IAction<boolean> => ({
-    type: UPDATE_TITLEBAR_VISIBILITY,
-    value
-});
+    /** ACTION TYPES */
+    export const enum actionTypes {
+        CHANGE_TITLE = "@@shell/CHANGE_TITLE",
+        CHANGE_TITLEBAR_VISIBILITY = "@@shell/CHANGE_TITLEBAR_VISIBILITY"
+    }
 
-export const shellActions = {
-    updateTitle: updateTitle,
-    updateTitlebarVisibility: updateTitlebarVisibility
-};
+    /** ACTIONS */
+    export const actions = {
+        changeTitle: (value: string) => action(actionTypes.CHANGE_TITLE, value),
+        changeTitlebarVisibility: (value: boolean) =>
+            action(actionTypes.CHANGE_TITLEBAR_VISIBILITY, value)
+    };
+
+    /** REDUCER */
+    export const reducer: Reducer<IState> = (
+        state: IState = initialState,
+        action
+    ) => {
+        switch (action.type) {
+            case actionTypes.CHANGE_TITLE:
+                return { ...state, title: action.payload };
+            case actionTypes.CHANGE_TITLEBAR_VISIBILITY:
+                return { ...state, isTitlebarVisible: action.payload };
+            default: {
+                return state;
+            }
+        }
+    };
+}
