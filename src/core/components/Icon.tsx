@@ -1,13 +1,13 @@
 import * as React from "react";
-import { SVG } from "@features/svg";
+import { SVG } from "@core/svg";
 import {
     IUIControlProps,
     IUIControlState,
     UIControlBase
 } from "@components/index";
 
-import { ISize, SizeType } from "@features/vectors";
-import { IButtonTheme } from "@features/theme";
+import { ISize, SizeType } from "@core/vectors";
+import { IButtonTheme } from "@core/theme";
 
 export interface IIconProps extends IUIControlProps {
     sizeType: SizeType;

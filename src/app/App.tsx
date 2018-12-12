@@ -12,7 +12,7 @@ import {
 } from "@components/index";
 
 import { EditorPage } from "@app/pages";
-import { ShellContainer, Shell } from "@features/electron/window/shell/Shell";
+import { ShellContainer, Shell } from "@core/electron/window/shell/Shell";
 
 export interface IAppProps extends IPureComponentProps {}
 

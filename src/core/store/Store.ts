@@ -8,8 +8,8 @@ import {
     applyMiddleware
 } from "redux";
 import { routerMiddleware } from "connected-react-router";
-import { ThemeRedux } from "@features/theme";
-import { ShellRedux } from "@features/electron";
+import { ThemeRedux } from "@core/theme";
+import { ShellRedux } from "@core/electron";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { History } from "history";
 import thunk from "redux-thunk";

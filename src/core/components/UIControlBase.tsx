@@ -5,7 +5,7 @@ import {
     IPureComponentProps,
     IPureComponentState
 } from "@components/index";
-import { ISize } from "@features/vectors";
+import { ISize } from "@core/vectors";
 
 export interface IUIControlProps extends IPureComponentProps {
     width: number;

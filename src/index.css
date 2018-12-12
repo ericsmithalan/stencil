@@ -394,6 +394,14 @@ template {
   justify-self: center;
 }
 
+.svg-container {
+  position: relative;
+}
+
+.svg-container .svg-image {
+  position: relative;
+}
+
 .editor {
   position: absolute;
   top: 0;
