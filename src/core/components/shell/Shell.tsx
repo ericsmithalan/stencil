@@ -71,6 +71,7 @@ export class Shell extends ControlBase<IShellProps, IShellState> {
                     className="shell-titlebar"
                 >
                     <Titlebar
+                        title={this.props.title}
                         onThemeChanged={() => this._handleThemeChange()}
                         theme={this.props.theme}
                         height={styles.titlebarHeight}
