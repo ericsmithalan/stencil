@@ -1,4 +1,4 @@
 export * from "./Store";
-export * from "./App.Store";
-export * from "./Theme.Store";
-export * from "./Shell.Store";
+export * from "./Store.App";
+export * from "./Store.Theme";
+export * from "./Store.Shell";
