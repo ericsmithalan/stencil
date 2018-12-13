@@ -7,7 +7,7 @@ import {
     IMonoColorScale
 } from "@core/theme";
 
-import { ISize, SizeType } from "@core/vectors";
+import { ISize, SizeType } from "@core/models";
 
 export class ThemeHelpers {
     public static getIconButtonSize(size: SizeType): ISize {

@@ -6,7 +6,7 @@ import {
     PureControlBase
 } from "@core/components";
 
-import { ISize } from "@core/vectors";
+import { ISize } from "@core/models";
 
 export interface IUIControlProps extends IPureControlProps {
     width: number;

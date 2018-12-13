@@ -8,9 +8,10 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import {
     IPureControlProps,
     IPureControlState,
-    PureControlBase
+    PureControlBase,
+    Shell,
+    ShellContainer
 } from "@core/components";
-import { Shell, ShellContainer } from "@core/shell";
 
 import { EditorPage } from "@app/pages";
 

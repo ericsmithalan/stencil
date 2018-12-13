@@ -337,14 +337,6 @@ template {
   display: none;
 }
 
-.svg-container {
-  position: relative;
-}
-
-.svg-container .svg-image {
-  position: relative;
-}
-
 .shell {
   display: flex;
   flex-direction: column;
@@ -367,7 +359,7 @@ template {
   z-index: 1;
 }
 
-.titlebar {
+.shell .titlebar {
   display: flex;
   flex-direction: row;
   position: absolute;
@@ -377,29 +369,37 @@ template {
   right: 0;
 }
 
-.titlebar .title-bar-menu {
+.shell .titlebar .title-bar-menu {
   position: absolute;
   left: 0;
   width: 200px;
   height: 200px;
 }
 
-.titlebar .titlebar-middle {
+.shell .titlebar .titlebar-middle {
   -webkit-app-region: drag;
   flex-grow: 1;
   justify-content: center;
   align-items: center;
 }
 
-.titlebar .titlebar-middle .title {
+.shell .titlebar .titlebar-middle .title {
   margin-left: 10px;
   vertical-align: middle;
 }
 
-.titlebar .title {
+.shell .titlebar .title {
   font-size: 13px;
   align-self: center;
   justify-self: center;
+}
+
+.svg-container {
+  position: relative;
+}
+
+.svg-container .svg-image {
+  position: relative;
 }
 
 .editor {

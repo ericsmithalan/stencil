@@ -1,2 +1,2 @@
-export * from "./editor/EditorPage";
-export * from "./launch/LaunchPage";
+export * from "./editor/Editor.Page";
+export * from "./launch/Launch.Page";

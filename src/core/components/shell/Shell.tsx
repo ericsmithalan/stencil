@@ -1,15 +1,21 @@
 import * as React from "react";
 
-import { ControlBase, IControlProps, IControlState } from "@core/components";
-import { ShellStore, Titlebar } from "@core/shell";
-import { ThemeColor, ThemeStore } from "@core/theme";
+import {
+    ControlBase,
+    IControlProps,
+    IControlState,
+    Titlebar,
+    IShellDispatchFromProps,
+    IShellPropsFromState
+} from "@core/components";
+import { ThemeColor } from "@core/theme";
 
 /** PROPS */
-export interface IShellProps extends IControlProps {
+export interface IShellProps
+    extends IControlProps,
+        IShellPropsFromState,
+        IShellDispatchFromProps {
     titlebarHeight: number;
-    shellState: ShellStore.IState;
-    themeState: ThemeStore.IState;
-    changeTheme(value: ThemeColor): void;
 }
 
 /** STATE */
@@ -45,7 +51,7 @@ export class Shell extends ControlBase<IShellProps, IShellState> {
     }
 
     public render() {
-        const { colors } = this.props.themeState.theme;
+        const { colors } = this.props.theme;
 
         const shellTheme: IShellTheme = {
             backgroundColor: colors.chrome.high,
@@ -60,7 +66,7 @@ export class Shell extends ControlBase<IShellProps, IShellState> {
                 <div
                     style={{
                         height: shellTheme.titlebarHeight,
-                        display: this.props.shellState.isTitlebarVisible
+                        display: this.props.isTitlebarVisible
                             ? "block"
                             : "hidden"
                     }}
@@ -68,7 +74,7 @@ export class Shell extends ControlBase<IShellProps, IShellState> {
                 >
                     <Titlebar
                         onThemeChanged={() => this._handleThemeChange()}
-                        theme={this.props.themeState.theme}
+                        theme={this.props.theme}
                         height={shellTheme.titlebarHeight}
                         ref={this._titlebar}
                     />
@@ -79,12 +85,12 @@ export class Shell extends ControlBase<IShellProps, IShellState> {
     }
 
     private _handleThemeChange(): void {
-        if (this.props.themeState.themeColor === ThemeColor.Light) {
+        if (this.props.theme.id === ThemeColor.Light) {
             this.props.changeTheme(ThemeColor.Dark);
         } else {
             this.props.changeTheme(ThemeColor.Light);
         }
 
-        console.log(this.props.themeState.themeColor);
+        console.log(this.props.theme.id);
     }
 }

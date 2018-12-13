@@ -1,4 +1,4 @@
-import { IBounds, IVector2 } from "@core/vectors";
+import { IBounds, IVector2 } from "@core/models";
 
 export class VectorHelpers {
     public static isVector2Equal(a: IVector2, b: IVector2) {

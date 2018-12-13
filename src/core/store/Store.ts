@@ -1,41 +1,28 @@
-import {
-	Action,
-	AnyAction,
-	Dispatch,
-	Store,
-	applyMiddleware,
-	combineReducers,
-	createStore
-} from "redux";
+import { Store, applyMiddleware, createStore, combineReducers } from "redux";
 
 import { History } from "history";
-import { ShellStore } from "@core/shell";
-import { ThemeStore } from "@core/theme";
+import { AppStore, ThemeStore, ShellStore } from "@core/store";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { routerMiddleware } from "connected-react-router";
 import thunk from "redux-thunk";
 
-export interface IRootState {
-	theme: ThemeStore.IState;
-	shell: ShellStore.IState;
+export interface IRootStore {
+    themeStore: ThemeStore.IState;
+    shellStore: ShellStore.IState;
 }
 
-export interface ConnectedReduxProps<A extends Action = AnyAction> {
-	dispatch: Dispatch<A>;
-}
+export function configureStore(history: History): Store<AppStore.IState> {
+    const composeEnhancers = composeWithDevTools({});
 
-export const rootReducer = combineReducers<IRootState>({
-	theme: ThemeStore.reducer,
-	shell: ShellStore.reducer
-});
+    const rootReducer = combineReducers<IRootStore>({
+        themeStore: ThemeStore.reducer,
+        shellStore: ShellStore.reducer
+    });
 
-export function configureStore(history: History): Store<IRootState> {
-	const composeEnhancers = composeWithDevTools({});
+    const store = createStore(
+        rootReducer,
+        composeEnhancers(applyMiddleware(routerMiddleware(history), thunk))
+    );
 
-	const store = createStore(
-		rootReducer,
-		composeEnhancers(applyMiddleware(routerMiddleware(history), thunk))
-	);
-
-	return store;
+    return store;
 }
