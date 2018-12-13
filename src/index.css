@@ -337,6 +337,10 @@ template {
   display: none;
 }
 
+.draw-canvas {
+  position: relative;
+}
+
 .shell {
   display: flex;
   flex-direction: column;
@@ -402,7 +406,7 @@ template {
   position: relative;
 }
 
-.editor {
+.editor-container {
   position: absolute;
   top: 0;
   left: 0;

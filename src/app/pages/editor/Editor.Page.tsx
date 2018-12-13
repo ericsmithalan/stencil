@@ -3,19 +3,22 @@ import * as React from "react";
 import { IPageProps, IPageState, PageBase } from "@core/components";
 
 import { Grid } from "@app/drawings";
-import { IRootStore } from "@core/store";
-import { connect } from "react-redux";
+import { ITheme } from "@core/theme";
 
-export class Page extends PageBase<IPageProps, IPageState> {
+export interface IEditorPageProps extends IPageProps {
+    theme: ITheme;
+}
+
+export interface IEditorPageState extends IPageState {}
+
+export class EditorPage extends PageBase<IPageProps, IPageState> {
     protected loaded() {
         super.loaded();
-
-        console.log(this.props);
     }
 
     public render() {
         return (
-            <div className="editor">
+            <div className="editor-container">
                 <div>Edit Page</div>
 
                 <Grid />
@@ -23,16 +26,3 @@ export class Page extends PageBase<IPageProps, IPageState> {
         );
     }
 }
-
-const mapStateToProps = (state: IRootStore) => ({
-    theme: state.themeStore
-});
-
-const mapDispatchToProps = (dispatch: any) => ({
-    changeTheme: () => dispatch(dispatch.theme.changeTheme(dispatch))
-});
-
-export const EditorPage = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Page);

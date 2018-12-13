@@ -13,7 +13,7 @@ import {
     ShellContainer
 } from "@core/components";
 
-import { EditorPage } from "@app/pages";
+import { EditorContainer } from "@app/pages";
 
 export interface IAppProps extends IPureControlProps {}
 
@@ -57,12 +57,12 @@ export class App extends PureControlBase<IAppProps, IAppState> {
                     <Route
                         exact={true}
                         path="/"
-                        render={(props) => <EditorPage {...props} />}
+                        render={(props) => <EditorContainer {...props} />}
                     />
                     <Route
                         exact={true}
                         path="/home"
-                        render={(props) => <EditorPage {...props} />}
+                        render={(props) => <EditorContainer {...props} />}
                     />
                 </Switch>
             </BrowserRouter>

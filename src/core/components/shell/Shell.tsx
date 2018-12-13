@@ -21,12 +21,6 @@ export interface IShellProps
 /** STATE */
 export interface IShellState extends IControlState {}
 
-/** THEME */
-export interface IShellTheme {
-    backgroundColor: string;
-    titlebarHeight: number;
-}
-
 /** SHELL */
 export class Shell extends ControlBase<IShellProps, IShellState> {
     private _titlebar: React.RefObject<Titlebar>;
@@ -53,19 +47,23 @@ export class Shell extends ControlBase<IShellProps, IShellState> {
     public render() {
         const { colors } = this.props.theme;
 
-        const shellTheme: IShellTheme = {
+        const styles = {
+            fontColor: colors.base.highMedium,
             backgroundColor: colors.chrome.high,
             titlebarHeight: 30
         };
 
         return (
             <div
-                style={{ backgroundColor: shellTheme.backgroundColor }}
+                style={{
+                    color: styles.fontColor,
+                    backgroundColor: styles.backgroundColor
+                }}
                 className="shell"
             >
                 <div
                     style={{
-                        height: shellTheme.titlebarHeight,
+                        height: styles.titlebarHeight,
                         display: this.props.isTitlebarVisible
                             ? "block"
                             : "hidden"
@@ -75,7 +73,7 @@ export class Shell extends ControlBase<IShellProps, IShellState> {
                     <Titlebar
                         onThemeChanged={() => this._handleThemeChange()}
                         theme={this.props.theme}
-                        height={shellTheme.titlebarHeight}
+                        height={styles.titlebarHeight}
                         ref={this._titlebar}
                     />
                 </div>

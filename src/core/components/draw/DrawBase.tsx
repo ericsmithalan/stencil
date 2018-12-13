@@ -1,27 +1,21 @@
 import * as React from "react";
 
 import {
-    IPureControlProps,
-    IPureControlState,
-    PureControlBase
+    IUIControlProps,
+    IUIControlState,
+    UIControlBase
 } from "@core/components";
+import {} from "../control/UIControlBase";
 
-export interface IDrawProps extends IPureControlProps {}
+export interface IDrawProps extends IUIControlProps {}
 
-export interface IDrawState extends IPureControlState {}
+export interface IDrawState extends IUIControlState {}
 
-export abstract class DrawBase extends PureControlBase<IDrawProps, IDrawState> {
-    private readonly _canvasRef: React.RefObject<HTMLCanvasElement>;
-
-    public constructor(props: IPureControlProps) {
-        super(props);
-
-        this._canvasRef = React.createRef();
-        this.init();
-    }
-
-    protected abstract init(): void;
-
+export abstract class DrawBase extends UIControlBase<
+    HTMLCanvasElement,
+    IDrawProps,
+    IDrawState
+> {
     /** @virtual */
     protected abstract draw(
         canvas: HTMLCanvasElement,
@@ -31,7 +25,7 @@ export abstract class DrawBase extends PureControlBase<IDrawProps, IDrawState> {
     protected loaded() {
         super.loaded();
 
-        const canvas: HTMLCanvasElement = this._canvasRef
+        const canvas: HTMLCanvasElement = this._containerRef
             .current as HTMLCanvasElement;
 
         const context: CanvasRenderingContext2D = canvas.getContext(
@@ -42,6 +36,14 @@ export abstract class DrawBase extends PureControlBase<IDrawProps, IDrawState> {
     }
 
     public render() {
-        return <canvas ref={this._canvasRef} />;
+        return (
+            <canvas
+                className="draw-canvas"
+                width={this.state.width}
+                height={this.state.height}
+                style={{ width: this.state.width, height: this.state.height }}
+                ref={this._containerRef}
+            />
+        );
     }
 }

@@ -74,12 +74,14 @@ export class Titlebar extends PureControlBase<ITitlebarProps, ITitlebarState> {
         const { colors } = this.props.theme;
 
         const styles = {
+            fontColor: colors.base.highMedium,
             backgroundColor: colors.chrome.high
         };
 
         return (
             <div
                 style={{
+                    color: styles.fontColor,
                     backgroundColor: styles.backgroundColor,
                     height: this.props.height
                 }}

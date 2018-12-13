@@ -26,8 +26,8 @@ export abstract class UIControlBase<
     TState extends IUIControlState
 > extends PureControlBase<TProps, TState> {
     public static defaultProps: Partial<IUIControlProps> = {
-        width: 0,
-        height: 0,
+        width: -1,
+        height: -1,
         preserveAspect: false,
         allowAutoScale: true
     };
@@ -42,11 +42,11 @@ export abstract class UIControlBase<
         this._containerRef = React.createRef();
 
         if (this.props.allowAutoScale) {
-            if (this.props.height === 0) {
+            if (this.props.height <= 0) {
                 this._isAutoSizeY = true;
             }
 
-            if (this.props.width === 0) {
+            if (this.props.width <= 0) {
                 this._isAutoSizeX = true;
             }
         }
@@ -126,6 +126,8 @@ export abstract class UIControlBase<
             );
         }
 
+        console.log("SIZE:", size);
+
         this.width = size.width;
         this.height = size.height;
     }
@@ -141,10 +143,12 @@ export abstract class UIControlBase<
                 if (parent) {
                     if (this._isAutoSizeX) {
                         width = parent.offsetWidth;
+                        console.log(width);
                     }
 
                     if (this._isAutoSizeY) {
                         height = parent.offsetHeight;
+                        console.log(height);
                     }
                 } else {
                     console.error("no parent element found");
