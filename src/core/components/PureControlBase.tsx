@@ -1,12 +1,12 @@
 import * as React from "react";
 
-export interface IComponentProps {}
-export interface IComponentState {}
+export interface IPureControlProps {}
+export interface IPureControlState {}
 
-export abstract class ComponentBase<
-    TProps extends IComponentProps,
-    TState extends IComponentState
-> extends React.Component<TProps, TState> {
+export abstract class PureControlBase<
+    TProps extends IPureControlProps,
+    TState extends IPureControlState
+> extends React.PureComponent<TProps, TState> {
     private _isLoaded: boolean;
 
     protected constructor(props: TProps) {

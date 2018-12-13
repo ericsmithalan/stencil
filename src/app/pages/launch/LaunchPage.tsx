@@ -1,24 +1,24 @@
 import * as React from "react";
 
 import {
-	IComponentProps,
-	IComponentState,
-	PureComponentBase
+    IControlProps,
+    IControlState,
+    PureControlBase
 } from "@core/components";
 
-interface ILaunchProps extends IComponentProps {}
-interface ILaunchState extends IComponentState {}
+interface ILaunchProps extends IControlProps {}
+interface ILaunchState extends IControlState {}
 
-export class LaunchPage extends PureComponentBase<ILaunchProps, ILaunchState> {
-	public constructor(props: ILaunchProps) {
-		super(props);
-	}
+export class LaunchPage extends PureControlBase<ILaunchProps, ILaunchState> {
+    public constructor(props: ILaunchProps) {
+        super(props);
+    }
 
-	public render() {
-		return (
-			<div className="launch">
-				<div className="launch-content">loading...</div>
-			</div>
-		);
-	}
+    public render() {
+        return (
+            <div className="launch">
+                <div className="launch-content">loading...</div>
+            </div>
+        );
+    }
 }
