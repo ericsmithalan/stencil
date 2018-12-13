@@ -26,15 +26,15 @@ export abstract class UIControlBase<
     TState extends IUIControlState
 > extends PureControlBase<TProps, TState> {
     public static defaultProps: Partial<IUIControlProps> = {
-        width: -1,
-        height: -1,
         preserveAspect: false,
         allowAutoScale: true
     };
-
+    protected __name: string = "PureControlBase";
     private readonly _isAutoSizeY: boolean = false;
     private readonly _isAutoSizeX: boolean = false;
     protected _containerRef: React.RefObject<TElement>;
+    private _width: number;
+    private _height: number;
 
     protected constructor(props: TProps) {
         super(props);
@@ -51,47 +51,53 @@ export abstract class UIControlBase<
             }
         }
 
+        this._width = this.props.width;
+        this._height = this.props.height;
+
         this.state = {
-            width: this.props.width,
-            height: this.props.height
+            width: this._width,
+            height: this._height
         } as TState;
     }
 
     public get width(): number {
-        return this.state.width;
+        return this._width;
     }
 
     public set width(value: number) {
-        if (this.state.width !== value) {
-            this.setState({ width: value });
-        }
+        this._width = value;
+        this.setState({ width: value });
     }
 
     public get height(): number {
-        return this.state.width;
+        return this._height;
     }
 
     public set height(value: number) {
-        if (this.state.height !== value) {
-            this.setState({ height: value });
-        }
+        this._height = value;
+        this.setState({ height: value });
     }
 
     protected get containerEl(): TElement {
         return this._containerRef.current as TElement;
     }
 
-    /** @virtual */
-    protected loaded(): void {
-        super.loaded();
-
+    public componentDidMount() {
         if (this.containerEl) {
+            console.log("measureing");
             this.measure();
             this._addEventListeners();
 
             this.isLoaded = true;
+
+            this.loaded();
+            console.log("laoded");
         } else {
-            console.error("container element not found", this.containerEl);
+            console.error(
+                this.__name,
+                "container element not found",
+                this.containerEl
+            );
         }
     }
 
@@ -119,17 +125,24 @@ export abstract class UIControlBase<
 
     protected measure() {
         const size: ISize = this.calculateSize();
-
         if (size.width <= 0 || size.height <= 0) {
             console.warn(
+                this.__name,
                 `size is 0; height: ${size.height} width: ${size.width}`
             );
-        }
 
-        console.log("SIZE:", size);
+            return;
+        }
 
         this.width = size.width;
         this.height = size.height;
+
+        console.info(
+            "-----------",
+            this.__name + " --- measured",
+            size.width,
+            size.height
+        );
     }
 
     protected calculateSize(): ISize {
@@ -143,15 +156,13 @@ export abstract class UIControlBase<
                 if (parent) {
                     if (this._isAutoSizeX) {
                         width = parent.offsetWidth;
-                        console.log(width);
                     }
 
                     if (this._isAutoSizeY) {
                         height = parent.offsetHeight;
-                        console.log(height);
                     }
                 } else {
-                    console.error("no parent element found");
+                    console.error(this.__name, "no parent element found");
                 }
             }
 
@@ -167,9 +178,13 @@ export abstract class UIControlBase<
                 height = value;
             }
         } else {
-            console.error("element is null or not instance of HTMLElement", {
-                element: this.containerEl
-            });
+            console.error(
+                this.__name,
+                "element is null or not instance of HTMLElement",
+                {
+                    element: this.containerEl
+                }
+            );
         }
 
         return { width: width, height: height };
@@ -191,9 +206,13 @@ export abstract class UIControlBase<
                 this.mouseUp(e)
             );
         } else {
-            console.error("element is null or not instance of HTMLElement", {
-                element: this.containerEl
-            });
+            console.error(
+                this.__name,
+                "element is null or not instance of HTMLElement",
+                {
+                    element: this.containerEl
+                }
+            );
         }
     }
 
@@ -213,9 +232,13 @@ export abstract class UIControlBase<
                 this.mouseUp(e)
             );
         } else {
-            console.error("element is null or not instance of HTMLElement", {
-                element: this.containerEl
-            });
+            console.error(
+                this.__name,
+                "element is null or not instance of HTMLElement",
+                {
+                    element: this.containerEl
+                }
+            );
         }
     }
 }

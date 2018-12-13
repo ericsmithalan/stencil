@@ -23,6 +23,7 @@ export interface IShellState extends IControlState {}
 
 /** SHELL */
 export class Shell extends ControlBase<IShellProps, IShellState> {
+    __name = "Shell";
     private _titlebar: React.RefObject<Titlebar>;
 
     public constructor(props: IShellProps) {
@@ -41,7 +42,6 @@ export class Shell extends ControlBase<IShellProps, IShellState> {
 
     protected loaded() {
         super.loaded();
-        console.log("props", this.props);
     }
 
     public render() {
@@ -89,7 +89,5 @@ export class Shell extends ControlBase<IShellProps, IShellState> {
         } else {
             this.props.changeTheme(ThemeColor.Light);
         }
-
-        console.log(this.props.theme.id);
     }
 }

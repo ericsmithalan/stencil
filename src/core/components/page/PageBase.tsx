@@ -8,6 +8,7 @@ export abstract class PageBase<
     TProps extends IPageProps,
     TState extends IPageState
 > extends ControlBase<TProps, TState> {
+    __name = "PageBase";
     public constructor(props: TProps) {
         super(props);
     }

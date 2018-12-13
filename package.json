@@ -14,7 +14,8 @@
         "redux": "^4.0.1",
         "redux-thunk": "^2.3.0",
         "rxjs": "^6.3.3",
-        "typesafe-actions": "^2.0.4"
+        "typesafe-actions": "^2.0.4",
+        "typescript-collections": "^1.3.2"
     },
     "scripts": {
         "build-css": "node-sass-chokidar src/ -o src/  -r -i --output-style expanded",

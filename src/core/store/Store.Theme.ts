@@ -40,7 +40,6 @@ export namespace ThemeStore {
                 } else {
                     theme = LightTheme.getTheme();
                 }
-                console.log(theme, action, action.payload);
                 return { ...state, theme: theme, themeColor: action.payload };
             default: {
                 return state;

@@ -7,7 +7,7 @@ import {
     UIControlBase
 } from "@core/components";
 
-import { VectorHelpers } from "@core/models";
+import { VectorHelpers } from "@core/utils";
 
 export interface ISVGProps extends IUIControlProps {
     fill: string;

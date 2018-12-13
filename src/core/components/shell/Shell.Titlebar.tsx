@@ -29,6 +29,7 @@ export interface ITitlebarTheme {
 }
 
 export class Titlebar extends PureControlBase<ITitlebarProps, ITitlebarState> {
+    __name = "Titlebar";
     //hack to bypass an issue
     private _remote = window.require("electron").remote;
 

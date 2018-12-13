@@ -23,8 +23,6 @@ export abstract class DrawBase extends UIControlBase<
     ): void;
 
     protected loaded() {
-        super.loaded();
-
         const canvas: HTMLCanvasElement = this._containerRef
             .current as HTMLCanvasElement;
 

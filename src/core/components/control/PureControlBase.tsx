@@ -8,12 +8,16 @@ export abstract class PureControlBase<
     TState extends IPureControlState
 > extends React.PureComponent<TProps, TState> {
     private _isLoaded: boolean;
+    protected __name: string = "PureControlBase";
 
     protected constructor(props: TProps) {
         super(props);
 
         this._isLoaded = false;
     }
+
+    /** @virtual */
+    protected init(): void {}
 
     /** @virtual */
     protected loaded(): void {}

@@ -8,6 +8,7 @@ export abstract class ControlBase<
     TState extends IControlState
 > extends React.Component<TProps, TState> {
     private _isLoaded: boolean;
+    protected __name: string = "ControlBase";
 
     protected constructor(props: TProps) {
         super(props);

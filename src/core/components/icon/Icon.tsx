@@ -25,6 +25,7 @@ export class Icon extends UIControlBase<
     IIconProps,
     IIconState
 > {
+    __name = "icon";
     protected readonly _svgRef: React.RefObject<SVG>;
 
     public static defaultProps: Partial<IIconProps> = {
@@ -88,7 +89,6 @@ export class Icon extends UIControlBase<
     }
 
     protected calculateSize(): ISize {
-        console.log("SIZE CALLED");
         switch (this.props.sizeType) {
             case SizeType.Small:
                 return {
