@@ -1,22 +1,31 @@
-import * as React from 'react';
-import './App.css';
+import * as React from "react";
 
-import logo from './logo.svg';
+import { PixiCore } from "./pixi/PixiCore";
 
-class App extends React.Component {
-  public render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+export interface IAppProps {}
+
+export interface IAppState {}
+
+class App extends React.Component<IAppProps, IAppState> {
+	private readonly _pixiCore: PixiCore;
+	private readonly _pixiRef: React.RefObject<HTMLDivElement>;
+
+	public constructor(props: IAppProps) {
+		super(props);
+		this._pixiCore = new PixiCore();
+		this._pixiRef = React.createRef();
+	}
+
+	componentDidMount() {
+		if (this._pixiRef.current) {
+			this._pixiCore.create(this._pixiRef.current, 500, 500);
+			console.log("cool");
+		}
+	}
+
+	public render() {
+		return <div ref={this._pixiRef}>Hello</div>;
+	}
 }
 
 export default App;
